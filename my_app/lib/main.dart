@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MaterialApp(
-      home: Text('hey ninjas'),
+void main() => runApp(MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Welcome to Sweat Smart"),
+          centerTitle: true,
+        ),
+      ),
     ));
