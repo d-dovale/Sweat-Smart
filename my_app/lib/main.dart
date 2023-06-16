@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-// this bullshit ass git
-
-void main() {
-  runApp(const MaterialApp());
-}
+void main() => runApp(const MaterialApp(
+      home: Text('hey ninjas'),
+    ));
