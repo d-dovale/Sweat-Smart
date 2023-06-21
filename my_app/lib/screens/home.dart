@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
+// Screen Background Color for Dark Mode: #191919
+
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Welcome to Sweat Smart"),
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      //   title: const Text("Welcome to Sweat Smart"),
+      //   centerTitle: true,
+      // ),
       body: Center(
         child: Icon(
           Icons.fitness_center,

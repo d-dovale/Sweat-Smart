@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/screens/home.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(MaterialApp(home: Home()));
 
-class MyApp extends StatelessWidget {
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Welcome to Sweat Smart"),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Icon(
+          Icons.fitness_center,
+          color: Color.fromARGB(255, 194, 32, 21),
+          size: 200.0,
+        ),
+      ),
     );
   }
 }
