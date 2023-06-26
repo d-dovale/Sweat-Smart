@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 // Screen Background Color for Dark Mode: #191919
 
-class Home extends StatelessWidget {
+class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
