@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/screens/schedule.dart';
+import 'package:my_app/screens/workout.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key, required String title});
@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (BuildContext context) {
-                    return const SchedulePage();
+                    return const WorkoutPage();
                   },
                 ),
               );
