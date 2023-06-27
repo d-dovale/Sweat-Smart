@@ -1,44 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/screens/schedule.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key, required String title});
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  int currentPage = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Sweat Smart',
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Image(
+            image: AssetImage(
+                'assets/images/Sweat Smart Loading Screen Light.gif'),
+            height: 400 //testing logo gif,
+          ),
+          const Text(
+            'Welcome to Sweat Smart, [name]!',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'BebasNeue',
+            ),
+          ),
+          SizedBox(height: 16), // Optional spacing between text and button
+          ElevatedButton(
+            onPressed: () {
+              // Handle button press
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return const SchedulePage();
+                  },
+                ),
+              );
+            },
+            child: const Text(
+              'Click for Today\'s Workout, [workout variable]!',
               style: TextStyle(
+                fontSize: 16,
                 fontFamily: 'BebasNeue',
                 letterSpacing: 2.0,
-              )),
-        ),
-
-        bottomNavigationBar: NavigationBar(
-          destinations: const [
-            NavigationDestination(
-              icon: Icon(Icons.home),
-              label: 'Home',
+              ),
             ),
-            NavigationDestination(
-              icon: Icon(Icons.calendar_month),
-              label: 'Schedule',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.fitness_center),
-              label: 'Workout',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-            ),
-          ],
-        ));
+          )
+        ],
+      ),
+    );
   }
 }
