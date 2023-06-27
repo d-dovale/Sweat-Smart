@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/screens/home.dart';
+import 'package:my_app/screens/workout.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -10,6 +11,10 @@ class NavBar extends StatefulWidget {
 
 class _HomeState extends State<NavBar> {
   int currentPage = 0;
+  List<Widget> pages = [
+    const HomePage(title: 'Home Page',),
+    const WorkoutPage()
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
