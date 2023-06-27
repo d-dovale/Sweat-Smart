@@ -2,10 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_app/screens/home.dart';
-
-import '../main.dart';
-
-// Screen Background Color for Dark Mode: #191919
+import 'package:my_app/shared/navbar.dart';
 
 class Loading extends StatefulWidget {
   @override
