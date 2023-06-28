@@ -110,6 +110,7 @@ class ChatWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 chatIndex == 0
                     ? Image.asset('assets/images/Buff Guy.png',
@@ -124,6 +125,8 @@ class ChatWidget extends StatelessWidget {
                 Expanded(
                   child: Text(
                     msg,
+                    style: const TextStyle(fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
