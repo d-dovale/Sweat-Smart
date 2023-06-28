@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:my_app/shared/testmessages.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);
@@ -43,7 +44,11 @@ class _SchedulePageState extends State<SchedulePage> {
             child: ListView.builder(
               itemCount: 6,
               itemBuilder: (context, index) {
-                return const ChatWidget();
+                return ChatWidget(
+                  msg: chatMessages[index]["msg"].toString(),
+                  chatIndex:
+                      int.parse(chatMessages[index]["chatIndex"].toString()),
+                );
               },
             ),
           ),
@@ -56,7 +61,7 @@ class _SchedulePageState extends State<SchedulePage> {
               height: 15,
             ),
             Material(
-              color: Color.fromARGB(255, 221, 220, 220),
+              color: const Color.fromARGB(255, 221, 220, 220),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -68,7 +73,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         onSubmitted: (value) {
                           //TODO send message
                         },
-                        decoration: InputDecoration.collapsed(
+                        decoration: const InputDecoration.collapsed(
                             hintText: "How can I help you",
                             hintStyle: TextStyle(color: Colors.grey)),
                       ),
@@ -91,21 +96,36 @@ class _SchedulePageState extends State<SchedulePage> {
 }
 
 class ChatWidget extends StatelessWidget {
-  const ChatWidget({super.key});
-
+  const ChatWidget({super.key, required this.msg, required this.chatIndex});
+  final String msg;
+  final int chatIndex;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Material(
-          color: const Color.fromARGB(255, 221, 220, 220),
+          color: chatIndex == 0
+              ? const Color.fromARGB(255, 221, 220, 220)
+              : Color.fromARGB(255, 236, 216, 216),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                Image.asset('assets/images/Sweat Smart Logo.png',
-                height: 30,
-                width: 30),
+                chatIndex == 0
+                    ? Image.asset('assets/images/Buff Guy.png',
+                        height: 30,
+                        width: 30,
+                        )
+                    : Image.asset(
+                        'assets/images/Sweat Smart Logo.png',
+                        height: 30,
+                        width: 30,
+                      ),
+                Expanded(
+                  child: Text(
+                    msg,
+                  ),
+                ),
               ],
             ),
           ),
