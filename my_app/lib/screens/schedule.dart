@@ -43,7 +43,7 @@ class _SchedulePageState extends State<SchedulePage> {
             child: ListView.builder(
               itemCount: 6,
               itemBuilder: (context, index) {
-                return const Text("hello this is a text");
+                return const ChatWidget();
               },
             ),
           ),
