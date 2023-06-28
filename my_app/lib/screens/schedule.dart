@@ -19,12 +19,12 @@ class _SchedulePageState extends State<SchedulePage> {
     textEditingController = TextEditingController();
   }
 
-
   @override
-  void dispose(){
+  void dispose() {
     textEditingController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,21 +52,65 @@ class _SchedulePageState extends State<SchedulePage> {
               color: Colors.black,
               size: 18,
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(controller: textEditingController,
-                  onSubmitted: (value){
-                    //TODO send message
-                  },
-                  decoration: InputDecoration.collapsed(hintText: "How can I help you"),
-                  ),
+            const SizedBox(
+              height: 15,
+            ),
+            Material(
+              color: Color.fromARGB(255, 221, 220, 220),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        style: const TextStyle(color: Colors.white),
+                        controller: textEditingController,
+                        onSubmitted: (value) {
+                          //TODO send message
+                        },
+                        decoration: InputDecoration.collapsed(
+                            hintText: "How can I help you",
+                            hintStyle: TextStyle(color: Colors.grey)),
+                      ),
+                    ),
+                    IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.send,
+                          color: Colors.red,
+                        ))
+                  ],
                 ),
-              ],
+              ),
             )
           ]
         ],
       ),
     ));
+  }
+}
+
+class ChatWidget extends StatelessWidget {
+  const ChatWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Material(
+          color: const Color.fromARGB(255, 221, 220, 220),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Image.asset('assets/images/Sweat Smart Logo.png',
+                height: 30,
+                width: 30),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
