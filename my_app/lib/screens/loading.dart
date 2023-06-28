@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/screens/home.dart';
 import 'package:my_app/shared/navbar.dart';
@@ -17,7 +18,7 @@ class _LoadingState extends State<Loading> {
   }
 
   _navigatetohome() async {
-    await Future.delayed(Duration(seconds: 2000), () {});
+    await Future.delayed(Duration(seconds: 2), () {});
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
