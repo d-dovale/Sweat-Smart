@@ -125,7 +125,7 @@ class ChatWidget extends StatelessWidget {
                 Expanded(
                   child: Text(
                     msg,
-                    style: TextStyle(fontWeight: FontWeight.bold,
+                    style: const TextStyle(fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
