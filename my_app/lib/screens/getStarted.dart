@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:my_app/screens/home.dart';
+import 'package:my_app/shared/navbar.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});
@@ -147,6 +149,27 @@ class _GetStartedState extends State<GetStarted> {
                       ),
                     ],
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 100.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Handle button press
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return NavBar();
+                              },
+                            ),
+                          );
+                        },
+                        child: Text('Get Started'),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             );
