@@ -1,3 +1,4 @@
 {
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "cmake.sourceDirectory": "D:/Visual Studio Projects/Sweat-Smart/my_app/linux"
 }
