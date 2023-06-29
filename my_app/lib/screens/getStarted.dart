@@ -1,32 +1,13 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:my_app/shared/navbar.dart';
 
-class Loading extends StatefulWidget {
+class GetStarted extends StatefulWidget {
+  const GetStarted({super.key});
+
   @override
-  State<Loading> createState() => _LoadingState();
+  State<GetStarted> createState() => _GetStartedState();
 }
 
-class _LoadingState extends State<Loading> {
-  @override
-  void initState() {
-    super.initState();
-    _navigatetohome();
-  }
-
-  _navigatetohome() async {
-    await Future.delayed(Duration(seconds: 2), () {});
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => NavBar(
-          key: null,
-        ),
-      ),
-    );
-  }
-
+class _GetStartedState extends State<GetStarted> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,8 +62,12 @@ class _LoadingState extends State<Loading> {
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, availableHeight * 0.15, 0, 0),
-                  child: Image(
-                    image: AssetImage("assets/images/loading.gif"),
+                  child: Column(
+                    children: <Widget>[
+                      // Image(
+
+                      // ),
+                    ],
                   ),
                 ),
               ],
