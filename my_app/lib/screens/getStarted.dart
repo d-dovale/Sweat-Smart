@@ -66,7 +66,7 @@ class _GetStartedState extends State<GetStarted> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0, availableHeight * 0.15, 0, 0),
+                  padding: EdgeInsets.fromLTRB(0, availableHeight * 0.17, 0, 0),
                   child: Column(
                     children: <Widget>[
                       Row(
