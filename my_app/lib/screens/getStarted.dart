@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class GetStarted extends StatefulWidget {
@@ -21,6 +23,9 @@ class _GetStartedState extends State<GetStarted> {
             double logoSize = availableWidth * 0.15;
             double titleFontSize = availableWidth * 0.15;
             double subtitleFontSize = availableWidth * 0.027;
+
+            double iconSize = availableWidth * 0.085;
+            double iconText = availableWidth * 0.04;
 
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -64,9 +69,82 @@ class _GetStartedState extends State<GetStarted> {
                   padding: EdgeInsets.fromLTRB(0, availableHeight * 0.15, 0, 0),
                   child: Column(
                     children: <Widget>[
-                      // Image(
-
-                      // ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image(
+                            image: AssetImage("assets/images/flex.png"),
+                            width: iconSize,
+                            height: iconSize,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0),
+                            child: SizedBox(
+                              width: 225,
+                              child: Text(
+                                'Get personalized workouts based on your needs',
+                                style: TextStyle(
+                                  fontSize: iconText,
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  letterSpacing: 1.0,
+                                  fontFamily: 'Lato',
+                                ),
+                                maxLines: 2,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image(
+                              image: AssetImage("assets/images/planner.png"),
+                              width: iconSize,
+                              height: iconSize,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20.0),
+                              child: Text(
+                                'Schedule planner for your routine',
+                                style: TextStyle(
+                                  fontSize: iconText,
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  letterSpacing: 1.0,
+                                  fontFamily: 'Lato',
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image(
+                              image: AssetImage("assets/images/guyFlex.png"),
+                              width: iconSize,
+                              height: iconSize,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20.0),
+                              child: Text(
+                                'Become the best version of yourself!',
+                                style: TextStyle(
+                                  fontSize: iconText,
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  letterSpacing: 1.0,
+                                  fontFamily: 'Lato',
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),

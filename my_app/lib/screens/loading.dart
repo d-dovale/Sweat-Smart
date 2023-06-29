@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:my_app/screens/getStarted.dart';
 import 'package:my_app/shared/navbar.dart';
 
 class Loading extends StatefulWidget {
@@ -20,7 +21,7 @@ class _LoadingState extends State<Loading> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => NavBar(
+        builder: (context) => GetStarted(
           key: null,
         ),
       ),
