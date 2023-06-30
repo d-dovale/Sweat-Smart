@@ -70,7 +70,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   children: [
                     Expanded(
                       child: TextField(
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
                         controller: textEditingController,
                         onSubmitted: (value) {
                           //TODO send message
@@ -83,7 +83,8 @@ class _SchedulePageState extends State<SchedulePage> {
                     IconButton(
                         onPressed: () async {
                           try {
-                            await ApiService.getModels();
+                            print("Request sent");
+                            await ApiService.sendMessage(message: textEditingController.text, modelId: "gpt-3.5-turbo");
                           } catch (error){
                             print("error $error");
                           }
