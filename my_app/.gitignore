@@ -32,6 +32,8 @@ migrate_working_dir/
 .pub/
 /build/
 
+#API key
+/lib/data/constants.dart
 
 
 # Symbolication related
