@@ -44,21 +44,26 @@ class _GetStartedState extends State<GetStarted> {
                   textColor: Colors.white,
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0, availableHeight * 0.17, 0, 0),
+                  padding:
+                      EdgeInsets.fromLTRB(30, availableHeight * 0.17, 0, 0),
                   child: Column(
                     children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Image(
-                            image: AssetImage("assets/images/flex.png"),
-                            width: iconSize,
-                            height: iconSize,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 20.0),
-                            child: SizedBox(
-                              width: 225,
+                      Align(
+                        alignment: Alignment.center,
+                        child: Row(
+                          children: <Widget>[
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Image(
+                                image: AssetImage("assets/images/flex.png"),
+                                width: iconSize,
+                                height: iconSize,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ), // Add some spacing between icon and text
+                            Expanded(
                               child: Text(
                                 'Get personalized workouts based on your needs',
                                 style: TextStyle(
@@ -70,57 +75,73 @@ class _GetStartedState extends State<GetStarted> {
                                 maxLines: 2,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image(
-                              image: AssetImage("assets/images/planner.png"),
-                              width: iconSize,
-                              height: iconSize,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 20.0),
-                              child: Text(
-                                'Schedule planner for your routine',
-                                style: TextStyle(
-                                  fontSize: iconText,
-                                  color: Colors.white,
-                                  letterSpacing: 1.0,
-                                  fontFamily: 'Lato',
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image(
-                              image: AssetImage("assets/images/guyFlex.png"),
-                              width: iconSize,
-                              height: iconSize,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 20.0),
-                              child: Text(
-                                'Become the best version of yourself!',
-                                style: TextStyle(
-                                  fontSize: iconText,
-                                  color: Colors.white,
-                                  letterSpacing: 1.0,
-                                  fontFamily: 'Lato',
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Row(
+                            children: <Widget>[
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Image(
+                                  image:
+                                      AssetImage("assets/images/planner.png"),
+                                  width: iconSize,
+                                  height: iconSize,
                                 ),
                               ),
-                            ),
-                          ],
+                              SizedBox(
+                                width: 10,
+                              ), // Add some spacing between icon and text
+                              Expanded(
+                                child: Text(
+                                  'Schedule planner for your routine',
+                                  style: TextStyle(
+                                    fontSize: iconText,
+                                    color: Colors.white,
+                                    letterSpacing: 1.0,
+                                    fontFamily: 'Lato',
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 20.0),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Row(
+                            children: <Widget>[
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Image(
+                                  image:
+                                      AssetImage("assets/images/guyFlex.png"),
+                                  width: iconSize,
+                                  height: iconSize,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ), // Add some spacing between icon and text
+                              Expanded(
+                                child: Text(
+                                  'Become the best version of yourself!',
+                                  style: TextStyle(
+                                    fontSize: iconText,
+                                    color: Colors.white,
+                                    letterSpacing: 1.0,
+                                    fontFamily: 'Lato',
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
