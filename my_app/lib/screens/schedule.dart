@@ -12,7 +12,7 @@ class SchedulePage extends StatefulWidget {
 }
 
 class _SchedulePageState extends State<SchedulePage> {
-  final bool _isTyping = true;
+  bool _isTyping = false;
 
   late TextEditingController textEditingController;
 
@@ -61,7 +61,7 @@ class _SchedulePageState extends State<SchedulePage> {
             ),
             const SizedBox(
               height: 15,
-            ),
+            ),],
             Material(
               color: const Color.fromARGB(255, 221, 220, 220),
               child: Padding(
@@ -83,10 +83,17 @@ class _SchedulePageState extends State<SchedulePage> {
                     IconButton(
                         onPressed: () async {
                           try {
+                            setState((){
+                              _isTyping = true;
+                            });
                             print("Request sent");
                             await ApiService.sendMessage(message: textEditingController.text, modelId: "gpt-3.5-turbo");
                           } catch (error){
                             print("error $error");
+                          }finally{
+                            setState((){
+                              _isTyping = false;
+                            });
                           }
                         },
                         icon: const Icon(
@@ -98,7 +105,6 @@ class _SchedulePageState extends State<SchedulePage> {
               ),
             )
           ]
-        ],
       ),
     ));
   }
