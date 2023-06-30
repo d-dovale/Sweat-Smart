@@ -13,7 +13,14 @@ class _InformationState extends State<Information> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Color.fromARGB(255, 25, 25, 25),
+      appBar: AppBar(
+        title: Text('Basic Info',
+            style: TextStyle(
+              fontFamily: 'BebasNeue',
+              letterSpacing: 2.0,
+            )),
+      ),
     );
   }
 }

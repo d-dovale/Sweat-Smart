@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/shared/title.dart';
 import 'package:my_app/shared/navbar.dart';
+import 'package:my_app/screens/information.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});
@@ -158,7 +159,7 @@ class _GetStartedState extends State<GetStarted> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) {
-                                return NavBar();
+                                return Information();
                               },
                             ),
                           );
