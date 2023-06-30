@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:my_app/screens/home.dart';
+import 'package:my_app/shared/title.dart';
 import 'package:my_app/shared/navbar.dart';
 
 class GetStarted extends StatefulWidget {
@@ -17,8 +17,11 @@ class _GetStartedState extends State<GetStarted> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 25, 25, 25),
       body: Center(
+        // Uses the LayoutBuilder widget to readjust based on screen size
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
+            // Defines sizes for screen widgets such as the font size
+
             double availableWidth = constraints.maxWidth;
             double availableHeight = constraints.maxHeight;
 
@@ -29,43 +32,16 @@ class _GetStartedState extends State<GetStarted> {
             double iconSize = availableWidth * 0.085;
             double iconText = availableWidth * 0.04;
 
+            double buttonText = availableWidth * 0.035;
+
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image(
-                      image: AssetImage('assets/images/Sweat Smart Logo.png'),
-                      width: logoSize,
-                      height: logoSize,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'SWEAT SMART',
-                          style: TextStyle(
-                            fontSize: titleFontSize,
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontFamily: 'BebasNeue',
-                            letterSpacing: 2.0,
-                          ),
-                        ),
-                        Text(
-                          'POWERED BY CHATGPT',
-                          style: TextStyle(
-                            fontSize: subtitleFontSize,
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 3.0,
-                            fontFamily: 'Lato',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                AppTitle(
+                  logoSize: logoSize,
+                  titleFontSize: titleFontSize,
+                  subtitleFontSize: subtitleFontSize,
+                  textColor: Colors.white,
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, availableHeight * 0.17, 0, 0),
@@ -87,7 +63,7 @@ class _GetStartedState extends State<GetStarted> {
                                 'Get personalized workouts based on your needs',
                                 style: TextStyle(
                                   fontSize: iconText,
-                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  color: Colors.white,
                                   letterSpacing: 1.0,
                                   fontFamily: 'Lato',
                                 ),
@@ -113,7 +89,7 @@ class _GetStartedState extends State<GetStarted> {
                                 'Schedule planner for your routine',
                                 style: TextStyle(
                                   fontSize: iconText,
-                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  color: Colors.white,
                                   letterSpacing: 1.0,
                                   fontFamily: 'Lato',
                                 ),
@@ -138,7 +114,7 @@ class _GetStartedState extends State<GetStarted> {
                                 'Become the best version of yourself!',
                                 style: TextStyle(
                                   fontSize: iconText,
-                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  color: Colors.white,
                                   letterSpacing: 1.0,
                                   fontFamily: 'Lato',
                                 ),
@@ -166,7 +142,15 @@ class _GetStartedState extends State<GetStarted> {
                             ),
                           );
                         },
-                        child: Text('Get Started'),
+                        child: Text(
+                          'GET STARTED',
+                          style: TextStyle(
+                            fontSize: buttonText,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                        ),
                       ),
                     ),
                   ],
