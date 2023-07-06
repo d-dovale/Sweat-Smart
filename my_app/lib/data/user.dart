@@ -17,3 +17,4 @@ class User {
     required this.workoutDays,
   });
 }
+
