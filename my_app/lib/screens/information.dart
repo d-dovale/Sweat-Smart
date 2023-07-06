@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:my_app/shared/nextButton.dart';
 
 class Information extends StatefulWidget {
   const Information({super.key});
@@ -21,6 +22,11 @@ class _InformationState extends State<Information> {
               letterSpacing: 2.0,
             )),
       ),
+      floatingActionButton: Padding(
+        child: NextButton(),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
