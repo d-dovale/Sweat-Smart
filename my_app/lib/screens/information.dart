@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_app/shared/nextButton.dart';
+import 'package:my_app/shared/question.dart';
 
 class Information extends StatefulWidget {
   const Information({super.key});
@@ -22,6 +23,7 @@ class _InformationState extends State<Information> {
               letterSpacing: 2.0,
             )),
       ),
+      body: Column(),
       floatingActionButton: Padding(
         child: NextButton(),
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
