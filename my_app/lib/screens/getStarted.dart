@@ -159,7 +159,7 @@ class _GetStartedState extends State<GetStarted> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) {
-                                return NavBar();
+                                return Information();
                               },
                             ),
                           );
