@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:my_app/data/constants.dart';
 import 'package:http/http.dart' as http;
 
-
-
 class ApiService {
   static Future<void> sendMessage(
       {required String message, required String modelId}) async {
@@ -26,7 +24,7 @@ class ApiService {
         }),
       );
       print(response.body);
-      if(response.statusCode == 200){
+      if (response.statusCode == 200) {
         print("success");
       }
       // Map jsonResponse = jsonDecode(response.body);
