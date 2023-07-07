@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/services/auth.dart';
 
 class WorkoutPage extends StatefulWidget {
   const WorkoutPage({super.key});
@@ -32,3 +33,4 @@ class _WorkoutPageState extends State<WorkoutPage> {
         ));
   }
 }
+
