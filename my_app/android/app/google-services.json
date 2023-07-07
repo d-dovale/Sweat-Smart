@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "199475245550",
+    "project_id": "sweat-smart-database",
+    "storage_bucket": "sweat-smart-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199475245550:android:573a3343458d59f7525eff",
+        "android_client_info": {
+          "package_name": "com.example.my_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199475245550-33ur6qaa37bebc8p9t0hglo7v8aakldq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUKXcTXHnHTaYP5pkEHGy_KWdp2kxmuDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199475245550-33ur6qaa37bebc8p9t0hglo7v8aakldq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -16,39 +16,31 @@ class QuestionBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        margin: EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
-        padding: EdgeInsets.only(top: 110.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              text,
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.white,
-                fontFamily: 'BebasNeue',
-                letterSpacing: 2.0,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                subtext,
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: 12.0,
-                  color: Colors.grey,
-                  fontFamily: 'Lato',
-                  letterSpacing: 2.0,
-                ),
-              ),
-            ),
-          ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: 20.0,
+            color: Colors.white,
+            fontFamily: 'BebasNeue',
+            letterSpacing: 2.0,
+          ),
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Text(
+            subtext,
+            style: TextStyle(
+              fontSize: 15.0,
+              color: Colors.grey,
+              fontFamily: 'BebasNeue',
+              letterSpacing: 2.0,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

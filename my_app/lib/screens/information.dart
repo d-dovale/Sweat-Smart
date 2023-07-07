@@ -23,15 +23,7 @@ class _InformationState extends State<Information> {
               letterSpacing: 2.0,
             )),
       ),
-      body: Column(
-        children: <Widget>[
-          QuestionBox(
-              text: 'Start by inputting some basic information',
-              subtext:
-                  'These are required to help us find your ideal workout plan',
-              indexAction: 0),
-        ],
-      ),
+      body: Column(),
       floatingActionButton: Padding(
         child: NextButton(),
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
