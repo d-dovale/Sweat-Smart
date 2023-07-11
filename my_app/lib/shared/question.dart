@@ -4,6 +4,20 @@ import 'package:flutter/material.dart';
 
 class Question {
   final String questionText;
+  final List<Answer> answers;
+
+  Question({
+    required this.questionText,
+    required this.answers,
+  });
+}
+
+class Answer {
+  final String answerText;
+
+  Answer({
+    required this.answerText,
+  });
 }
 
 class QuestionBox extends StatelessWidget {

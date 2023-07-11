@@ -23,7 +23,7 @@ class _LoadingState extends State<Loading> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => NavBar(),
+        builder: (context) => GetStarted(),
       ),
     );
   }
