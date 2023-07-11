@@ -20,7 +20,7 @@ class ApiService {
           "messages": [
             {
               "role": "user",
-              "content": "Give me a workout routine for a male $message",
+              "content": "I am a male who weighs 140 pounds, who's height is 6'1. I am a beginner lifter and my ideal physique is to be Tom Holland who's height is 6'1. I am a beginner lifter and my ideal physique is to be Tom Holland and I want a workout split of 4 days. Generate me 3 completely different workout splits that can be used for my stats. Please start the title of a day with \"Day:\" and end with a new line before describing the workout",
             }
           ]
         }),
