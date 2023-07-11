@@ -1,36 +1,53 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 
 class Question {
   final String questionText;
-  final List<Answer> answers;
+  final String questionSubText;
+  final Widget answers;
 
   Question({
     required this.questionText,
+    required this.questionSubText,
     required this.answers,
   });
 }
 
-class Answer {
-  final String answerText;
+List<Question> getQuestions() {
+  List<Question> list = [];
 
-  Answer({
-    required this.answerText,
-  });
+  list.add(Question(
+      questionText: 'Start by inputting some basic information',
+      questionSubText:
+          'These are required to help us find your ideal workout plan',
+      answers: Column(
+        children: <Widget>[],
+      )));
+
+  return list;
 }
 
-class QuestionBox extends StatelessWidget {
-  const QuestionBox(
-      {Key? key,
-      required this.text,
-      required this.subtext,
-      required this.indexAction})
-      : super(key: key);
+class QuestionBox extends StatefulWidget {
+  @override
+  State<QuestionBox> createState() => _QuestionBoxState();
+}
 
-  final String text;
-  final String subtext;
-  final int indexAction;
+class _QuestionBoxState extends State<QuestionBox> {
+  List<Question> questionsList = getQuestions();
+
+  int questionIndex = 0;
+
+  void goToNextQuestion() {
+    if (questionIndex < questionsList.length - 1) {
+      // Increment the question index if it's within the range of the list
+      questionIndex++;
+    } else {
+      // Handle reaching the end of the questions list
+      // For example, you can show a message or navigate to a different screen
+      print('End of questions');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +67,7 @@ class QuestionBox extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                text,
+                questionsList[questionIndex].questionText,
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: titleFontSize,
@@ -62,7 +79,7 @@ class QuestionBox extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 15.0),
                 child: Text(
-                  subtext,
+                  questionsList[questionIndex].questionSubText,
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     fontSize: subtitleFontSize,

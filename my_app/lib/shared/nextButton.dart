@@ -1,8 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:my_app/shared/question.dart';
 
 class NextButton extends StatelessWidget {
+  // final Function onPressed;
+
+  // NextButton({
+  //   required this.onPressed
+  // });
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

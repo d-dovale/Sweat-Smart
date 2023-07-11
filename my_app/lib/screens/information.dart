@@ -25,16 +25,12 @@ class _InformationState extends State<Information> {
       ),
       body: Column(
         children: <Widget>[
-          QuestionBox(
-              text: 'Start by inputting some basic information',
-              subtext:
-                  'These are required to help us find your ideal workout plan',
-              indexAction: 0),
+          QuestionBox(),
         ],
       ),
       floatingActionButton: Padding(
-        child: NextButton(),
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: NextButton(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
