@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class Question {
-  final String questionText;
+  late final String questionText;
 }
 
 class QuestionBox extends StatelessWidget {
