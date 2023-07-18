@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:my_app/shared/nextButton.dart';
 
 class Question {
   final String questionText;
@@ -14,43 +15,27 @@ class Question {
   });
 }
 
-List<Question> getQuestions() {
-  List<Question> list = [];
-
-  list.add(Question(
-      questionText: 'Start by inputting some basic information',
-      questionSubText:
-          'These are required to help us find your ideal workout plan',
-      answers: Column(
-        children: <Widget>[],
-      )));
-
-  return list;
-}
-
 class QuestionBox extends StatefulWidget {
+  final int questionIndex;
+  final VoidCallback goToNextQuestion;
+  final List<Question> questionsList;
+
+  QuestionBox({
+    required this.questionIndex,
+    required this.goToNextQuestion,
+    required this.questionsList,
+  });
+
   @override
   State<QuestionBox> createState() => _QuestionBoxState();
 }
 
 class _QuestionBoxState extends State<QuestionBox> {
-  List<Question> questionsList = getQuestions();
-
-  int questionIndex = 0;
-
-  void goToNextQuestion() {
-    if (questionIndex < questionsList.length - 1) {
-      // Increment the question index if it's within the range of the list
-      questionIndex++;
-    } else {
-      // Handle reaching the end of the questions list
-      // For example, you can show a message or navigate to a different screen
-      print('End of questions');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    List<Question> questionsList = widget.questionsList;
+    int questionIndex = widget.questionIndex;
+
     return Center(
       child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {

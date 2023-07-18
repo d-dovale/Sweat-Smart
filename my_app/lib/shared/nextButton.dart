@@ -1,25 +1,23 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:my_app/shared/question.dart';
 
 class NextButton extends StatelessWidget {
-  // final Function onPressed;
+  final VoidCallback onPressed;
 
-  // NextButton({
-  //   required this.onPressed
-  // });
+  NextButton({required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.circular(14.0),
+    return Container(
+      width: double.infinity, // Set the width to fill the available space
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          primary: Colors.red,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14.0),
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
         ),
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: Text(
           'Next',
           textAlign: TextAlign.center,
