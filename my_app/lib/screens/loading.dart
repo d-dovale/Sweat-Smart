@@ -1,9 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:my_app/screens/getStarted.dart';
 import 'package:my_app/shared/title.dart';
-
+import 'package:my_app/screens/getStarted.dart';
 import '../shared/navbar.dart';
 
 class Loading extends StatefulWidget {
