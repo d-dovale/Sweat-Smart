@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_app/shared/title.dart';
-import 'package:my_app/shared/navbar.dart';
 import 'package:my_app/screens/information.dart';
 
 class GetStarted extends StatefulWidget {

@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:my_app/screens/getStarted.dart';
 import 'package:my_app/shared/title.dart';
 
 import '../shared/navbar.dart';
@@ -23,7 +22,7 @@ class _LoadingState extends State<Loading> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => GetStarted(),
+        builder: (context) => NavBar(),
       ),
     );
   }
