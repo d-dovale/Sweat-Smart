@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/shared/nextButton.dart';
 import 'package:my_app/shared/question.dart';
+import 'package:my_app/shared/navbar.dart';
 
 List<Question> getQuestions() {
   List<Question> list = [];
@@ -39,14 +40,17 @@ class _InformationState extends State<Information> {
 
   void goToNextQuestion() {
     if (questionIndex < questionsList.length - 1) {
-      // Increment the question index if it's within the range of the list
       setState(() {
         questionIndex++;
       });
     } else {
-      // Handle reaching the end of the questions list
-      // For example, you can show a message or navigate to a different screen
-      print('End of questions');
+      // Navigate to NavBar() when reaching the end of the questions list
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                NavBar()), // Replace NavBar with your widget name
+      );
     }
   }
 
