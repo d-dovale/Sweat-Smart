@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_app/shared/title.dart';
-
+import 'package:my_app/screens/getStarted.dart';
 import '../shared/navbar.dart';
 
 class Loading extends StatefulWidget {
@@ -22,7 +22,7 @@ class _LoadingState extends State<Loading> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => NavBar(),
+        builder: (context) => GetStarted(),
       ),
     );
   }
