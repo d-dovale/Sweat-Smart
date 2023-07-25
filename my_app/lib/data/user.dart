@@ -2,6 +2,7 @@ class User {
   String name;
   String gender;
   String height;
+  String age;
   String bodyWeight;
   String experience;
   String idealPhysique;
@@ -9,6 +10,7 @@ class User {
 
   User({
     required this.name,
+    required this.age,
     required this.gender,
     required this.height,
     required this.bodyWeight,
@@ -17,4 +19,3 @@ class User {
     required this.workoutDays,
   });
 }
-

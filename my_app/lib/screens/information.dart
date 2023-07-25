@@ -12,14 +12,48 @@ List<Question> getQuestions() {
       questionText: 'Start by inputting some basic information',
       questionSubText:
           'These are required to help us find your ideal workout plan',
+
+      // Will include:
+      // name (type out box),
+      // age (type out box),
+      // sex (male or female small buttons next to each other that light up when clicked)
+
       answers: Column(
         children: <Widget>[],
       )));
 
   list.add(Question(
-      questionText: 'Test',
+      questionText: 'Start by inputting some basic information',
+      questionSubText: 'Input your height, body weight, and experience',
+
+      // Will include:
+      // Height (type out box)
+      // Body weight (type out box)
+      // Experience (Begineer, Intermediate, Advanced)
+
+      answers: Column(
+        children: <Widget>[],
+      )));
+
+  list.add(Question(
+      questionText: 'What is your ideal physique or body goals?',
       questionSubText:
-          'These are required to help us find your ideal workout plan',
+          'Click and select one of the three picture references of popular celebrities',
+
+      // Will include:
+      // Ideal physique/Goals (3 big picture buttons)
+
+      answers: Column(
+        children: <Widget>[],
+      )));
+
+  list.add(Question(
+      questionText: 'How many days a week can you workout?',
+      questionSubText: 'Leave empty if you are not sure',
+
+      // Will include:
+      // Days a week (text box)
+
       answers: Column(
         children: <Widget>[],
       )));
@@ -39,17 +73,16 @@ class _InformationState extends State<Information> {
   int questionIndex = 0;
 
   void goToNextQuestion() {
+    // Increases the questionsList index to change to the next question in the list
     if (questionIndex < questionsList.length - 1) {
       setState(() {
         questionIndex++;
       });
     } else {
-      // Navigate to NavBar() when reaching the end of the questions list
+      // Navigates to NavBar() when reaching the end of the questions list
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) =>
-                NavBar()), // Replace NavBar with your widget name
+        MaterialPageRoute(builder: (context) => NavBar()),
       );
     }
   }
