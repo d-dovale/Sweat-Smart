@@ -38,27 +38,48 @@ class _QuestionBoxState extends State<QuestionBox> {
 
     return Center(
       child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-        double availableWidth = constraints.maxWidth;
-        double availableHeight = constraints.maxHeight;
+        builder: (BuildContext context, BoxConstraints constraints) {
+          double availableWidth = constraints.maxWidth;
+          double availableHeight = constraints.maxHeight;
 
-        double titleFontSize = availableWidth * 0.04;
-        double subtitleFontSize = availableWidth * 0.03;
+          double titleFontSize = availableWidth * 0.043;
+          double subtitleFontSize = availableWidth * 0.03;
 
-        return Container(
-          margin: EdgeInsets.only(right: 2.0),
-          padding: EdgeInsets.only(top: 50.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                questionsList[questionIndex].questionText,
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: titleFontSize,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontFamily: 'Lato',
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(0, 70.0, 0, 0),
+            child: FractionallySizedBox(
+              // Adjusts the value of the container
+              widthFactor: 0.9,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      questionsList[questionIndex].questionText,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: titleFontSize,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontFamily: 'Lato',
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: Text(
+                        questionsList[questionIndex].questionSubText,
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: subtitleFontSize,
+                          color: Colors.grey,
+                          fontFamily: 'Lato',
+                          letterSpacing: 1.0,
+                        ),
+                        maxLines: 2,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Padding(
