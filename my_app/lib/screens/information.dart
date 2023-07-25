@@ -56,31 +56,44 @@ class _InformationState extends State<Information> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromARGB(255, 25, 25, 25),
-      appBar: AppBar(
-        title: Text('Basic Info',
-            style: TextStyle(
-              fontFamily: 'BebasNeue',
-              letterSpacing: 2.0,
-            )),
-      ),
-      body: Column(
-        children: <Widget>[
-          QuestionBox(
-            questionIndex: questionIndex,
-            goToNextQuestion: goToNextQuestion,
-            questionsList: questionsList,
-          ),
-        ],
-      ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: NextButton(
-          onPressed: goToNextQuestion,
+    return WillPopScope(
+      onWillPop: () async{
+        if (questionIndex == 0) {
+          Navigator.pop(context);
+          return false;
+        } else{
+          setState(() {
+            questionIndex--;
+          });
+          return false;
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Color.fromARGB(255, 25, 25, 25),
+        appBar: AppBar(
+          title: Text('Basic Info',
+              style: TextStyle(
+                fontFamily: 'BebasNeue',
+                letterSpacing: 2.0,
+              )),
         ),
+        body: Column(
+          children: <Widget>[
+            QuestionBox(
+              questionIndex: questionIndex,
+              goToNextQuestion: goToNextQuestion,
+              questionsList: questionsList,
+            ),
+          ],
+        ),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: NextButton(
+            onPressed: goToNextQuestion,
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
