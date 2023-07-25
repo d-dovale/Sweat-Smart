@@ -156,11 +156,14 @@ List<Question> getQuestions() {
       children: <Widget>[
         // Text field for Name
         TextField(
-          decoration: InputDecoration(labelText: 'Name'),
+          decoration: InputDecoration(labelText: 'Name',
+          labelStyle: TextStyle(color: Colors.white),)
+          
         ),
         // Text field for Age
         TextField(
-          decoration: InputDecoration(labelText: 'Age'),
+          decoration: InputDecoration(labelText: 'Age',
+          labelStyle: TextStyle(color: Colors.white),),
         ),
         // Row of buttons for gender selection
         Row(
@@ -194,15 +197,18 @@ List<Question> getQuestions() {
       children: <Widget>[
         // Text field for Height
         TextField(
-          decoration: InputDecoration(labelText: 'Height'),
+          decoration: InputDecoration(labelText: 'Height',
+          labelStyle: TextStyle(color: Colors.white),),
         ),
         // Text field for Body Weight
         TextField(
-          decoration: InputDecoration(labelText: 'Body Weight'),
+          decoration: InputDecoration(labelText: 'Body Weight',
+          labelStyle: TextStyle(color: Colors.white),),
         ),
         // Radio buttons for Experience selection
         RadioListTile(
-          title: Text('Beginner'),
+          title: Text('Beginner',
+          style: TextStyle(color: Colors.white),),
           value: 'Beginner',
           groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
           onChanged: (value) {
@@ -210,7 +216,8 @@ List<Question> getQuestions() {
           },
         ),
         RadioListTile(
-          title: Text('Intermediate'),
+          title: Text('Intermediate',
+          style: TextStyle(color: Colors.white),),
           value: 'Intermediate',
           groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
           onChanged: (value) {
@@ -218,7 +225,8 @@ List<Question> getQuestions() {
           },
         ),
         RadioListTile(
-          title: Text('Advanced'),
+          title: Text('Advanced',
+          style: TextStyle(color: Colors.white),),
           value: 'Advanced',
           groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
           onChanged: (value) {
