@@ -74,6 +74,7 @@ class _QuestionBoxState extends State<QuestionBox> {
                   ),
                 ),
               ),
+              questionsList[questionIndex].answers,
             ],
           ),
         );
