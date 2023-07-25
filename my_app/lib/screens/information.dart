@@ -154,7 +154,7 @@ List<Question> getQuestions() {
       children: <Widget>[
         // Text field for Name
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(top: 80.0),
           child: TextField(
               decoration: InputDecoration(
             labelText: 'Name',
@@ -162,26 +162,32 @@ List<Question> getQuestions() {
           )),
         ),
         // Text field for Age
-        TextField(
-          decoration: InputDecoration(
-            labelText: 'Age',
-            labelStyle: TextStyle(color: Colors.white),
+        Padding(
+          padding: const EdgeInsets.only(top: 30.0),
+          child: TextField(
+            decoration: InputDecoration(
+              labelText: 'Age',
+              labelStyle: TextStyle(color: Colors.white),
+            ),
           ),
         ),
         // Row of buttons for gender selection
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Male'),
-            ),
-            SizedBox(width: 10),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Female'),
-            ),
-          ],
+        Padding(
+          padding: const EdgeInsets.only(top: 100.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ElevatedButton(
+                onPressed: () {},
+                child: Text('Male'),
+              ),
+              SizedBox(width: 10),
+              ElevatedButton(
+                onPressed: () {},
+                child: Text('Female'),
+              ),
+            ],
+          ),
         ),
       ],
     ),
