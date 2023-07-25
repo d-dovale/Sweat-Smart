@@ -32,7 +32,14 @@ List<Question> getQuestions() {
       // Experience (Begineer, Intermediate, Advanced)
 
       answers: Column(
-        children: <Widget>[],
+        children: <Widget>[
+          TextFormField(
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Enter your username',
+            ),
+          ),
+        ],
       )));
 
   list.add(Question(
