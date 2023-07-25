@@ -153,11 +153,14 @@ List<Question> getQuestions() {
     answers: Column(
       children: <Widget>[
         // Text field for Name
-        TextField(
-            decoration: InputDecoration(
-          labelText: 'Name',
-          labelStyle: TextStyle(color: Colors.white),
-        )),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+              decoration: InputDecoration(
+            labelText: 'Name',
+            labelStyle: TextStyle(color: Colors.white),
+          )),
+        ),
         // Text field for Age
         TextField(
           decoration: InputDecoration(
