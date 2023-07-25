@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/shared/title.dart';
 import 'package:my_app/screens/information.dart';
+import 'package:my_app/data/user.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});
@@ -64,15 +65,30 @@ class _GetStartedState extends State<GetStarted> {
                               width: 10,
                             ), // Add some spacing between icon and text
                             Expanded(
-                              child: Text(
-                                'Get personalized workouts based on your needs',
-                                style: TextStyle(
-                                  fontSize: iconText,
-                                  color: Colors.white,
-                                  letterSpacing: 1.0,
-                                  fontFamily: 'Lato',
-                                ),
-                                maxLines: 2,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Get personalized workouts based on',
+                                    style: TextStyle(
+                                      fontSize: iconText,
+                                      color: Colors.white,
+                                      letterSpacing: 1.0,
+                                      fontFamily: 'Lato',
+                                    ),
+                                    maxLines: 1,
+                                  ),
+                                  Text(
+                                    'your needs',
+                                    style: TextStyle(
+                                      fontSize: iconText,
+                                      color: Colors.white,
+                                      letterSpacing: 1.0,
+                                      fontFamily: 'Lato',
+                                    ),
+                                    maxLines: 1,
+                                  ),
+                                ],
                               ),
                             ),
                           ],
