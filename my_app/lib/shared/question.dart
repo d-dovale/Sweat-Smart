@@ -79,27 +79,14 @@ class _QuestionBoxState extends State<QuestionBox> {
                         maxLines: 2,
                       ),
                     ),
+                    questionsList[questionIndex].answers, // Move this line inside the Column widget
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Text(
-                  questionsList[questionIndex].questionSubText,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontSize: subtitleFontSize,
-                    color: Colors.grey,
-                    fontFamily: 'Lato',
-                    letterSpacing: 1.0,
-                  ),
-                ),
-              ),
-              questionsList[questionIndex].answers,
-            ],
-          ),
-        );
-      }),
+            ),
+          );
+        },
+      ),
     );
   }
 }
