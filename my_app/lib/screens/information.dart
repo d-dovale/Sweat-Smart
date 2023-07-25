@@ -90,11 +90,11 @@ class _InformationState extends State<Information> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
         if (questionIndex == 0) {
           Navigator.pop(context);
           return false;
-        } else{
+        } else {
           setState(() {
             questionIndex--;
           });
