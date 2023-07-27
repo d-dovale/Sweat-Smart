@@ -21,8 +21,8 @@ List<Question> getQuestions() {
     answers: Column(
       children: <Widget>[
         // Text field for Name
-        Padding(
-          padding: const EdgeInsets.only(top: 80.0),
+        const Padding(
+          padding: EdgeInsets.only(top: 80.0),
           child: TextField(
               decoration: InputDecoration(
             labelText: 'Name',
@@ -30,8 +30,8 @@ List<Question> getQuestions() {
           )),
         ),
         // Text field for Age
-        Padding(
-          padding: const EdgeInsets.only(top: 30.0),
+        const Padding(
+          padding: EdgeInsets.only(top: 30.0),
           child: TextField(
             decoration: InputDecoration(
               labelText: 'Age',
@@ -47,12 +47,12 @@ List<Question> getQuestions() {
             children: <Widget>[
               ElevatedButton(
                 onPressed: () {},
-                child: Text('Male'),
+                child: const Text('Male'),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               ElevatedButton(
                 onPressed: () {},
-                child: Text('Female'),
+                child: const Text('Female'),
               ),
             ],
           ),
@@ -70,7 +70,7 @@ List<Question> getQuestions() {
       // Body weight (type out box)
       // Experience (Beginner, Intermediate, Advanced)
 
-      answers: Column(
+      answers: const Column(
         children: <Widget>[],
       )));
 
@@ -82,7 +82,7 @@ List<Question> getQuestions() {
     // Will include:
     // Ideal physique/Goals (3 big picture buttons)
 
-    answers: Column(
+    answers: const Column(
       children: <Widget>[
         // Add your image selection buttons here
       ],
@@ -96,7 +96,7 @@ List<Question> getQuestions() {
     // Will include:
     // Days a week (text box)
 
-    answers: Column(
+    answers: const Column(
       children: <Widget>[
         // Text field for Days a week
         TextField(
@@ -164,7 +164,7 @@ class _InformationState extends State<Information> {
       // Navigates to NavBar() when reaching the end of the questions list
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => NavBar()),
+        MaterialPageRoute(builder: (context) => const NavBar()),
       );
     }
   }
@@ -223,9 +223,9 @@ class _InformationState extends State<Information> {
         }
       },
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 25, 25, 25),
+        backgroundColor: const Color.fromARGB(255, 25, 25, 25),
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Basic Info',
             style: TextStyle(
               fontFamily: 'BebasNeue',
