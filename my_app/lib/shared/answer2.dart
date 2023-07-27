@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/shared/customradiobutton.dart';
 
 class Answer2 extends StatefulWidget {
   const Answer2({super.key});
@@ -70,9 +69,9 @@ class _Answer2State extends State<Answer2> {
                 experience = value as String;
               });
             },
-            secondary: CustomRadioButton(
-              selected: experience == 'Beginner',
-            ),
+            // secondary: CustomRadioButton(
+            //   selected: experience == 'Beginner',
+            // ),
           ),
         ),
         RadioListTile(
@@ -87,9 +86,9 @@ class _Answer2State extends State<Answer2> {
               experience = value as String;
             });
           },
-          secondary: CustomRadioButton(
-            selected: experience == 'Intermediate',
-          ),
+          // secondary: CustomRadioButton(
+          //   selected: experience == 'Intermediate',
+          // ),
         ),
         RadioListTile(
           title: const Text(
@@ -103,9 +102,9 @@ class _Answer2State extends State<Answer2> {
               experience = value as String;
             });
           },
-          secondary: CustomRadioButton(
-            selected: experience == 'Advanced',
-          ),
+          // secondary: CustomRadioButton(
+          //   selected: experience == 'Advanced',
+          // ),
         ),
       ],
     );
