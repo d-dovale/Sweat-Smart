@@ -79,7 +79,8 @@ class _QuestionBoxState extends State<QuestionBox> {
                         maxLines: 2,
                       ),
                     ),
-                    questionsList[questionIndex].answers, // Move this line inside the Column widget
+                    questionsList[questionIndex]
+                        .answers, // Move this line inside the Column widget
                   ],
                 ),
               ),

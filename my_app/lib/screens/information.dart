@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:my_app/shared/nextButton.dart';
 import 'package:my_app/shared/question.dart';
 import 'package:my_app/shared/navbar.dart';
+import 'package:my_app/shared/answer1.dart';
 import 'package:my_app/data/user.dart';
 const bool debugSharedPreferences = false;
 List<Question> getQuestions(Map<String, TextEditingController> controllers) {
@@ -18,52 +21,7 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers) {
     // age (type out box),
     // sex (male or female small buttons next to each other that light up when clicked)
 
-    answers: Column(
-      children: <Widget>[
-        // Text field for Name
-        Padding(
-          padding: const EdgeInsets.only(top: 80.0),
-          child: TextField(
-              controller: controllers['name'],
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                labelText: 'Name',
-                labelStyle: TextStyle(color: Colors.white),
-              )),
-        ),
-        // Text field for Age
-        Padding(
-          padding: const EdgeInsets.only(top: 30.0),
-          child: TextField(
-            controller: controllers['age'],
-            style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(
-              labelText: 'Age',
-              labelStyle: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-        // Row of buttons for gender selection
-
-        // Padding(
-        //   padding: const EdgeInsets.only(top: 100.0),
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: <Widget>[
-        //       ElevatedButton(
-        //         onPressed: () {},
-        //         child: const Text('Male'),
-        //       ),
-        //       const SizedBox(width: 10),
-        //       ElevatedButton(
-        //         onPressed: () {},
-        //         child: const Text('Female'),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-      ],
-    ),
+    answers: Answer1(),
   ));
 
   list.add(Question(
@@ -77,43 +35,68 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers) {
 
       answers: Column(
         children: <Widget>[
-        const TextField(
-          decoration: InputDecoration(labelText: 'Height',
-          labelStyle: TextStyle(color: Colors.white),),
-        ),
-        // Text field for Body Weight
-        const TextField(
-          decoration: InputDecoration(labelText: 'Body Weight',
-          labelStyle: TextStyle(color: Colors.white),),
-        ),
-        // Radio buttons for Experience selection
-        RadioListTile(
-          title: const Text('Beginner',
-          style: TextStyle(color: Colors.white),),
-          value: 'Beginner',
-          groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
-          onChanged: (value) {
-            // Handle the selection
-          },
-        ),
-        RadioListTile(
-          title: const Text('Intermediate',
-          style: TextStyle(color: Colors.white),),
-          value: 'Intermediate',
-          groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
-          onChanged: (value) {
-            // Handle the selection
-          },
-        ),
-        RadioListTile(
-          title: const Text('Advanced',
-          style: TextStyle(color: Colors.white),),
-          value: 'Advanced',
-          groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
-          onChanged: (value) {
-            // Handle the selection
-          },
-        ),],
+          Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+            child: const TextField(
+              style: const TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                labelText: 'Height',
+                labelStyle: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+          // Text field for Body Weight
+          Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+            child: const TextField(
+              style: const TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                labelText: 'Body Weight',
+                labelStyle: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+          // Radio buttons for Experience selection
+          Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+            child: RadioListTile(
+              title: const Text(
+                'Beginner',
+                style: TextStyle(color: Colors.white),
+              ),
+              value: 'Beginner',
+              groupValue:
+                  'Experience', // Replace 'Experience' with the appropriate group value variable
+              onChanged: (value) {
+                // Handle the selection
+              },
+            ),
+          ),
+          RadioListTile(
+            title: const Text(
+              'Intermediate',
+              style: TextStyle(color: Colors.white),
+            ),
+            value: 'Intermediate',
+            groupValue:
+                'Experience', // Replace 'Experience' with the appropriate group value variable
+            onChanged: (value) {
+              // Handle the selection
+            },
+          ),
+          RadioListTile(
+            title: const Text(
+              'Advanced',
+              style: TextStyle(color: Colors.white),
+            ),
+            value: 'Advanced',
+            groupValue:
+                'Experience', // Replace 'Experience' with the appropriate group value variable
+            onChanged: (value) {
+              // Handle the selection
+            },
+          ),
+        ],
       )));
 
   list.add(Question(
@@ -161,10 +144,10 @@ class Information extends StatefulWidget {
 class _InformationState extends State<Information> {
   SharedPreferences? sharedPreferences;
   List<Question> questionsList = getQuestions({}); // Add this line
-  int questionIndex = 0; // Add this line
+  int questionIndex = 0;
 
   // User information
-    User user = User(
+  User user = User(
     name: '',
     age: '',
     gender: '',
@@ -284,7 +267,6 @@ class _InformationState extends State<Information> {
       // Add more sharedPreferences!.setString() calls for other user information
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
