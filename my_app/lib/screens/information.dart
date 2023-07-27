@@ -150,10 +150,18 @@ class _InformationState extends State<Information> {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
+  void clearTextControllers() {
+  nameController.clear();
+  ageController.clear();
+
+  // Add other text input controllers for other questions if needed
+  }
+
   void goToNextQuestion() {
     // Store the current answer in shared preferences
     storeAnswer();
-
+    // Clear text input controllers before moving to the next question
+    clearTextControllers();
     if (questionIndex < questionsList.length - 1) {
       setState(() {
         questionIndex++;
