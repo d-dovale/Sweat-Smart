@@ -6,6 +6,7 @@ import 'package:my_app/shared/nextButton.dart';
 import 'package:my_app/shared/question.dart';
 import 'package:my_app/shared/navbar.dart';
 import 'package:my_app/shared/answer1.dart';
+import 'package:my_app/shared/answer2.dart';
 import 'package:my_app/data/user.dart';
 
 List<Question> getQuestions(Map<String, TextEditingController> controllers) {
@@ -25,79 +26,16 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers) {
   ));
 
   list.add(Question(
-      questionText: 'Start by inputting some basic information',
-      questionSubText: 'Input your height, body weight, and experience',
+    questionText: 'Start by inputting some basic information',
+    questionSubText: 'Input your height, body weight, and experience',
 
-      // Will include:
-      // Height (type out box)
-      // Body weight (type out box)
-      // Experience (Beginner, Intermediate, Advanced)
+    // Will include:
+    // Height (type out box)
+    // Body weight (type out box)
+    // Experience (Beginner, Intermediate, Advanced)
 
-      answers: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 50.0),
-            child: const TextField(
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                labelText: 'Height',
-                labelStyle: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          // Text field for Body Weight
-          Padding(
-            padding: const EdgeInsets.only(top: 50.0),
-            child: const TextField(
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                labelText: 'Body Weight',
-                labelStyle: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          // Radio buttons for Experience selection
-          Padding(
-            padding: const EdgeInsets.only(top: 50.0),
-            child: RadioListTile(
-              title: const Text(
-                'Beginner',
-                style: TextStyle(color: Colors.white),
-              ),
-              value: 'Beginner',
-              groupValue:
-                  'Experience', // Replace 'Experience' with the appropriate group value variable
-              onChanged: (value) {
-                // Handle the selection
-              },
-            ),
-          ),
-          RadioListTile(
-            title: const Text(
-              'Intermediate',
-              style: TextStyle(color: Colors.white),
-            ),
-            value: 'Intermediate',
-            groupValue:
-                'Experience', // Replace 'Experience' with the appropriate group value variable
-            onChanged: (value) {
-              // Handle the selection
-            },
-          ),
-          RadioListTile(
-            title: const Text(
-              'Advanced',
-              style: TextStyle(color: Colors.white),
-            ),
-            value: 'Advanced',
-            groupValue:
-                'Experience', // Replace 'Experience' with the appropriate group value variable
-            onChanged: (value) {
-              // Handle the selection
-            },
-          ),
-        ],
-      )));
+    answers: Answer2(),
+  ));
 
   list.add(Question(
     questionText: 'What is your ideal physique or body goals?',
