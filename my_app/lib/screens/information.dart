@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:my_app/shared/nextButton.dart';
@@ -89,31 +91,42 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers) {
 
       answers: Column(
         children: <Widget>[
-          const TextField(
-            decoration: InputDecoration(
-              labelText: 'Height',
-              labelStyle: TextStyle(color: Colors.white),
+          Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+            child: const TextField(
+              style: const TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                labelText: 'Height',
+                labelStyle: TextStyle(color: Colors.white),
+              ),
             ),
           ),
           // Text field for Body Weight
-          const TextField(
-            decoration: InputDecoration(
-              labelText: 'Body Weight',
-              labelStyle: TextStyle(color: Colors.white),
+          Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+            child: const TextField(
+              style: const TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                labelText: 'Body Weight',
+                labelStyle: TextStyle(color: Colors.white),
+              ),
             ),
           ),
           // Radio buttons for Experience selection
-          RadioListTile(
-            title: const Text(
-              'Beginner',
-              style: TextStyle(color: Colors.white),
+          Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+            child: RadioListTile(
+              title: const Text(
+                'Beginner',
+                style: TextStyle(color: Colors.white),
+              ),
+              value: 'Beginner',
+              groupValue:
+                  'Experience', // Replace 'Experience' with the appropriate group value variable
+              onChanged: (value) {
+                // Handle the selection
+              },
             ),
-            value: 'Beginner',
-            groupValue:
-                'Experience', // Replace 'Experience' with the appropriate group value variable
-            onChanged: (value) {
-              // Handle the selection
-            },
           ),
           RadioListTile(
             title: const Text(
