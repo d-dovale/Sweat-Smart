@@ -5,9 +5,8 @@ import 'package:my_app/shared/question.dart';
 import 'package:my_app/shared/navbar.dart';
 import 'package:my_app/data/user.dart';
 
-List<Question> getQuestions() {
+List<Question> getQuestions(Map<String, TextEditingController> controllers) {
   List<Question> list = [];
-  int selectedIndex = 0;
 
   list.add(Question(
     questionText: 'Start by inputting some basic information',
@@ -22,21 +21,23 @@ List<Question> getQuestions() {
     answers: Column(
       children: <Widget>[
         // Text field for Name
-        const Padding(
-          padding: EdgeInsets.only(top: 80.0),
+        Padding(
+          padding: const EdgeInsets.only(top: 80.0),
           child: TextField(
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
+              controller: controllers['name'],
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
                 labelText: 'Name',
                 labelStyle: TextStyle(color: Colors.white),
               )),
         ),
         // Text field for Age
-        const Padding(
-          padding: EdgeInsets.only(top: 30.0),
+        Padding(
+          padding: const EdgeInsets.only(top: 30.0),
           child: TextField(
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
+            controller: controllers['age'],
+            style: const TextStyle(color: Colors.white),
+            decoration: const InputDecoration(
               labelText: 'Age',
               labelStyle: TextStyle(color: Colors.white),
             ),
@@ -74,8 +75,44 @@ List<Question> getQuestions() {
       // Body weight (type out box)
       // Experience (Beginner, Intermediate, Advanced)
 
-      answers: const Column(
-        children: <Widget>[],
+      answers: Column(
+        children: <Widget>[        const TextField(
+          decoration: InputDecoration(labelText: 'Height',
+          labelStyle: TextStyle(color: Colors.white),),
+        ),
+        // Text field for Body Weight
+        const TextField(
+          decoration: InputDecoration(labelText: 'Body Weight',
+          labelStyle: TextStyle(color: Colors.white),),
+        ),
+        // Radio buttons for Experience selection
+        RadioListTile(
+          title: const Text('Beginner',
+          style: TextStyle(color: Colors.white),),
+          value: 'Beginner',
+          groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
+          onChanged: (value) {
+            // Handle the selection
+          },
+        ),
+        RadioListTile(
+          title: const Text('Intermediate',
+          style: TextStyle(color: Colors.white),),
+          value: 'Intermediate',
+          groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
+          onChanged: (value) {
+            // Handle the selection
+          },
+        ),
+        RadioListTile(
+          title: const Text('Advanced',
+          style: TextStyle(color: Colors.white),),
+          value: 'Advanced',
+          groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
+          onChanged: (value) {
+            // Handle the selection
+          },
+        ),],
       )));
 
   list.add(Question(
@@ -121,11 +158,12 @@ class Information extends StatefulWidget {
 }
 
 class _InformationState extends State<Information> {
-  List<Question> questionsList = getQuestions();
-  int questionIndex = 0;
+  SharedPreferences? sharedPreferences;
+  List<Question> questionsList = getQuestions({}); // Add this line
+  int questionIndex = 0; // Add this line
 
   // User information
-  late User user = User(
+    User user = User(
     name: '',
     age: '',
     gender: '',
@@ -137,35 +175,43 @@ class _InformationState extends State<Information> {
   );
 
   // Text editing controllers for text fields
-  TextEditingController nameController = TextEditingController();
-  TextEditingController ageController = TextEditingController();
-
-  // Initialize SharedPreferences
-  late SharedPreferences sharedPreferences;
+  late Map<String, TextEditingController> controllers;
 
   @override
   void initState() {
     super.initState();
     // Initialize SharedPreferences instance
     initSharedPreferences();
+
+    // Initialize text editing controllers with stored user information
+    controllers = {
+      'name': TextEditingController(text: user.name),
+      'age': TextEditingController(text: user.age),
+      // Add more controllers for other fields as needed
+    };
+
+    questionsList = getQuestions(controllers);
   }
 
   Future<void> initSharedPreferences() async {
     sharedPreferences = await SharedPreferences.getInstance();
-  }
-
-  void clearTextControllers() {
-  nameController.clear();
-  ageController.clear();
-
-  // Add other text input controllers for other questions if needed
+    // Retrieve user information from shared preferences and update the user object
+    user = User(
+      name: sharedPreferences!.getString('name') ?? '',
+      age: sharedPreferences!.getString('age') ?? '',
+      gender: '',
+      height: '',
+      bodyWeight: '',
+      experience: '',
+      idealPhysique: '',
+      workoutDays: '',
+    );
   }
 
   void goToNextQuestion() {
     // Store the current answer in shared preferences
     storeAnswer();
-    // Clear text input controllers before moving to the next question
-    clearTextControllers();
+
     if (questionIndex < questionsList.length - 1) {
       setState(() {
         questionIndex++;
@@ -214,11 +260,13 @@ class _InformationState extends State<Information> {
   }
 
   Future<void> saveUserInformation() async {
-    sharedPreferences.setString('name', user.name);
-    sharedPreferences.setString('age', user.age);
-    sharedPreferences.setString('gender', user.gender);
-    // Add more sharedPreferences.setString() calls for other user information
+    if (sharedPreferences != null) {
+      sharedPreferences!.setString('name', user.name);
+      sharedPreferences!.setString('age', user.age);
+      // Add more sharedPreferences!.setString() calls for other user information
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {
