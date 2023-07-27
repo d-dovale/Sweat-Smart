@@ -8,7 +8,7 @@ import 'package:my_app/shared/navbar.dart';
 import 'package:my_app/shared/answer1.dart';
 import 'package:my_app/shared/answer2.dart';
 import 'package:my_app/data/user.dart';
-
+const bool debugSharedPreferences = false;
 List<Question> getQuestions(Map<String, TextEditingController> controllers) {
   List<Question> list = [];
 
@@ -117,7 +117,24 @@ class _InformationState extends State<Information> {
 
   Future<void> initSharedPreferences() async {
     sharedPreferences = await SharedPreferences.getInstance();
-    // Retrieve user information from shared preferences and update the user object
+
+    if (debugSharedPreferences){
+      await sharedPreferences!.clear();
+    }
+  //   // Check if the user information is already stored in SharedPreferences
+  // bool isUserInfoStored = sharedPreferences!.containsKey('name') &&
+  //     sharedPreferences!.containsKey('age');
+  //     // Add other keys for other user information...
+
+  // // If the user information is not stored, it means the app is starting for the first time.
+  // // You can clear SharedPreferences to reset all values.
+  // if (!isUserInfoStored) {
+  //   await sharedPreferences!.clear();
+  // }
+
+  // Retrieve user information from shared preferences and update the user object
+
+ 
     user = User(
       name: sharedPreferences!.getString('name') ?? '',
       age: sharedPreferences!.getString('age') ?? '',
@@ -144,7 +161,7 @@ class _InformationState extends State<Information> {
       // Navigates to NavBar() when reaching the end of the questions list
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const NavBar()),
+        MaterialPageRoute(builder: (context) => NavBar(user: user)),
       );
     }
   }

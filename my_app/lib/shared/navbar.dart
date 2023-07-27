@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:my_app/screens/home.dart';
 import 'package:my_app/screens/workout.dart';
 import 'package:my_app/screens/schedule.dart';
+import 'package:my_app/data/user.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+  final User user;
+  const NavBar({Key? key, required this.user}) : super(key: key); // Update constructor
+
 
   @override
   State<NavBar> createState() => _HomeState();
@@ -12,24 +15,26 @@ class NavBar extends StatefulWidget {
 
 class _HomeState extends State<NavBar> {
   int currentPage = 0;
-  List<Widget> pages = [
-    const HomePage(
-      title: 'Home Page',
-    ),
-    const SchedulePage(),
-    const WorkoutPage(),
-  ];
-  @override
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Sweat Smart',
-              style: TextStyle(
-                fontFamily: 'BebasNeue',
-                letterSpacing: 2.0,
-              )),
+      appBar: AppBar(
+        title: const Text(
+          'Sweat Smart',
+          style: TextStyle(
+            fontFamily: 'BebasNeue',
+            letterSpacing: 2.0,
+          ),
         ),
-        body: pages[currentPage],
+      ),
+      body: IndexedStack(
+        index: currentPage,
+        children: [
+          HomePage(user: widget.user), // Pass the User object to HomePage
+          SchedulePage(), // Pass the User object to SchedulePage
+          WorkoutPage(), // Pass the User object to WorkoutPage
+        ],
+      ),
         bottomNavigationBar: NavigationBar(
           destinations: const [
             NavigationDestination(
