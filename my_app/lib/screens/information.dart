@@ -7,6 +7,7 @@ import 'package:my_app/data/user.dart';
 
 List<Question> getQuestions() {
   List<Question> list = [];
+  int selectedIndex = 0;
 
   list.add(Question(
     questionText: 'Start by inputting some basic information',
@@ -24,15 +25,17 @@ List<Question> getQuestions() {
         const Padding(
           padding: EdgeInsets.only(top: 80.0),
           child: TextField(
+              style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
-            labelText: 'Name',
-            labelStyle: TextStyle(color: Colors.white),
-          )),
+                labelText: 'Name',
+                labelStyle: TextStyle(color: Colors.white),
+              )),
         ),
         // Text field for Age
         const Padding(
           padding: EdgeInsets.only(top: 30.0),
           child: TextField(
+            style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
               labelText: 'Age',
               labelStyle: TextStyle(color: Colors.white),
@@ -40,23 +43,24 @@ List<Question> getQuestions() {
           ),
         ),
         // Row of buttons for gender selection
-        Padding(
-          padding: const EdgeInsets.only(top: 100.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Male'),
-              ),
-              const SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Female'),
-              ),
-            ],
-          ),
-        ),
+
+        // Padding(
+        //   padding: const EdgeInsets.only(top: 100.0),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: <Widget>[
+        //       ElevatedButton(
+        //         onPressed: () {},
+        //         child: const Text('Male'),
+        //       ),
+        //       const SizedBox(width: 10),
+        //       ElevatedButton(
+        //         onPressed: () {},
+        //         child: const Text('Female'),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ],
     ),
   ));
