@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:my_app/shared/nextButton.dart';
 import 'package:my_app/shared/question.dart';
 import 'package:my_app/shared/navbar.dart';
+import 'package:my_app/shared/answer1.dart';
 import 'package:my_app/data/user.dart';
 
 List<Question> getQuestions(Map<String, TextEditingController> controllers) {
@@ -20,64 +21,7 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers) {
     // age (type out box),
     // sex (male or female small buttons next to each other that light up when clicked)
 
-    answers: Column(
-      children: <Widget>[
-        // Text field for Name
-        Padding(
-          padding: const EdgeInsets.only(top: 80.0),
-          child: TextField(
-              controller: controllers['name'],
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                labelText: 'Name',
-                labelStyle: TextStyle(color: Colors.white),
-              )),
-        ),
-        // Text field for Age
-        Padding(
-          padding: const EdgeInsets.only(top: 30.0),
-          child: TextField(
-            controller: controllers['age'],
-            style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(
-              labelText: 'Age',
-              labelStyle: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-        // Row of buttons for gender selection
-
-        Padding(
-          padding: const EdgeInsets.only(top: 100.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                child: SizedBox(
-                  width: 150, // Adjust the width as needed
-                  height: 50, // Adjust the height as needed
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Male'),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: SizedBox(
-                  width: 150, // Adjust the width as needed
-                  height: 50, // Adjust the height as needed
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Female'),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
+    answers: Answer1(),
   ));
 
   list.add(Question(
@@ -200,7 +144,7 @@ class Information extends StatefulWidget {
 class _InformationState extends State<Information> {
   SharedPreferences? sharedPreferences;
   List<Question> questionsList = getQuestions({}); // Add this line
-  int questionIndex = 0; // Add this line
+  int questionIndex = 0;
 
   // User information
   User user = User(
