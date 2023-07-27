@@ -5,8 +5,6 @@ import 'package:my_app/shared/question.dart';
 import 'package:my_app/shared/navbar.dart';
 import 'package:my_app/data/user.dart';
 
-
-
 List<Question> getQuestions() {
   List<Question> list = [];
 
@@ -23,87 +21,58 @@ List<Question> getQuestions() {
     answers: Column(
       children: <Widget>[
         // Text field for Name
-        TextField(
-          decoration: InputDecoration(labelText: 'Name',
-          labelStyle: TextStyle(color: Colors.white),)
-          
+        Padding(
+          padding: const EdgeInsets.only(top: 80.0),
+          child: TextField(
+              decoration: InputDecoration(
+            labelText: 'Name',
+            labelStyle: TextStyle(color: Colors.white),
+          )),
         ),
         // Text field for Age
-        TextField(
-          decoration: InputDecoration(labelText: 'Age',
-          labelStyle: TextStyle(color: Colors.white),),
+        Padding(
+          padding: const EdgeInsets.only(top: 30.0),
+          child: TextField(
+            decoration: InputDecoration(
+              labelText: 'Age',
+              labelStyle: TextStyle(color: Colors.white),
+            ),
+          ),
         ),
         // Row of buttons for gender selection
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Male'),
-            ),
-            SizedBox(width: 10),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Female'),
-            ),
-          ],
+        Padding(
+          padding: const EdgeInsets.only(top: 100.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ElevatedButton(
+                onPressed: () {},
+                child: Text('Male'),
+              ),
+              SizedBox(width: 10),
+              ElevatedButton(
+                onPressed: () {},
+                child: Text('Female'),
+              ),
+            ],
+          ),
         ),
       ],
     ),
   ));
 
   list.add(Question(
-    questionText: 'Start by inputting some basic information',
-    questionSubText: 'Input your height, body weight, and experience',
+      questionText: 'Start by inputting some basic information',
+      questionSubText: 'Input your height, body weight, and experience',
 
-    // Will include:
-    // Height (type out box)
-    // Body weight (type out box)
-    // Experience (Beginner, Intermediate, Advanced)
+      // Will include:
+      // Height (type out box)
+      // Body weight (type out box)
+      // Experience (Beginner, Intermediate, Advanced)
 
-    answers: Column(
-      children: <Widget>[
-        // Text field for Height
-        TextField(
-          decoration: InputDecoration(labelText: 'Height',
-          labelStyle: TextStyle(color: Colors.white),),
-        ),
-        // Text field for Body Weight
-        TextField(
-          decoration: InputDecoration(labelText: 'Body Weight',
-          labelStyle: TextStyle(color: Colors.white),),
-        ),
-        // Radio buttons for Experience selection
-        RadioListTile(
-          title: Text('Beginner',
-          style: TextStyle(color: Colors.white),),
-          value: 'Beginner',
-          groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
-          onChanged: (value) {
-            // Handle the selection
-          },
-        ),
-        RadioListTile(
-          title: Text('Intermediate',
-          style: TextStyle(color: Colors.white),),
-          value: 'Intermediate',
-          groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
-          onChanged: (value) {
-            // Handle the selection
-          },
-        ),
-        RadioListTile(
-          title: Text('Advanced',
-          style: TextStyle(color: Colors.white),),
-          value: 'Advanced',
-          groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
-          onChanged: (value) {
-            // Handle the selection
-          },
-        ),
-      ],
-    ),
-  ));
+      answers: Column(
+        children: <Widget>[],
+      )));
 
   list.add(Question(
     questionText: 'What is your ideal physique or body goals?',
@@ -139,7 +108,6 @@ List<Question> getQuestions() {
 
   return list;
 }
-
 
 class Information extends StatefulWidget {
   const Information({super.key});
@@ -220,7 +188,8 @@ class _InformationState extends State<Information> {
       // If the answer widget is a row (e.g., gender), store the selected gender in the User object
       List<Widget> genderOptions = (currentQuestion.answers as Row).children;
       for (int i = 0; i < genderOptions.length; i++) {
-        if (genderOptions[i] is ElevatedButton && (genderOptions[i] as ElevatedButton).style != null) {
+        if (genderOptions[i] is ElevatedButton &&
+            (genderOptions[i] as ElevatedButton).style != null) {
           // The selected gender will have a style that indicates it is pressed
           setState(() {
             user.gender = (i == 0) ? 'Male' : 'Female';
@@ -284,4 +253,3 @@ class _InformationState extends State<Information> {
     );
   }
 }
-
