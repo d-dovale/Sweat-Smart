@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/screens/workout.dart';
+import 'package:my_app/data/user.dart';
+import 'package:my_app/screens/information.dart';
+import 'package:my_app/shared/navbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key, required String title});
+class HomePage extends StatefulWidget {
 
+  final User user;
+  const HomePage({required this.user});
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -11,27 +21,26 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Image(
-            image: AssetImage(
-                'assets/images/Sweat Smart Loading Screen Light.gif'),
-            height: 400 //testing logo gif,
+            image: AssetImage('assets/images/Sweat Smart Loading Screen Light.gif'),
+            height: 400, //testing logo gif,
           ),
-          const Text(
-            'Welcome to Sweat Smart, [name]!',
+          Text(
+            'Welcome to Sweat Smart, ${widget.user.name}!',
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               fontFamily: 'BebasNeue',
             ),
           ),
-          SizedBox(height: 16), // Optional spacing between text and button
+          const SizedBox(height: 16), // Optional spacing between text and button
           ElevatedButton(
             onPressed: () {
               // Handle button press
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (BuildContext context) {
-                    return const WorkoutPage();
+                    return NavBar(user: widget.user); // Pass the User object to NavBar
                   },
                 ),
               );
@@ -44,7 +53,7 @@ class HomePage extends StatelessWidget {
                 letterSpacing: 2.0,
               ),
             ),
-          )
+          ),
         ],
       ),
     );
