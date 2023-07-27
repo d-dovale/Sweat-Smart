@@ -45,23 +45,35 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers) {
         ),
         // Row of buttons for gender selection
 
-        // Padding(
-        //   padding: const EdgeInsets.only(top: 100.0),
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: <Widget>[
-        //       ElevatedButton(
-        //         onPressed: () {},
-        //         child: const Text('Male'),
-        //       ),
-        //       const SizedBox(width: 10),
-        //       ElevatedButton(
-        //         onPressed: () {},
-        //         child: const Text('Female'),
-        //       ),
-        //     ],
-        //   ),
-        // ),
+        Padding(
+          padding: const EdgeInsets.only(top: 100.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: SizedBox(
+                  width: 150, // Adjust the width as needed
+                  height: 50, // Adjust the height as needed
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('Male'),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: SizedBox(
+                  width: 150, // Adjust the width as needed
+                  height: 50, // Adjust the height as needed
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('Female'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     ),
   ));
@@ -76,43 +88,58 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers) {
       // Experience (Beginner, Intermediate, Advanced)
 
       answers: Column(
-        children: <Widget>[        const TextField(
-          decoration: InputDecoration(labelText: 'Height',
-          labelStyle: TextStyle(color: Colors.white),),
-        ),
-        // Text field for Body Weight
-        const TextField(
-          decoration: InputDecoration(labelText: 'Body Weight',
-          labelStyle: TextStyle(color: Colors.white),),
-        ),
-        // Radio buttons for Experience selection
-        RadioListTile(
-          title: const Text('Beginner',
-          style: TextStyle(color: Colors.white),),
-          value: 'Beginner',
-          groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
-          onChanged: (value) {
-            // Handle the selection
-          },
-        ),
-        RadioListTile(
-          title: const Text('Intermediate',
-          style: TextStyle(color: Colors.white),),
-          value: 'Intermediate',
-          groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
-          onChanged: (value) {
-            // Handle the selection
-          },
-        ),
-        RadioListTile(
-          title: const Text('Advanced',
-          style: TextStyle(color: Colors.white),),
-          value: 'Advanced',
-          groupValue: 'Experience', // Replace 'Experience' with the appropriate group value variable
-          onChanged: (value) {
-            // Handle the selection
-          },
-        ),],
+        children: <Widget>[
+          const TextField(
+            decoration: InputDecoration(
+              labelText: 'Height',
+              labelStyle: TextStyle(color: Colors.white),
+            ),
+          ),
+          // Text field for Body Weight
+          const TextField(
+            decoration: InputDecoration(
+              labelText: 'Body Weight',
+              labelStyle: TextStyle(color: Colors.white),
+            ),
+          ),
+          // Radio buttons for Experience selection
+          RadioListTile(
+            title: const Text(
+              'Beginner',
+              style: TextStyle(color: Colors.white),
+            ),
+            value: 'Beginner',
+            groupValue:
+                'Experience', // Replace 'Experience' with the appropriate group value variable
+            onChanged: (value) {
+              // Handle the selection
+            },
+          ),
+          RadioListTile(
+            title: const Text(
+              'Intermediate',
+              style: TextStyle(color: Colors.white),
+            ),
+            value: 'Intermediate',
+            groupValue:
+                'Experience', // Replace 'Experience' with the appropriate group value variable
+            onChanged: (value) {
+              // Handle the selection
+            },
+          ),
+          RadioListTile(
+            title: const Text(
+              'Advanced',
+              style: TextStyle(color: Colors.white),
+            ),
+            value: 'Advanced',
+            groupValue:
+                'Experience', // Replace 'Experience' with the appropriate group value variable
+            onChanged: (value) {
+              // Handle the selection
+            },
+          ),
+        ],
       )));
 
   list.add(Question(
@@ -163,7 +190,7 @@ class _InformationState extends State<Information> {
   int questionIndex = 0; // Add this line
 
   // User information
-    User user = User(
+  User user = User(
     name: '',
     age: '',
     gender: '',
@@ -266,7 +293,6 @@ class _InformationState extends State<Information> {
       // Add more sharedPreferences!.setString() calls for other user information
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
