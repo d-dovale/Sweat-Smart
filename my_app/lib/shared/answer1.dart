@@ -2,7 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_app/screens/information.dart';
 
-import 'package:my_app/data/user.dart';
+class AgeInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    // Only allow digits (0-9) and ensure the entered value is within the range of 0-100
+    if (newValue.text.isEmpty || (int.tryParse(newValue.text) ?? -1) <= 100) {
+      return newValue;
+    } else {
+      // If the value is not valid, keep the old value
+      return oldValue;
+    }
+  }
+}
+
 class Answer1 extends StatefulWidget {
   final Map<String, TextEditingController> controllers;
   const Answer1({required this.controllers, Key? key}) : super(key: key);
@@ -48,6 +61,10 @@ class _Answer1State extends State<Answer1> {
               labelText: 'Age',
               labelStyle: TextStyle(color: Colors.white),
             ),
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              AgeInputFormatter(), // Use the custom input formatter for age validation
+            ],
           ),
         ),
         // Row of buttons for gender selection
