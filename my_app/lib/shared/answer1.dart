@@ -3,23 +3,75 @@ import 'package:flutter/services.dart';
 import 'package:my_app/screens/information.dart';
 
 class AgeInputFormatter extends TextInputFormatter {
+  final BuildContext context;
+
+  AgeInputFormatter(this.context);
+
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
     // Only allow digits (0-9) and ensure the entered value is within the range of 0-100
-    if (newValue.text.isEmpty || (int.tryParse(newValue.text) ?? -1) <= 100) {
+    if (newValue.text.isEmpty) {
+      return newValue;
+    }
+
+    int? age = int.tryParse(newValue.text);
+
+    if (age != null && age >= 0 && age <= 100) {
       return newValue;
     } else {
-      // If the value is not valid, keep the old value
+      // Show the error snackbar
+      showInputErrorSnackBar(
+          context, 'Invalid age. Age must be a number between 0 and 100.');
       return oldValue;
     }
+  }
+
+  void showInputErrorSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+}
+
+class NameInputFormatter extends TextInputFormatter {
+  final BuildContext context;
+  final int maxLength;
+
+  NameInputFormatter(this.context, {this.maxLength = 50});
+
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    // Allow only letters (a-z, A-Z) and restrict name length
+    final nameRegExp = RegExp(r'^[a-zA-Z\s]+$');
+    if (nameRegExp.hasMatch(newValue.text) &&
+        newValue.text.length <= maxLength) {
+      return newValue;
+    } else {
+      // Show the error snackbar
+      showInputErrorSnackBar(context,
+          'Invalid name. Name should contain only letters and be less than $maxLength characters.');
+      return oldValue;
+    }
+  }
+
+  void showInputErrorSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2),
+      ),
+    );
   }
 }
 
 class Answer1 extends StatefulWidget {
   final Map<String, TextEditingController> controllers;
   const Answer1({required this.controllers, Key? key}) : super(key: key);
-
 
   @override
   State<Answer1> createState() => _Answer1State();
@@ -37,7 +89,6 @@ class _Answer1State extends State<Answer1> {
         Padding(
           padding: const EdgeInsets.only(top: 80.0),
           child: TextField(
-          
             style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               labelText: 'Name',
@@ -47,6 +98,8 @@ class _Answer1State extends State<Answer1> {
             // Input validator to disallow numbers to be typed
             inputFormatters: [
               FilteringTextInputFormatter.deny(RegExp(r'[0-9]')),
+              NameInputFormatter(context,
+                  maxLength: 30), // Set the maximum length of the name
             ],
           ),
         ),
@@ -63,7 +116,7 @@ class _Answer1State extends State<Answer1> {
             ),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
-              AgeInputFormatter(), // Use the custom input formatter for age validation
+              AgeInputFormatter(context),
             ],
           ),
         ),
@@ -75,22 +128,20 @@ class _Answer1State extends State<Answer1> {
             children: <Widget>[
               Expanded(
                 child: SizedBox(
-                  width: 150, // Adjust the width as needed
-                  height: 50, // Adjust the height as needed
+                  width: 150,
+                  height: 50,
                   child: ElevatedButton(
                     onPressed: () {
                       setState(() {
                         isMaleSelected = !isMaleSelected;
                         if (isMaleSelected) {
-                          // If male is selected, deselect female
                           isFemaleSelected = false;
                         }
                       });
                     },
+                    // Highlighted color when selected
                     style: ElevatedButton.styleFrom(
-                      primary: isMaleSelected
-                          ? Colors.blue // Highlighted color when selected
-                          : null,
+                      primary: isMaleSelected ? Colors.blue : null,
                     ),
                     child: const Text('Male'),
                   ),
@@ -99,22 +150,19 @@ class _Answer1State extends State<Answer1> {
               const SizedBox(width: 10),
               Expanded(
                 child: SizedBox(
-                  width: 150, // Adjust the width as needed
-                  height: 50, // Adjust the height as needed
+                  width: 150,
+                  height: 50,
                   child: ElevatedButton(
                     onPressed: () {
                       setState(() {
                         isFemaleSelected = !isFemaleSelected;
                         if (isFemaleSelected) {
-                          // If female is selected, deselect male
                           isMaleSelected = false;
                         }
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: isFemaleSelected
-                          ? Colors.blue // Highlighted color when selected
-                          : null,
+                      primary: isFemaleSelected ? Colors.blue : null,
                     ),
                     child: const Text('Female'),
                   ),
