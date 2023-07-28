@@ -6,9 +6,10 @@ import 'package:my_app/shared/navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
-
   final User user;
+
   const HomePage({required this.user});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
