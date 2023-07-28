@@ -9,6 +9,7 @@ class Answer2 extends StatefulWidget {
 
 class _Answer2State extends State<Answer2> {
   double heightInInches = 70.0;
+  String experience = '';
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class _Answer2State extends State<Answer2> {
               Slider(
                 value: heightInInches,
                 min: 48,
-                max: 96,
+                max: 90,
                 divisions: 48,
                 label: '${feet}\' ${inches}\"',
                 onChanged: (value) {
@@ -62,8 +63,15 @@ class _Answer2State extends State<Answer2> {
               style: TextStyle(color: Colors.white),
             ),
             value: 'Beginner',
-            groupValue: 'Experience',
-            onChanged: (value) {},
+            groupValue: experience,
+            onChanged: (value) {
+              setState(() {
+                experience = value as String;
+              });
+            },
+            // secondary: CustomRadioButton(
+            //   selected: experience == 'Beginner',
+            // ),
           ),
         ),
         RadioListTile(
@@ -72,8 +80,15 @@ class _Answer2State extends State<Answer2> {
             style: TextStyle(color: Colors.white),
           ),
           value: 'Intermediate',
-          groupValue: 'Experience',
-          onChanged: (value) {},
+          groupValue: experience,
+          onChanged: (value) {
+            setState(() {
+              experience = value as String;
+            });
+          },
+          // secondary: CustomRadioButton(
+          //   selected: experience == 'Intermediate',
+          // ),
         ),
         RadioListTile(
           title: const Text(
@@ -81,8 +96,15 @@ class _Answer2State extends State<Answer2> {
             style: TextStyle(color: Colors.white),
           ),
           value: 'Advanced',
-          groupValue: 'Experience',
-          onChanged: (value) {},
+          groupValue: experience,
+          onChanged: (value) {
+            setState(() {
+              experience = value as String;
+            });
+          },
+          // secondary: CustomRadioButton(
+          //   selected: experience == 'Advanced',
+          // ),
         ),
       ],
     );
