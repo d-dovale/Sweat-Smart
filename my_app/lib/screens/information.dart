@@ -22,7 +22,7 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers) {
     // age (type out box),
     // sex (male or female small buttons next to each other that light up when clicked)
 
-    answers: Answer1(),
+    answers: Answer1(controllers: controllers),
   ));
 
   list.add(Question(

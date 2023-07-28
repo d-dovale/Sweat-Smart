@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/screens/information.dart';
+import 'package:my_app/data/user.dart';
 class Answer1 extends StatefulWidget {
-  const Answer1({super.key});
+  final Map<String, TextEditingController> controllers;
+  const Answer1({required this.controllers, Key? key}) : super(key: key);
+
 
   @override
   State<Answer1> createState() => _Answer1State();
@@ -19,7 +22,7 @@ class _Answer1State extends State<Answer1> {
         Padding(
           padding: const EdgeInsets.only(top: 80.0),
           child: TextField(
-          
+          controller: widget.controllers['name'],
             style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               labelText: 'Name',
@@ -31,6 +34,7 @@ class _Answer1State extends State<Answer1> {
         Padding(
           padding: const EdgeInsets.only(top: 30.0),
           child: TextField(
+            controller: widget.controllers['age'],
             style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               labelText: 'Age',
