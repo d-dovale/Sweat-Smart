@@ -121,16 +121,6 @@ class _InformationState extends State<Information> {
     if (debugSharedPreferences){
       await sharedPreferences!.clear();
     }
-  //   // Check if the user information is already stored in SharedPreferences
-  // bool isUserInfoStored = sharedPreferences!.containsKey('name') &&
-  //     sharedPreferences!.containsKey('age');
-  //     // Add other keys for other user information...
-
-  // // If the user information is not stored, it means the app is starting for the first time.
-  // // You can clear SharedPreferences to reset all values.
-  // if (!isUserInfoStored) {
-  //   await sharedPreferences!.clear();
-  // }
 
   // Retrieve user information from shared preferences and update the user object
 
@@ -147,7 +137,7 @@ class _InformationState extends State<Information> {
     );
   }
 
-  void goToNextQuestion() {
+  void goToNextQuestion() async {
     // Store the current answer in shared preferences
     storeAnswer();
 
@@ -157,7 +147,9 @@ class _InformationState extends State<Information> {
       });
     } else {
       // Save the user information to shared preferences before navigating to NavBar()
-      saveUserInformation();
+      await saveUserInformation();
+
+      final Future<User> userFuture = Future.value(user);
       // Navigates to NavBar() when reaching the end of the questions list
       Navigator.push(
         context,

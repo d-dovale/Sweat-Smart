@@ -37,7 +37,7 @@ class _Answer1State extends State<Answer1> {
         Padding(
           padding: const EdgeInsets.only(top: 80.0),
           child: TextField(
-          
+          controller: widget.controllers['name'],
             style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               labelText: 'Name',

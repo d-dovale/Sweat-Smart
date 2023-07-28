@@ -6,16 +6,17 @@ import 'package:my_app/data/user.dart';
 
 class NavBar extends StatefulWidget {
   final User user;
-  const NavBar({Key? key, required this.user}) : super(key: key); // Update constructor
 
+  const NavBar({Key? key, required this.user}) : super(key: key);
 
   @override
-  State<NavBar> createState() => _HomeState();
+  State<NavBar> createState() => _NavBarState();
 }
 
-class _HomeState extends State<NavBar> {
+class _NavBarState extends State<NavBar> {
   int currentPage = 0;
-    @override
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -35,31 +36,32 @@ class _HomeState extends State<NavBar> {
           WorkoutPage(), // Pass the User object to WorkoutPage
         ],
       ),
-        bottomNavigationBar: NavigationBar(
-          destinations: const [
-            NavigationDestination(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.calendar_month),
-              label: 'Schedule',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.fitness_center),
-              label: 'Workout',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-            ),
-          ],
-          onDestinationSelected: (int index) {
-            setState(() {
-              currentPage = index;
-            });
-          },
-          selectedIndex: currentPage,
-        ));
+      bottomNavigationBar: NavigationBar(
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.calendar_month),
+            label: 'Schedule',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.fitness_center),
+            label: 'Workout',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPage = index;
+          });
+        },
+        selectedIndex: currentPage,
+      ),
+    );
   }
 }
