@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:my_app/screens/information.dart';
+
 class Answer1 extends StatefulWidget {
   const Answer1({super.key});
 
@@ -18,15 +20,20 @@ class _Answer1State extends State<Answer1> {
         // Text field for Name
         Padding(
           padding: const EdgeInsets.only(top: 80.0),
-          child: TextField(
-
+          child: TextFormField(
             style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               labelText: 'Name',
               labelStyle: TextStyle(color: Colors.white),
             ),
+
+            // Input validator to disallow numbers to be typed
+            inputFormatters: [
+              FilteringTextInputFormatter.deny(RegExp(r'[0-9]')),
+            ],
           ),
         ),
+
         // Text field for Age
         Padding(
           padding: const EdgeInsets.only(top: 30.0),
