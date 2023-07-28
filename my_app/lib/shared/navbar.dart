@@ -19,15 +19,16 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Sweat Smart',
-          style: TextStyle(
-            fontFamily: 'BebasNeue',
-            letterSpacing: 2.0,
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
+      //   title: const Text(
+      //     'Sweat Smart',
+      //     style: TextStyle(
+      //       fontFamily: 'BebasNeue',
+      //       letterSpacing: 2.0,
+      //     ),
+      //   ),
+      // ),
       body: IndexedStack(
         index: currentPage,
         children: [

@@ -79,8 +79,6 @@ import 'package:intl/intl.dart';
 //   }
 // }
 
-
-
 class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);
 
@@ -103,73 +101,73 @@ class _SchedulePageState extends State<SchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Schedule Page'),
-      ),
       body: content(),
     );
   }
 
   Widget content() {
-    return Column(
-      children: [
-        Container(
-          child: TableCalendar(
-            locale: 'en_US',
-            calendarFormat: _calendarFormat,
-            onFormatChanged: (format) {
-              setState(() {
-                _calendarFormat = format;
-              });
-            },
-            focusedDay: _focusedDay,
-            firstDay: DateTime.utc(2010, 1, 1),
-            lastDay: DateTime.utc(2030, 1, 1),
-            selectedDayPredicate: (day) {
-              return isSameDay(_selectedDay, day);
-            },
-            onDaySelected: (selectedDay, focusedDay) {
-              setState(() {
-                _selectedDay = selectedDay;
-                _focusedDay = focusedDay;
-              });
-            },
-            headerStyle: HeaderStyle(
-              formatButtonVisible: false,
-              leftChevronIcon: Container(
-                child: const Icon(
-                  Icons.chevron_left,
-                  color: Colors.red,
+    return Scaffold(
+      backgroundColor: Color.fromARGB(255, 25, 25, 25),
+      body: Column(
+        children: [
+          Container(
+            child: TableCalendar(
+              locale: 'en_US',
+              calendarFormat: _calendarFormat,
+              onFormatChanged: (format) {
+                setState(() {
+                  _calendarFormat = format;
+                });
+              },
+              focusedDay: _focusedDay,
+              firstDay: DateTime.utc(2010, 1, 1),
+              lastDay: DateTime.utc(2030, 1, 1),
+              selectedDayPredicate: (day) {
+                return isSameDay(_selectedDay, day);
+              },
+              onDaySelected: (selectedDay, focusedDay) {
+                setState(() {
+                  _selectedDay = selectedDay;
+                  _focusedDay = focusedDay;
+                });
+              },
+              headerStyle: HeaderStyle(
+                formatButtonVisible: false,
+                leftChevronIcon: Container(
+                  child: const Icon(
+                    Icons.chevron_left,
+                    color: Colors.red,
+                  ),
+                ),
+                rightChevronIcon: Container(
+                  child: const Icon(
+                    Icons.chevron_right,
+                    color: Colors.red,
+                  ),
                 ),
               ),
-              rightChevronIcon: Container(
-                child: const Icon(
-                  Icons.chevron_right,
+              calendarStyle: CalendarStyle(
+                todayDecoration: BoxDecoration(
                   color: Colors.red,
+                  shape: BoxShape.circle,
                 ),
-              ),
-            ),
-            calendarStyle: CalendarStyle(
-              todayDecoration: BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
-              selectedDecoration: BoxDecoration(
-                color: _selectedDay != null ? Colors.red[200] : Colors.red,
-                shape: BoxShape.circle,
+                selectedDecoration: BoxDecoration(
+                  color: _selectedDay != null ? Colors.red[200] : Colors.red,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
           ),
-        ),
-        if (_selectedDay != null)
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'On ${DateFormat.yMMMd().format(_selectedDay!)}, you have a back and bicep day!',
-              style: TextStyle(fontSize: 20),
+          if (_selectedDay != null)
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'On ${DateFormat.yMMMd().format(_selectedDay!)}, you have a back and bicep day!',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }

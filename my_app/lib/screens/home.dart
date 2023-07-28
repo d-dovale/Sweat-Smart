@@ -17,45 +17,51 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Image(
-            image: AssetImage('assets/images/Sweat Smart Loading Screen Light.gif'),
-            height: 400, //testing logo gif,
-          ),
-          Text(
-            'Welcome to Sweat Smart, ${widget.user.name}!',
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'BebasNeue',
+    return Scaffold(
+      backgroundColor: Color.fromARGB(255, 25, 25, 25),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Image(
+              image: AssetImage(
+                  'assets/images/Sweat Smart Loading Screen Light.gif'),
+              height: 400, //testing logo gif,
             ),
-          ),
-          const SizedBox(height: 16), // Optional spacing between text and button
-          ElevatedButton(
-            onPressed: () {
-              // Handle button press
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return NavBar(user: widget.user); // Pass the User object to NavBar
-                  },
-                ),
-              );
-            },
-            child: const Text(
-              'Click for Today\'s Workout, [workout variable]!',
-              style: TextStyle(
-                fontSize: 16,
+            Text(
+              'Welcome to Sweat Smart, ${widget.user.name}!',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
                 fontFamily: 'BebasNeue',
-                letterSpacing: 2.0,
               ),
             ),
-          ),
-        ],
+            const SizedBox(
+                height: 16), // Optional spacing between text and button
+            ElevatedButton(
+              onPressed: () {
+                // Handle button press
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return NavBar(
+                          user: widget.user); // Pass the User object to NavBar
+                    },
+                  ),
+                );
+              },
+              child: const Text(
+                'Click for Today\'s Workout, [workout variable]!',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'BebasNeue',
+                  letterSpacing: 2.0,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

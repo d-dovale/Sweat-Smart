@@ -15,22 +15,6 @@ class _WorkoutPageState extends State<WorkoutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          '[Split for the day]',
-          style: TextStyle(
-            fontFamily: 'BebasNeue',
-            letterSpacing: 2.0,
-          ),
-        ),
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -78,7 +62,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Future<void> _saveUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', _nameController.text);
-    await prefs.setString('birthday', _selectedDate?.toString() ?? ''); // Handle null case
+    await prefs.setString(
+        'birthday', _selectedDate?.toString() ?? ''); // Handle null case
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -169,5 +154,3 @@ class _UserProfilePageState extends State<UserProfilePage> {
     );
   }
 }
-
-
