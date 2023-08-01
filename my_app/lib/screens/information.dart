@@ -8,9 +8,7 @@ import 'package:my_app/shared/navbar.dart';
 import 'package:my_app/shared/answer1.dart';
 import 'package:my_app/shared/answer2.dart';
 import 'package:my_app/data/user.dart';
-
 const bool debugSharedPreferences = false;
-
 List<Question> getQuestions(Map<String, TextEditingController> controllers) {
   List<Question> list = [];
 
@@ -83,7 +81,7 @@ class Information extends StatefulWidget {
 
 class _InformationState extends State<Information> {
   SharedPreferences? sharedPreferences;
-  List<Question> questionsList = getQuestions({}); // Add this line
+  List<Question> questionsList = getQuestions({});
   int questionIndex = 0;
 
   // User information
@@ -120,12 +118,13 @@ class _InformationState extends State<Information> {
   Future<void> initSharedPreferences() async {
     sharedPreferences = await SharedPreferences.getInstance();
 
-    if (debugSharedPreferences) {
+    if (debugSharedPreferences){
       await sharedPreferences!.clear();
     }
 
-    // Retrieve user information from shared preferences and update the user object
+  // Retrieve user information from shared preferences and update the user object
 
+ 
     user = User(
       name: sharedPreferences!.getString('name') ?? '',
       age: sharedPreferences!.getString('age') ?? '',
@@ -150,8 +149,8 @@ class _InformationState extends State<Information> {
       // Save the user information to shared preferences before navigating to NavBar()
       await saveUserInformation();
 
-      final Future<User> userFuture = Future.value(user);
       // Navigates to NavBar() when reaching the end of the questions list
+      // ignore: use_build_context_synchronously
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => NavBar(user: user)),
@@ -161,20 +160,18 @@ class _InformationState extends State<Information> {
 
   void storeAnswer() {
     Question currentQuestion = questionsList[questionIndex];
-    if (currentQuestion.answers is TextField) {
+    if (currentQuestion.answers is Answer1) {
+      bool testAge = currentQuestion.questionText == 'Age';
       // If the answer widget is a text field (e.g., name, age), store the value in the User object
-      String answer = (currentQuestion.answers as TextField).controller!.text;
-      if (currentQuestion.questionText == 'Name') {
-        setState(() {
-          user.name = answer;
-        });
-      } else if (currentQuestion.questionText == 'Age') {
-        setState(() {
-          user.age = answer;
-        });
-      }
+      Answer1 answer1 = currentQuestion.answers as Answer1;
+      String name = answer1.controllers['name']!.text;
+      String age = answer1.controllers['age']!.text;
+      setState((){
+        user.name = name;
+        user.age = age;
+      });
       // Add other conditions for storing other text-based answers if needed
-    } else if (currentQuestion.answers is Row) {
+    } if (currentQuestion.answers is Row) {
       // If the answer widget is a row (e.g., gender), store the selected gender in the User object
       List<Widget> genderOptions = (currentQuestion.answers as Row).children;
       for (int i = 0; i < genderOptions.length; i++) {
@@ -214,7 +211,6 @@ class _InformationState extends State<Information> {
         }
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         backgroundColor: const Color.fromARGB(255, 25, 25, 25),
         appBar: AppBar(
           title: const Text(
@@ -225,16 +221,14 @@ class _InformationState extends State<Information> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              QuestionBox(
-                questionIndex: questionIndex,
-                goToNextQuestion: goToNextQuestion,
-                questionsList: questionsList,
-              ),
-            ],
-          ),
+        body: Column(
+          children: <Widget>[
+            QuestionBox(
+              questionIndex: questionIndex,
+              goToNextQuestion: goToNextQuestion,
+              questionsList: questionsList,
+            ),
+          ],
         ),
         floatingActionButton: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -247,3 +241,4 @@ class _InformationState extends State<Information> {
     );
   }
 }
+
