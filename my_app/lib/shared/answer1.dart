@@ -7,10 +7,11 @@ class AgeInputFormatter extends TextInputFormatter {
 
   AgeInputFormatter(this.context);
 
+  bool _isAgeValid = true;
+
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    // Only allow digits (0-9) and ensure the entered value is within the range of 0-100
     if (newValue.text.isEmpty) {
       return newValue;
     }
@@ -18,11 +19,16 @@ class AgeInputFormatter extends TextInputFormatter {
     int? age = int.tryParse(newValue.text);
 
     if (age != null && age >= 0 && age <= 100) {
+      // Reset the error status for age when input is valid
+      _isAgeValid = true;
       return newValue;
     } else {
-      // Show the error snackbar
-      showInputErrorSnackBar(
-          context, 'Invalid age. Age must be a number between 0 and 100.');
+      // Show the error snackbar only if the error status for age is false
+      if (!_isAgeValid) {
+        showInputErrorSnackBar(
+            context, 'Invalid age. Age must be a number between 0 and 100.');
+      }
+      _isAgeValid = false;
       return oldValue;
     }
   }
@@ -40,23 +46,36 @@ class AgeInputFormatter extends TextInputFormatter {
 class NameInputFormatter extends TextInputFormatter {
   final BuildContext context;
   final int maxLength;
+  final void Function() onErrorShown;
 
-  NameInputFormatter(this.context, {this.maxLength = 50});
+  NameInputFormatter(this.context,
+      {this.maxLength = 30, required this.onErrorShown});
+
+  bool _isNameValid = true; // Track the error status for name
 
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    // Allow only letters (a-z, A-Z) and restrict name length
-    final nameRegExp = RegExp(r'^[a-zA-Z\s]+$');
+    // Allow empty strings as well
+    final nameRegExp = RegExp(r'^[a-zA-Z\s]*$');
+
     if (nameRegExp.hasMatch(newValue.text) &&
         newValue.text.length <= maxLength) {
+      _isNameValid = true;
       return newValue;
     } else {
-      // Show the error snackbar
-      showInputErrorSnackBar(context,
-          'Invalid name. Name should contain only letters and be less than $maxLength characters.');
+      // Show the error snackbar only if the error status for name is false
+      if (!_isNameValid && onErrorShown != null) {
+        onErrorShown();
+      }
+      _isNameValid = false;
       return oldValue;
     }
+  }
+
+  static bool isValidName(String value) {
+    final nameRegExp = RegExp(r'^[a-zA-Z\s]*$');
+    return nameRegExp.hasMatch(value);
   }
 
   void showInputErrorSnackBar(BuildContext context, String message) {
@@ -81,6 +100,15 @@ class _Answer1State extends State<Answer1> {
   bool isMaleSelected = false;
   bool isFemaleSelected = false;
 
+  static void showInputErrorSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -98,8 +126,14 @@ class _Answer1State extends State<Answer1> {
 
             // Input validator to disallow numbers to be typed
             inputFormatters: [
-              FilteringTextInputFormatter.deny(RegExp(r'[0-9]')),
-              NameInputFormatter(context, maxLength: 30),
+              NameInputFormatter(
+                context,
+                maxLength: 30,
+                onErrorShown: () {
+                  showInputErrorSnackBar(context,
+                      'Invalid name. Name should contain only letters and be less than 30 characters.');
+                },
+              ),
             ],
           ),
         ),
