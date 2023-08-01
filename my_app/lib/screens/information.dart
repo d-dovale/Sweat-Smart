@@ -8,7 +8,9 @@ import 'package:my_app/shared/navbar.dart';
 import 'package:my_app/shared/answer1.dart';
 import 'package:my_app/shared/answer2.dart';
 import 'package:my_app/data/user.dart';
+
 const bool debugSharedPreferences = false;
+
 List<Question> getQuestions(Map<String, TextEditingController> controllers) {
   List<Question> list = [];
 
@@ -118,13 +120,12 @@ class _InformationState extends State<Information> {
   Future<void> initSharedPreferences() async {
     sharedPreferences = await SharedPreferences.getInstance();
 
-    if (debugSharedPreferences){
+    if (debugSharedPreferences) {
       await sharedPreferences!.clear();
     }
 
-  // Retrieve user information from shared preferences and update the user object
+    // Retrieve user information from shared preferences and update the user object
 
- 
     user = User(
       name: sharedPreferences!.getString('name') ?? '',
       age: sharedPreferences!.getString('age') ?? '',
@@ -213,6 +214,7 @@ class _InformationState extends State<Information> {
         }
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: const Color.fromARGB(255, 25, 25, 25),
         appBar: AppBar(
           title: const Text(
@@ -223,14 +225,16 @@ class _InformationState extends State<Information> {
             ),
           ),
         ),
-        body: Column(
-          children: <Widget>[
-            QuestionBox(
-              questionIndex: questionIndex,
-              goToNextQuestion: goToNextQuestion,
-              questionsList: questionsList,
-            ),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              QuestionBox(
+                questionIndex: questionIndex,
+                goToNextQuestion: goToNextQuestion,
+                questionsList: questionsList,
+              ),
+            ],
+          ),
         ),
         floatingActionButton: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
