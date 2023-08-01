@@ -161,7 +161,6 @@ class _InformationState extends State<Information> {
   void storeAnswer() {
     Question currentQuestion = questionsList[questionIndex];
     if (currentQuestion.answers is Answer1) {
-      bool testAge = currentQuestion.questionText == 'Age';
       // If the answer widget is a text field (e.g., name, age), store the value in the User object
       Answer1 answer1 = currentQuestion.answers as Answer1;
       String name = answer1.controllers['name']!.text;
@@ -169,6 +168,7 @@ class _InformationState extends State<Information> {
       setState((){
         user.name = name;
         user.age = age;
+        //add as needed
       });
       // Add other conditions for storing other text-based answers if needed
     } if (currentQuestion.answers is Row) {
