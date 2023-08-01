@@ -77,7 +77,10 @@ class _Answer2State extends State<Answer2> {
             children: [
               Text(
                 'Height: ${feet}\' ${inches}\"',
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Lato',
+                ),
               ),
               Slider(
                 value: heightInInches,
@@ -102,7 +105,10 @@ class _Answer2State extends State<Answer2> {
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
               labelText: 'Body Weight',
-              labelStyle: TextStyle(color: Colors.white),
+              labelStyle: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Lato',
+              ),
               suffix: Text(
                 'lbs',
                 style: TextStyle(color: Colors.white),
@@ -124,11 +130,14 @@ class _Answer2State extends State<Answer2> {
 
         // Radio buttons for Experience selection
         Padding(
-          padding: const EdgeInsets.only(top: 50.0),
+          padding: const EdgeInsets.only(top: 75.0),
           child: RadioListTile(
             title: const Text(
               'Beginner',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Lato',
+              ),
             ),
             value: 'Beginner',
             groupValue: experience,
@@ -142,7 +151,10 @@ class _Answer2State extends State<Answer2> {
         RadioListTile(
           title: const Text(
             'Intermediate',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Lato',
+            ),
           ),
           value: 'Intermediate',
           groupValue: experience,
@@ -155,7 +167,10 @@ class _Answer2State extends State<Answer2> {
         RadioListTile(
           title: const Text(
             'Advanced',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Lato',
+            ),
           ),
           value: 'Advanced',
           groupValue: experience,
