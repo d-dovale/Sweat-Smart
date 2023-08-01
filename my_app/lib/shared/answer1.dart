@@ -98,8 +98,7 @@ class _Answer1State extends State<Answer1> {
             // Input validator to disallow numbers to be typed
             inputFormatters: [
               FilteringTextInputFormatter.deny(RegExp(r'[0-9]')),
-              NameInputFormatter(context,
-                  maxLength: 30), // Set the maximum length of the name
+              NameInputFormatter(context, maxLength: 30),
             ],
           ),
         ),
@@ -141,7 +140,9 @@ class _Answer1State extends State<Answer1> {
                     },
                     // Highlighted color when selected
                     style: ElevatedButton.styleFrom(
-                      primary: isMaleSelected ? Colors.blue : null,
+                      primary: isMaleSelected
+                          ? Color.fromARGB(255, 156, 44, 36)
+                          : null,
                     ),
                     child: const Text('Male'),
                   ),
@@ -162,7 +163,9 @@ class _Answer1State extends State<Answer1> {
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: isFemaleSelected ? Colors.blue : null,
+                      primary: isFemaleSelected
+                          ? Color.fromARGB(255, 156, 44, 36)
+                          : null,
                     ),
                     child: const Text('Female'),
                   ),
