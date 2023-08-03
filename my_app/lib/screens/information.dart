@@ -7,7 +7,10 @@ import 'package:my_app/shared/question.dart';
 import 'package:my_app/shared/navbar.dart';
 import 'package:my_app/shared/answer1.dart';
 import 'package:my_app/shared/answer2.dart';
+import 'package:my_app/shared/answer3.dart';
+import 'package:my_app/shared/answer4.dart';
 import 'package:my_app/data/user.dart';
+
 const bool debugSharedPreferences = false;
 List<Question> getQuestions(Map<String, TextEditingController> controllers,User user, {required Function(String) onGenderSelected,}) {
   List<Question> list = [];
@@ -45,11 +48,7 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers,User 
     // Will include:
     // Ideal physique/Goals (3 big picture buttons)
 
-    answers: const Column(
-      children: <Widget>[
-        // Add your image selection buttons here
-      ],
-    ),
+    answers: Answer3(),
   ));
 
   list.add(Question(
@@ -59,14 +58,7 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers,User 
     // Will include:
     // Days a week (text box)
 
-    answers: const Column(
-      children: <Widget>[
-        // Text field for Days a week
-        TextField(
-          decoration: InputDecoration(labelText: 'Days a week'),
-        ),
-      ],
-    ),
+    answers: Answer4(),
   ));
 
   return list;
@@ -119,13 +111,12 @@ class _InformationState extends State<Information> {
   Future<void> initSharedPreferences() async {
     sharedPreferences = await SharedPreferences.getInstance();
 
-    if (debugSharedPreferences){
+    if (debugSharedPreferences) {
       await sharedPreferences!.clear();
     }
 
-  // Retrieve user information from shared preferences and update the user object
+    // Retrieve user information from shared preferences and update the user object
 
- 
     user = User(
       name: sharedPreferences!.getString('name') ?? '',
       age: sharedPreferences!.getString('age') ?? '',
@@ -144,7 +135,16 @@ class _InformationState extends State<Information> {
   }
 
   void goToNextQuestion() async {
-    print("test 1 ${user.gender}");
+    // Get the values of the name and age text fields
+    String name = controllers['name']!.text;
+    String age = controllers['age']!.text;
+
+    // Check if the name and age fields are empty
+    if (name.isEmpty || age.isEmpty) {
+      showInputErrorSnackBar(context, 'Please fill in all required fields.');
+      return;
+    }
+
     // Store the current answer in shared preferences
     storeAnswer();
     if (questionIndex < questionsList.length - 1) {
@@ -167,17 +167,32 @@ class _InformationState extends State<Information> {
   void storeAnswer() {
     print("test 2 ${user.gender}");
     Question currentQuestion = questionsList[questionIndex];
+
     if (currentQuestion.answers is Answer1) {
       // If the answer widget is a text field (e.g., name, age), store the value in the User object
       Answer1 answer1 = currentQuestion.answers as Answer1;
       String name = answer1.controllers['name']!.text;
       String age = answer1.controllers['age']!.text;
-      setState((){
+      setState(() {
         user.name = name;
         user.age = age;
         //add as needed
       });
       // Add other conditions for storing other text-based answers if needed
+    }
+    if (currentQuestion.answers is Row) {
+      // If the answer widget is a row (e.g., gender), store the selected gender in the User object
+      List<Widget> genderOptions = (currentQuestion.answers as Row).children;
+      for (int i = 0; i < genderOptions.length; i++) {
+        if (genderOptions[i] is ElevatedButton &&
+            (genderOptions[i] as ElevatedButton).style != null) {
+          // The selected gender will have a style that indicates it is pressed
+          setState(() {
+            user.gender = (i == 0) ? 'Male' : 'Female';
+          });
+          break;
+        }
+      }
     }
     // Add other conditions for storing other types of answers if needed
   }
@@ -191,6 +206,14 @@ class _InformationState extends State<Information> {
     }
   }
 
+  static void showInputErrorSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -208,6 +231,7 @@ class _InformationState extends State<Information> {
         }
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: const Color.fromARGB(255, 25, 25, 25),
         appBar: AppBar(
           title: const Text(
@@ -238,5 +262,3 @@ class _InformationState extends State<Information> {
     );
   }
 }
-
-

@@ -162,7 +162,10 @@ void initializeGenderSelection() async {
           padding: const EdgeInsets.only(top: 80.0),
           child: TextField(
             controller: widget.controllers['name'],
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: 'Lato',
+            ),
             decoration: const InputDecoration(
               labelText: 'Name',
               labelStyle: TextStyle(color: Colors.white),
@@ -187,7 +190,10 @@ void initializeGenderSelection() async {
           padding: const EdgeInsets.only(top: 30.0),
           child: TextField(
             controller: widget.controllers['age'],
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: 'Lato',
+            ),
             decoration: const InputDecoration(
               labelText: 'Age',
               labelStyle: TextStyle(color: Colors.white),
@@ -198,6 +204,7 @@ void initializeGenderSelection() async {
             ],
           ),
         ),
+
         // Row of buttons for gender selection
         Padding(
           padding: const EdgeInsets.only(top: 100.0),
