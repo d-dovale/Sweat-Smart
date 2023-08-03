@@ -12,7 +12,11 @@ import 'package:my_app/shared/answer4.dart';
 import 'package:my_app/data/user.dart';
 
 const bool debugSharedPreferences = false;
-List<Question> getQuestions(Map<String, TextEditingController> controllers,User user, {required Function(String) onGenderSelected,}) {
+List<Question> getQuestions(
+  Map<String, TextEditingController> controllers,
+  User user, {
+  required Function(String) onGenderSelected,
+}) {
   List<Question> list = [];
 
   list.add(Question(
@@ -25,7 +29,11 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers,User 
     // age (type out box),
     // sex (male or female small buttons next to each other that light up when clicked)
 
-    answers: Answer1(controllers: controllers, onGenderSelected: onGenderSelected, user: user,),
+    answers: Answer1(
+      controllers: controllers,
+      onGenderSelected: onGenderSelected,
+      user: user,
+    ),
   ));
 
   list.add(Question(
@@ -103,9 +111,12 @@ class _InformationState extends State<Information> {
       'age': TextEditingController(text: user.age),
       // Add more controllers for other fields as needed
     };
-  
 
-    questionsList = getQuestions(controllers, user, onGenderSelected: onGenderSelected,);
+    questionsList = getQuestions(
+      controllers,
+      user,
+      onGenderSelected: onGenderSelected,
+    );
   }
 
   Future<void> initSharedPreferences() async {
@@ -128,7 +139,8 @@ class _InformationState extends State<Information> {
       workoutDays: '',
     );
   }
-    void onGenderSelected(String gender) {
+
+  void onGenderSelected(String gender) {
     setState(() {
       user.gender = gender;
     });

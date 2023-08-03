@@ -94,7 +94,12 @@ class Answer1 extends StatefulWidget {
   final Map<String, TextEditingController> controllers;
   final Function(String)? onGenderSelected;
   final User user;
-  const Answer1({required this.controllers, this.onGenderSelected, required this.user, Key? key}) : super(key: key);
+  const Answer1(
+      {required this.controllers,
+      this.onGenderSelected,
+      required this.user,
+      Key? key})
+      : super(key: key);
 
   @override
   State<Answer1> createState() => _Answer1State();
@@ -118,41 +123,42 @@ class _Answer1State extends State<Answer1> {
     );
   }
 
-
-void onMaleSelected() async {
-  setState(() {
-    isMaleSelected = true;
-    isFemaleSelected = false;
-  });
-  widget.onGenderSelected?.call('Male'); // Notify the parent about gender selection
-
-    // Save the gender selection in SharedPreferences
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setBool('isMaleSelected', true);
-  await prefs.setBool('isFemaleSelected', false);
-}
-
-void onFemaleSelected() async {
-  setState(() {
-    isMaleSelected = false;
-    isFemaleSelected = true;
-  });
-  widget.onGenderSelected?.call('Female'); // Notify the parent about gender selection
+  void onMaleSelected() async {
+    setState(() {
+      isMaleSelected = true;
+      isFemaleSelected = false;
+    });
+    widget.onGenderSelected
+        ?.call('Male'); // Notify the parent about gender selection
 
     // Save the gender selection in SharedPreferences
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setBool('isMaleSelected', false);
-  await prefs.setBool('isFemaleSelected', true);
-}
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isMaleSelected', true);
+    await prefs.setBool('isFemaleSelected', false);
+  }
 
-void initializeGenderSelection() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  setState(() {
-    isMaleSelected = prefs.getBool('isMaleSelected') ?? false;
-    isFemaleSelected = prefs.getBool('isFemaleSelected') ?? false;
-  });
-}
-  
+  void onFemaleSelected() async {
+    setState(() {
+      isMaleSelected = false;
+      isFemaleSelected = true;
+    });
+    widget.onGenderSelected
+        ?.call('Female'); // Notify the parent about gender selection
+
+    // Save the gender selection in SharedPreferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isMaleSelected', false);
+    await prefs.setBool('isFemaleSelected', true);
+  }
+
+  void initializeGenderSelection() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isMaleSelected = prefs.getBool('isMaleSelected') ?? false;
+      isFemaleSelected = prefs.getBool('isFemaleSelected') ?? false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
