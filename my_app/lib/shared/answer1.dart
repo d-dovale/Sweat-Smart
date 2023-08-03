@@ -109,6 +109,22 @@ class _Answer1State extends State<Answer1> {
     );
   }
 
+  bool areAllFieldsFilled() {
+    bool allFieldsFilled = false;
+    final name = widget.controllers['name']!.text;
+    final age = widget.controllers['age']!.text;
+
+    if (name.isNotEmpty &&
+        age.isNotEmpty &&
+        (isMaleSelected || isFemaleSelected)) {
+      allFieldsFilled = true;
+    } else {
+      allFieldsFilled = false;
+    }
+
+    return allFieldsFilled;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -160,6 +176,7 @@ class _Answer1State extends State<Answer1> {
             ],
           ),
         ),
+
         // Row of buttons for gender selection
         Padding(
           padding: const EdgeInsets.only(top: 100.0),

@@ -48,11 +48,7 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers) {
     // Will include:
     // Ideal physique/Goals (3 big picture buttons)
 
-    answers: const Column(
-      children: <Widget>[
-        // Add your image selection buttons here
-      ],
-    ),
+    answers: Answer3(),
   ));
 
   list.add(Question(
@@ -133,6 +129,16 @@ class _InformationState extends State<Information> {
   }
 
   void goToNextQuestion() async {
+    // Validate the current answer before proceeding to the next question
+    // Question currentQuestion = questionsList[questionIndex];
+    // if (currentQuestion.answers is Answer1) {
+    //   Answer1 answer1 = currentQuestion.answers as Answer1;
+    //   if (!answer1.areAllFieldsFilled()) {
+    //     _InformationState.showInputErrorSnackBar(context, 'Please fill in all required fields.');
+    //     return;
+    //   }
+    // }
+
     // Store the current answer in shared preferences
     storeAnswer();
 
