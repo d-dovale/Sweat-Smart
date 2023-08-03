@@ -12,7 +12,7 @@ import 'package:my_app/shared/answer4.dart';
 import 'package:my_app/data/user.dart';
 
 const bool debugSharedPreferences = false;
-List<Question> getQuestions(Map<String, TextEditingController> controllers) {
+List<Question> getQuestions(Map<String, TextEditingController> controllers,User user, {required Function(String) onGenderSelected,}) {
   List<Question> list = [];
 
   list.add(Question(
@@ -25,7 +25,7 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers) {
     // age (type out box),
     // sex (male or female small buttons next to each other that light up when clicked)
 
-    answers: Answer1(controllers: controllers),
+    answers: Answer1(controllers: controllers, onGenderSelected: onGenderSelected, user: user,),
   ));
 
   list.add(Question(
@@ -73,8 +73,8 @@ class Information extends StatefulWidget {
 
 class _InformationState extends State<Information> {
   SharedPreferences? sharedPreferences;
-  List<Question> questionsList = getQuestions({});
   int questionIndex = 0;
+  List<Question> questionsList = []; // Declare the questionsList variable here
 
   // User information
   User user = User(
@@ -103,8 +103,9 @@ class _InformationState extends State<Information> {
       'age': TextEditingController(text: user.age),
       // Add more controllers for other fields as needed
     };
+  
 
-    questionsList = getQuestions(controllers);
+    questionsList = getQuestions(controllers, user, onGenderSelected: onGenderSelected,);
   }
 
   Future<void> initSharedPreferences() async {
@@ -119,13 +120,18 @@ class _InformationState extends State<Information> {
     user = User(
       name: sharedPreferences!.getString('name') ?? '',
       age: sharedPreferences!.getString('age') ?? '',
-      gender: '',
+      gender: sharedPreferences!.getString('gender') ?? '',
       height: '',
       bodyWeight: '',
       experience: '',
       idealPhysique: '',
       workoutDays: '',
     );
+  }
+    void onGenderSelected(String gender) {
+    setState(() {
+      user.gender = gender;
+    });
   }
 
   void goToNextQuestion() async {
@@ -141,7 +147,6 @@ class _InformationState extends State<Information> {
 
     // Store the current answer in shared preferences
     storeAnswer();
-
     if (questionIndex < questionsList.length - 1) {
       setState(() {
         questionIndex++;
@@ -160,6 +165,7 @@ class _InformationState extends State<Information> {
   }
 
   void storeAnswer() {
+    print("test 2 ${user.gender}");
     Question currentQuestion = questionsList[questionIndex];
 
     if (currentQuestion.answers is Answer1) {
@@ -195,6 +201,7 @@ class _InformationState extends State<Information> {
     if (sharedPreferences != null) {
       sharedPreferences!.setString('name', user.name);
       sharedPreferences!.setString('age', user.age);
+      sharedPreferences!.setString('gender', user.gender);
       // Add more sharedPreferences!.setString() calls for other user information
     }
   }
@@ -212,6 +219,7 @@ class _InformationState extends State<Information> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        print("test 3 ${user.gender}");
         if (questionIndex == 0) {
           Navigator.pop(context);
           return false;

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_app/data/user.dart';
 import 'package:my_app/screens/information.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AgeInputFormatter extends TextInputFormatter {
   final BuildContext context;
@@ -90,7 +92,9 @@ class NameInputFormatter extends TextInputFormatter {
 
 class Answer1 extends StatefulWidget {
   final Map<String, TextEditingController> controllers;
-  const Answer1({required this.controllers, Key? key}) : super(key: key);
+  final Function(String)? onGenderSelected;
+  final User user;
+  const Answer1({required this.controllers, this.onGenderSelected, required this.user, Key? key}) : super(key: key);
 
   @override
   State<Answer1> createState() => _Answer1State();
@@ -99,6 +103,11 @@ class Answer1 extends StatefulWidget {
 class _Answer1State extends State<Answer1> {
   bool isMaleSelected = false;
   bool isFemaleSelected = false;
+  @override
+  void initState() {
+    super.initState();
+    initializeGenderSelection();
+  }
 
   static void showInputErrorSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -109,22 +118,41 @@ class _Answer1State extends State<Answer1> {
     );
   }
 
-  bool areAllFieldsFilled() {
-    bool allFieldsFilled = false;
-    final name = widget.controllers['name']!.text;
-    final age = widget.controllers['age']!.text;
 
-    if (name.isNotEmpty &&
-        age.isNotEmpty &&
-        (isMaleSelected || isFemaleSelected)) {
-      allFieldsFilled = true;
-    } else {
-      allFieldsFilled = false;
-    }
+void onMaleSelected() async {
+  setState(() {
+    isMaleSelected = true;
+    isFemaleSelected = false;
+  });
+  widget.onGenderSelected?.call('Male'); // Notify the parent about gender selection
 
-    return allFieldsFilled;
-  }
+    // Save the gender selection in SharedPreferences
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('isMaleSelected', true);
+  await prefs.setBool('isFemaleSelected', false);
+}
 
+void onFemaleSelected() async {
+  setState(() {
+    isMaleSelected = false;
+    isFemaleSelected = true;
+  });
+  widget.onGenderSelected?.call('Female'); // Notify the parent about gender selection
+
+    // Save the gender selection in SharedPreferences
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('isMaleSelected', false);
+  await prefs.setBool('isFemaleSelected', true);
+}
+
+void initializeGenderSelection() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  setState(() {
+    isMaleSelected = prefs.getBool('isMaleSelected') ?? false;
+    isFemaleSelected = prefs.getBool('isFemaleSelected') ?? false;
+  });
+}
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -188,14 +216,7 @@ class _Answer1State extends State<Answer1> {
                   width: 150,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        isMaleSelected = !isMaleSelected;
-                        if (isMaleSelected) {
-                          isFemaleSelected = false;
-                        }
-                      });
-                    },
+                    onPressed: onMaleSelected,
                     // Highlighted color when selected
                     style: ElevatedButton.styleFrom(
                       primary: isMaleSelected
@@ -212,14 +233,7 @@ class _Answer1State extends State<Answer1> {
                   width: 150,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        isFemaleSelected = !isFemaleSelected;
-                        if (isFemaleSelected) {
-                          isMaleSelected = false;
-                        }
-                      });
-                    },
+                    onPressed: onFemaleSelected,
                     style: ElevatedButton.styleFrom(
                       primary: isFemaleSelected
                           ? Color.fromARGB(255, 156, 44, 36)
