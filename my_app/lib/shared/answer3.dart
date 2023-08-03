@@ -18,61 +18,75 @@ class _Answer3State extends State<Answer3> {
         double availableWidth = constraints.maxWidth;
         double availableHeight = constraints.maxHeight;
 
-        return SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                // Image 1
-                Padding(
-                  padding: const EdgeInsets.only(top: 70.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedImage = 'tom';
-                      });
-                    },
+        return Center(
+          child: Column(
+            children: [
+              // Image 1
+              Padding(
+                padding: const EdgeInsets.only(top: 70.0),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedImage = 'tom';
+                    });
+                  },
+                  child: SizedBox(
+                    width: 150,
+                    height: 200,
                     child: Image.asset(
                       'assets/images/tom.png', // Replace with your image asset path
-                      width: 150,
-                      height: 200,
+                      fit: BoxFit
+                          .cover, // Use BoxFit.cover to maintain aspect ratio
                       color: selectedImage == 'tom' ? Colors.red : null,
                     ),
                   ),
                 ),
+              ),
 
-                GestureDetector(
+              // Image 2
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: GestureDetector(
                   onTap: () {
                     setState(() {
                       selectedImage = 'arnold';
                     });
                   },
-                  child: Image.asset(
-                    'assets/images/arnold.png', // Replace with your image asset path
+                  child: SizedBox(
                     width: 150,
                     height: 200,
-                    color: selectedImage == 'arnold' ? Colors.red : null,
+                    child: Image.asset(
+                      'assets/images/arnold.png', // Replace with your image asset path
+                      fit: BoxFit
+                          .cover, // Use BoxFit.cover to maintain aspect ratio
+                      color: selectedImage == 'arnold' ? Colors.red : null,
+                    ),
                   ),
                 ),
+              ),
 
-                // Image 3
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedImage = 'michael';
-                      });
-                    },
+              // Image 3
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedImage = 'michael';
+                    });
+                  },
+                  child: SizedBox(
+                    width: 150,
+                    height: 200,
                     child: Image.asset(
                       'assets/images/michael.png', // Replace with your image asset path
-                      width: 150,
-                      height: 200,
+                      fit: BoxFit
+                          .cover, // Use BoxFit.cover to maintain aspect ratio
                       color: selectedImage == 'michael' ? Colors.red : null,
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },
