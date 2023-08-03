@@ -13,55 +13,69 @@ class _Answer3State extends State<Answer3> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Image 1
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              selectedImage = 'image1';
-            });
-          },
-          child: Image.asset(
-            'assets/image1.png', // Replace with your image asset path
-            width: 150,
-            height: 150,
-            color: selectedImage == 'image1' ? Colors.red : null,
-          ),
-        ),
-        const SizedBox(height: 10),
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        double availableWidth = constraints.maxWidth;
+        double availableHeight = constraints.maxHeight;
 
-        // Image 2
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              selectedImage = 'image2';
-            });
-          },
-          child: Image.asset(
-            'assets/image2.png', // Replace with your image asset path
-            width: 150,
-            height: 150,
-            color: selectedImage == 'image2' ? Colors.red : null,
-          ),
-        ),
-        const SizedBox(height: 10),
+        return SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                // Image 1
+                Padding(
+                  padding: const EdgeInsets.only(top: 70.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedImage = 'tom';
+                      });
+                    },
+                    child: Image.asset(
+                      'assets/images/tom.png', // Replace with your image asset path
+                      width: 150,
+                      height: 200,
+                      color: selectedImage == 'tom' ? Colors.red : null,
+                    ),
+                  ),
+                ),
 
-        // Image 3
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              selectedImage = 'image3';
-            });
-          },
-          child: Image.asset(
-            'assets/image3.png', // Replace with your image asset path
-            width: 150,
-            height: 150,
-            color: selectedImage == 'image3' ? Colors.red : null,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedImage = 'arnold';
+                    });
+                  },
+                  child: Image.asset(
+                    'assets/images/arnold.png', // Replace with your image asset path
+                    width: 150,
+                    height: 200,
+                    color: selectedImage == 'arnold' ? Colors.red : null,
+                  ),
+                ),
+
+                // Image 3
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedImage = 'michael';
+                      });
+                    },
+                    child: Image.asset(
+                      'assets/images/michael.png', // Replace with your image asset path
+                      width: 150,
+                      height: 200,
+                      color: selectedImage == 'michael' ? Colors.red : null,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 }

@@ -223,6 +223,7 @@ class _InformationState extends State<Information> {
         }
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: const Color.fromARGB(255, 25, 25, 25),
         appBar: AppBar(
           title: const Text(
