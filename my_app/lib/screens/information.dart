@@ -129,15 +129,15 @@ class _InformationState extends State<Information> {
   }
 
   void goToNextQuestion() async {
-    // Validate the current answer before proceeding to the next question
-    // Question currentQuestion = questionsList[questionIndex];
-    // if (currentQuestion.answers is Answer1) {
-    //   Answer1 answer1 = currentQuestion.answers as Answer1;
-    //   if (!answer1.areAllFieldsFilled()) {
-    //     _InformationState.showInputErrorSnackBar(context, 'Please fill in all required fields.');
-    //     return;
-    //   }
-    // }
+    // Get the values of the name and age text fields
+    String name = controllers['name']!.text;
+    String age = controllers['age']!.text;
+
+    // Check if the name and age fields are empty
+    if (name.isEmpty || age.isEmpty) {
+      showInputErrorSnackBar(context, 'Please fill in all required fields.');
+      return;
+    }
 
     // Store the current answer in shared preferences
     storeAnswer();
@@ -161,6 +161,7 @@ class _InformationState extends State<Information> {
 
   void storeAnswer() {
     Question currentQuestion = questionsList[questionIndex];
+
     if (currentQuestion.answers is Answer1) {
       // If the answer widget is a text field (e.g., name, age), store the value in the User object
       Answer1 answer1 = currentQuestion.answers as Answer1;
@@ -196,6 +197,15 @@ class _InformationState extends State<Information> {
       sharedPreferences!.setString('age', user.age);
       // Add more sharedPreferences!.setString() calls for other user information
     }
+  }
+
+  static void showInputErrorSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2),
+      ),
+    );
   }
 
   @override
