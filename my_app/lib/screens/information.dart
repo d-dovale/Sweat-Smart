@@ -9,7 +9,7 @@ import 'package:my_app/shared/answer1.dart';
 import 'package:my_app/shared/answer2.dart';
 import 'package:my_app/data/user.dart';
 const bool debugSharedPreferences = false;
-List<Question> getQuestions(Map<String, TextEditingController> controllers) {
+List<Question> getQuestions(Map<String, TextEditingController> controllers,User user, {required Function(String) onGenderSelected,}) {
   List<Question> list = [];
 
   list.add(Question(
@@ -22,7 +22,7 @@ List<Question> getQuestions(Map<String, TextEditingController> controllers) {
     // age (type out box),
     // sex (male or female small buttons next to each other that light up when clicked)
 
-    answers: Answer1(controllers: controllers),
+    answers: Answer1(controllers: controllers, onGenderSelected: onGenderSelected, user: user,),
   ));
 
   list.add(Question(
@@ -81,8 +81,8 @@ class Information extends StatefulWidget {
 
 class _InformationState extends State<Information> {
   SharedPreferences? sharedPreferences;
-  List<Question> questionsList = getQuestions({});
   int questionIndex = 0;
+  List<Question> questionsList = []; // Declare the questionsList variable here
 
   // User information
   User user = User(
@@ -111,8 +111,9 @@ class _InformationState extends State<Information> {
       'age': TextEditingController(text: user.age),
       // Add more controllers for other fields as needed
     };
+  
 
-    questionsList = getQuestions(controllers);
+    questionsList = getQuestions(controllers, user, onGenderSelected: onGenderSelected,);
   }
 
   Future<void> initSharedPreferences() async {
@@ -128,7 +129,7 @@ class _InformationState extends State<Information> {
     user = User(
       name: sharedPreferences!.getString('name') ?? '',
       age: sharedPreferences!.getString('age') ?? '',
-      gender: '',
+      gender: sharedPreferences!.getString('gender') ?? '',
       height: '',
       bodyWeight: '',
       experience: '',
@@ -136,11 +137,16 @@ class _InformationState extends State<Information> {
       workoutDays: '',
     );
   }
+    void onGenderSelected(String gender) {
+    setState(() {
+      user.gender = gender;
+    });
+  }
 
   void goToNextQuestion() async {
+    print("test 1 ${user.gender}");
     // Store the current answer in shared preferences
     storeAnswer();
-
     if (questionIndex < questionsList.length - 1) {
       setState(() {
         questionIndex++;
@@ -159,6 +165,7 @@ class _InformationState extends State<Information> {
   }
 
   void storeAnswer() {
+    print("test 2 ${user.gender}");
     Question currentQuestion = questionsList[questionIndex];
     if (currentQuestion.answers is Answer1) {
       // If the answer widget is a text field (e.g., name, age), store the value in the User object
@@ -171,19 +178,6 @@ class _InformationState extends State<Information> {
         //add as needed
       });
       // Add other conditions for storing other text-based answers if needed
-    } if (currentQuestion.answers is Row) {
-      // If the answer widget is a row (e.g., gender), store the selected gender in the User object
-      List<Widget> genderOptions = (currentQuestion.answers as Row).children;
-      for (int i = 0; i < genderOptions.length; i++) {
-        if (genderOptions[i] is ElevatedButton &&
-            (genderOptions[i] as ElevatedButton).style != null) {
-          // The selected gender will have a style that indicates it is pressed
-          setState(() {
-            user.gender = (i == 0) ? 'Male' : 'Female';
-          });
-          break;
-        }
-      }
     }
     // Add other conditions for storing other types of answers if needed
   }
@@ -192,14 +186,17 @@ class _InformationState extends State<Information> {
     if (sharedPreferences != null) {
       sharedPreferences!.setString('name', user.name);
       sharedPreferences!.setString('age', user.age);
+      sharedPreferences!.setString('gender', user.gender);
       // Add more sharedPreferences!.setString() calls for other user information
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        print("test 3 ${user.gender}");
         if (questionIndex == 0) {
           Navigator.pop(context);
           return false;
@@ -241,4 +238,5 @@ class _InformationState extends State<Information> {
     );
   }
 }
+
 
