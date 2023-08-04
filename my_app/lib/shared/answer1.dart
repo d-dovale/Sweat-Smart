@@ -4,6 +4,7 @@ import 'package:my_app/data/user.dart';
 import 'package:my_app/screens/information.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+const bool debugSharedPreferences = false;
 class AgeInputFormatter extends TextInputFormatter {
   final BuildContext context;
 
@@ -133,6 +134,9 @@ class _Answer1State extends State<Answer1> {
 
     // Save the gender selection in SharedPreferences
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (debugSharedPreferences) {
+      await prefs.clear();
+    }
     await prefs.setBool('isMaleSelected', true);
     await prefs.setBool('isFemaleSelected', false);
   }
@@ -147,6 +151,9 @@ class _Answer1State extends State<Answer1> {
 
     // Save the gender selection in SharedPreferences
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (debugSharedPreferences) {
+      await prefs.clear();
+    }
     await prefs.setBool('isMaleSelected', false);
     await prefs.setBool('isFemaleSelected', true);
   }

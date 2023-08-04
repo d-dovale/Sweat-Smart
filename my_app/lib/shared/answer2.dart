@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+
+const bool debugSharedPreferences = false;
 class WeightInputFormatter extends TextInputFormatter {
   final BuildContext context;
 
@@ -15,7 +18,7 @@ class WeightInputFormatter extends TextInputFormatter {
       return newValue;
     }
 
-    int? weight = int.tryParse(newValue.text);
+    double? weight = double.tryParse(newValue.text);
 
     if (weight != null && weight >= 0 && weight <= 1000) {
       _isWeightValid = true;
@@ -52,6 +55,27 @@ class _Answer2State extends State<Answer2> {
   String experience = '';
   double bodyWeight = 150.0;
 
+
+@override
+  void initState() {
+    super.initState();
+
+    // Initialize heightInInches based on the saved value in SharedPreferences
+    initializeValues();
+  }
+   void initializeValues() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if (debugSharedPreferences) {
+      await prefs.clear();
+    }
+
+    setState(() {
+      heightInInches = prefs.getDouble('heightInInches') ?? 70.0; // Default height if not found
+      bodyWeight = prefs.getDouble('bodyWeight') ?? 150.0;
+      experience = prefs.getString('experience') ?? '';
+    });
+  }
   @override
   Widget build(BuildContext context) {
     // Converts the height from inches to feet and inches
@@ -88,10 +112,14 @@ class _Answer2State extends State<Answer2> {
                 max: 90,
                 divisions: 48,
                 label: '${feet}\' ${inches}\"',
-                onChanged: (value) {
+                onChanged: (value) async {
                   setState(() {
                     heightInInches = value;
                   });
+
+                  // Save the heightInInches in SharedPreferences
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  await prefs.setDouble('heightInInches', heightInInches);
                 },
               ),
             ],
@@ -115,10 +143,13 @@ class _Answer2State extends State<Answer2> {
               ),
             ),
             // Save the entered value to the bodyWeight variable
-            onChanged: (value) {
+            onChanged: (value) async{
               setState(() {
                 bodyWeight = double.tryParse(value) ?? 0.0;
               });
+              // Save the bodyWeight in SharedPreferences
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              await prefs.setDouble('bodyWeight', bodyWeight);
             },
             // Add input formatters for validation
             inputFormatters: [
@@ -141,10 +172,14 @@ class _Answer2State extends State<Answer2> {
             ),
             value: 'Beginner',
             groupValue: experience,
-            onChanged: (value) {
+            onChanged: (value) async{
               setState(() {
                 experience = value as String;
               });
+              // Save the experience in SharedPreferences
+              SharedPreferences prefs =
+                  await SharedPreferences.getInstance();
+              await prefs.setString('experience', experience);
             },
           ),
         ),
@@ -158,10 +193,14 @@ class _Answer2State extends State<Answer2> {
           ),
           value: 'Intermediate',
           groupValue: experience,
-          onChanged: (value) {
+          onChanged: (value) async{
             setState(() {
               experience = value as String;
             });
+              // Save the experience in SharedPreferences
+              SharedPreferences prefs =
+                  await SharedPreferences.getInstance();
+              await prefs.setString('experience', experience);
           },
         ),
         RadioListTile(
@@ -174,10 +213,14 @@ class _Answer2State extends State<Answer2> {
           ),
           value: 'Advanced',
           groupValue: experience,
-          onChanged: (value) {
+          onChanged: (value) async{
             setState(() {
               experience = value as String;
             });
+              // Save the experience in SharedPreferences
+              SharedPreferences prefs =
+                  await SharedPreferences.getInstance();
+              await prefs.setString('experience', experience);
           },
         ),
       ],
