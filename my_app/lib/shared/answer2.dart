@@ -121,7 +121,7 @@ class _Answer2State extends State<Answer2> {
                   setState(() {
                     heightInInches = value;
                   });
-                  // Save the bodyWeight in SharedPreferences
+                  // Save the heightInInches in SharedPreferences
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   await prefs.setDouble('heightInInches', heightInInches);
                 },
