@@ -73,7 +73,7 @@ class _Answer4State extends State<Answer4> {
             decoration: InputDecoration(
               labelText: 'Days a week',
               labelStyle: TextStyle(
-                color: Colors.white,
+                color: Colors.grey,
                 fontFamily: 'Lato',
               ),
             ),
