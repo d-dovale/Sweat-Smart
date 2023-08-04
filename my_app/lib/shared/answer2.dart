@@ -92,6 +92,11 @@ class _Answer2State extends State<Answer2> {
       );
     }
 
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      double availableWidth = constraints.maxWidth;
+      double availableHeight = constraints.maxHeight;
+
     return Column(
       children: <Widget>[
         // Slider for the Height in Feet and Inches
@@ -112,14 +117,10 @@ class _Answer2State extends State<Answer2> {
                 max: 90,
                 divisions: 48,
                 label: '${feet}\' ${inches}\"',
-                onChanged: (value) async {
+                onChanged: (value) {
                   setState(() {
                     heightInInches = value;
                   });
-
-                  // Save the heightInInches in SharedPreferences
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
-                  await prefs.setDouble('heightInInches', heightInInches);
                 },
               ),
             ],
@@ -159,18 +160,39 @@ class _Answer2State extends State<Answer2> {
           ),
         ),
 
-        // Radio buttons for Experience selection
-        Padding(
-          padding: const EdgeInsets.only(top: 75.0),
-          child: RadioListTile(
+          // Radio buttons for Experience selection
+          Padding(
+            padding: EdgeInsets.only(top: 50.0),
+            child: RadioListTile(
+              title: const Text(
+                'Beginner',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Lato',
+                ),
+              ),
+              value: 'Beginner',
+              groupValue: experience,
+              onChanged: (value) async{
+                setState(() {
+                  experience = value as String;
+                });
+              // Save the experience in SharedPreferences
+              SharedPreferences prefs =
+                  await SharedPreferences.getInstance();
+              await prefs.setString('experience', experience);
+              },
+            ),
+          ),
+          RadioListTile(
             title: const Text(
-              'Beginner',
+              'Intermediate',
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'Lato',
               ),
             ),
-            value: 'Beginner',
+            value: 'Intermediate',
             groupValue: experience,
             onChanged: (value) async{
               setState(() {
@@ -182,48 +204,28 @@ class _Answer2State extends State<Answer2> {
               await prefs.setString('experience', experience);
             },
           ),
-        ),
-        RadioListTile(
-          title: const Text(
-            'Intermediate',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Lato',
+          RadioListTile(
+            title: const Text(
+              'Advanced',
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Lato',
+              ),
             ),
-          ),
-          value: 'Intermediate',
-          groupValue: experience,
-          onChanged: (value) async{
-            setState(() {
-              experience = value as String;
-            });
+            value: 'Advanced',
+            groupValue: experience,
+            onChanged: (value) async{
+              setState(() {
+                experience = value as String;
+              });
               // Save the experience in SharedPreferences
               SharedPreferences prefs =
                   await SharedPreferences.getInstance();
               await prefs.setString('experience', experience);
-          },
-        ),
-        RadioListTile(
-          title: const Text(
-            'Advanced',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Lato',
-            ),
+            },
           ),
-          value: 'Advanced',
-          groupValue: experience,
-          onChanged: (value) async{
-            setState(() {
-              experience = value as String;
-            });
-              // Save the experience in SharedPreferences
-              SharedPreferences prefs =
-                  await SharedPreferences.getInstance();
-              await prefs.setString('experience', experience);
-          },
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }

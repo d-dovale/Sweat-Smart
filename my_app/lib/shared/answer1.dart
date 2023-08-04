@@ -181,7 +181,7 @@ class _Answer1State extends State<Answer1> {
             ),
             decoration: const InputDecoration(
               labelText: 'Name',
-              labelStyle: TextStyle(color: Colors.white),
+              labelStyle: TextStyle(color: Colors.grey),
             ),
 
             // Input validator to disallow numbers to be typed
@@ -209,7 +209,7 @@ class _Answer1State extends State<Answer1> {
             ),
             decoration: const InputDecoration(
               labelText: 'Age',
-              labelStyle: TextStyle(color: Colors.white),
+              labelStyle: TextStyle(color: Colors.grey),
             ),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
