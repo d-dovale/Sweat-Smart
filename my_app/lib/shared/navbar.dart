@@ -14,54 +14,48 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  int currentPage = 0;
+  int currentPage = 1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   automaticallyImplyLeading: false,
-      //   title: const Text(
-      //     'Sweat Smart',
-      //     style: TextStyle(
-      //       fontFamily: 'BebasNeue',
-      //       letterSpacing: 2.0,
-      //     ),
-      //   ),
-      // ),
+      backgroundColor: Color.fromARGB(255, 25, 25, 25),
       body: IndexedStack(
         index: currentPage,
         children: [
+          WorkoutPage(),
           HomePage(user: widget.user), // Pass the User object to HomePage
-          SchedulePage(), // Pass the User object to SchedulePage
-          WorkoutPage(), // Pass the User object to WorkoutPage
+          SchedulePage(), // Pass the User object to SchedulePage// Pass the User object to WorkoutPage
         ],
       ),
-      bottomNavigationBar: NavigationBar(
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.calendar_month),
-            label: 'Schedule',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.fitness_center),
-            label: 'Workout',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
-        onDestinationSelected: (int index) {
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color.fromARGB(255, 25, 25, 25),
+        unselectedItemColor: Color.fromARGB(255, 255, 255, 255),
+        selectedItemColor: Colors.red,
+        currentIndex: currentPage,
+        onTap: (index) {
           setState(() {
             currentPage = index;
           });
         },
-        selectedIndex: currentPage,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fitness_center),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: '', // Empty label to remove the text
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: '',
+          ),
+        ],
       ),
     );
   }

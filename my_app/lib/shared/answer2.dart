@@ -68,78 +68,100 @@ class _Answer2State extends State<Answer2> {
       );
     }
 
-    return Column(
-      children: <Widget>[
-        // Slider for the Height in Feet and Inches
-        Padding(
-          padding: const EdgeInsets.only(top: 50.0),
-          child: Column(
-            children: [
-              Text(
-                'Height: ${feet}\' ${inches}\"',
-                style: const TextStyle(
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      double availableWidth = constraints.maxWidth;
+      double availableHeight = constraints.maxHeight;
+
+      return Column(
+        children: <Widget>[
+          // Slider for the Height in Feet and Inches
+          Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+            child: Column(
+              children: [
+                Text(
+                  'Height: ${feet}\' ${inches}\"',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Lato',
+                  ),
+                ),
+                Slider(
+                  value: heightInInches,
+                  min: 48,
+                  max: 90,
+                  divisions: 48,
+                  label: '${feet}\' ${inches}\"',
+                  onChanged: (value) {
+                    setState(() {
+                      heightInInches = value;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+
+          // TextField for Body Weight
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 20.0),
+            child: TextField(
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                labelText: 'Body Weight',
+                labelStyle: TextStyle(
+                  color: Colors.grey,
+                  fontFamily: 'Lato',
+                ),
+                suffix: Text(
+                  'lbs',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              // Save the entered value to the bodyWeight variable
+              onChanged: (value) {
+                setState(() {
+                  bodyWeight = double.tryParse(value) ?? 0.0;
+                });
+              },
+              // Add input formatters for validation
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                WeightInputFormatter(context),
+              ],
+            ),
+          ),
+
+          // Radio buttons for Experience selection
+          Padding(
+            padding: EdgeInsets.only(top: 50.0),
+            child: RadioListTile(
+              title: const Text(
+                'Beginner',
+                style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'Lato',
                 ),
               ),
-              Slider(
-                value: heightInInches,
-                min: 48,
-                max: 90,
-                divisions: 48,
-                label: '${feet}\' ${inches}\"',
-                onChanged: (value) {
-                  setState(() {
-                    heightInInches = value;
-                  });
-                },
-              ),
-            ],
-          ),
-        ),
-
-        // TextField for Body Weight
-        Padding(
-          padding: const EdgeInsets.only(top: 50.0),
-          child: TextField(
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
-              labelText: 'Body Weight',
-              labelStyle: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Lato',
-              ),
-              suffix: Text(
-                'lbs',
-                style: TextStyle(color: Colors.white),
-              ),
+              value: 'Beginner',
+              groupValue: experience,
+              onChanged: (value) {
+                setState(() {
+                  experience = value as String;
+                });
+              },
             ),
-            // Save the entered value to the bodyWeight variable
-            onChanged: (value) {
-              setState(() {
-                bodyWeight = double.tryParse(value) ?? 0.0;
-              });
-            },
-            // Add input formatters for validation
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              WeightInputFormatter(context),
-            ],
           ),
-        ),
-
-        // Radio buttons for Experience selection
-        Padding(
-          padding: const EdgeInsets.only(top: 75.0),
-          child: RadioListTile(
+          RadioListTile(
             title: const Text(
-              'Beginner',
+              'Intermediate',
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'Lato',
               ),
             ),
-            value: 'Beginner',
+            value: 'Intermediate',
             groupValue: experience,
             onChanged: (value) {
               setState(() {
@@ -147,40 +169,24 @@ class _Answer2State extends State<Answer2> {
               });
             },
           ),
-        ),
-        RadioListTile(
-          title: const Text(
-            'Intermediate',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Lato',
+          RadioListTile(
+            title: const Text(
+              'Advanced',
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Lato',
+              ),
             ),
+            value: 'Advanced',
+            groupValue: experience,
+            onChanged: (value) {
+              setState(() {
+                experience = value as String;
+              });
+            },
           ),
-          value: 'Intermediate',
-          groupValue: experience,
-          onChanged: (value) {
-            setState(() {
-              experience = value as String;
-            });
-          },
-        ),
-        RadioListTile(
-          title: const Text(
-            'Advanced',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Lato',
-            ),
-          ),
-          value: 'Advanced',
-          groupValue: experience,
-          onChanged: (value) {
-            setState(() {
-              experience = value as String;
-            });
-          },
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }
