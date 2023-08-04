@@ -19,70 +19,63 @@ class _Answer3State extends State<Answer3> {
         double availableHeight = constraints.maxHeight;
 
         return Center(
-          child: Column(
+          child: ListWheelScrollView(
+            itemExtent:
+                250, // Set the height of each item in the ListWheelScrollView
             children: [
               // Image 1
-              Padding(
-                padding: const EdgeInsets.only(top: 70.0),
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedImage = 'tom';
-                    });
-                  },
-                  child: SizedBox(
-                    width: 150,
-                    height: 200,
-                    child: Image.asset(
-                      'assets/images/tom.png', // Replace with your image asset path
-                      fit: BoxFit
-                          .cover, // Use BoxFit.cover to maintain aspect ratio
-                      color: selectedImage == 'tom' ? Colors.red : null,
-                    ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedImage = 'tom';
+                  });
+                },
+                child: SizedBox(
+                  width: 150,
+                  height: 200,
+                  child: Image.asset(
+                    'assets/images/tom.png', // Replace with your image asset path
+                    fit: BoxFit
+                        .cover, // Use BoxFit.cover to maintain aspect ratio
+                    color: selectedImage == 'tom' ? Colors.red : null,
                   ),
                 ),
               ),
 
               // Image 2
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedImage = 'arnold';
-                    });
-                  },
-                  child: SizedBox(
-                    width: 150,
-                    height: 200,
-                    child: Image.asset(
-                      'assets/images/arnold.png', // Replace with your image asset path
-                      fit: BoxFit
-                          .cover, // Use BoxFit.cover to maintain aspect ratio
-                      color: selectedImage == 'arnold' ? Colors.red : null,
-                    ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedImage = 'arnold';
+                  });
+                },
+                child: SizedBox(
+                  width: 150,
+                  height: 200,
+                  child: Image.asset(
+                    'assets/images/arnold.png', // Replace with your image asset path
+                    fit: BoxFit
+                        .cover, // Use BoxFit.cover to maintain aspect ratio
+                    color: selectedImage == 'arnold' ? Colors.red : null,
                   ),
                 ),
               ),
 
               // Image 3
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedImage = 'michael';
-                    });
-                  },
-                  child: SizedBox(
-                    width: 150,
-                    height: 200,
-                    child: Image.asset(
-                      'assets/images/michael.png', // Replace with your image asset path
-                      fit: BoxFit
-                          .cover, // Use BoxFit.cover to maintain aspect ratio
-                      color: selectedImage == 'michael' ? Colors.red : null,
-                    ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedImage = 'michael';
+                  });
+                },
+                child: SizedBox(
+                  width: 150,
+                  height: 200,
+                  child: Image.asset(
+                    'assets/images/michael.png', // Replace with your image asset path
+                    fit: BoxFit
+                        .cover, // Use BoxFit.cover to maintain aspect ratio
+                    color: selectedImage == 'michael' ? Colors.red : null,
                   ),
                 ),
               ),
