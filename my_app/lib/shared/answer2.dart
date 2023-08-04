@@ -117,10 +117,13 @@ class _Answer2State extends State<Answer2> {
                 max: 90,
                 divisions: 48,
                 label: '${feet}\' ${inches}\"',
-                onChanged: (value) {
+                onChanged: (value) async{
                   setState(() {
                     heightInInches = value;
                   });
+                  // Save the heightInInches in SharedPreferences
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  await prefs.setDouble('heightInInches', heightInInches);
                 },
               ),
             ],
