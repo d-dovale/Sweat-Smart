@@ -132,11 +132,11 @@ class _InformationState extends State<Information> {
       name: sharedPreferences!.getString('name') ?? '',
       age: sharedPreferences!.getString('age') ?? '',
       gender: sharedPreferences!.getString('gender') ?? '',
-      height: '',
-      bodyWeight: '',
-      experience: '',
-      idealPhysique: '',
-      workoutDays: '',
+      height: sharedPreferences!.getString('height') ?? '',
+      bodyWeight: sharedPreferences!.getString('bodyWeight') ?? '',
+      experience: sharedPreferences!.getString('experience') ?? '',
+      idealPhysique: sharedPreferences!.getString('idealPhysique') ?? '',
+      workoutDays: sharedPreferences!.getString('workoutDays') ?? '',
     );
   }
 
