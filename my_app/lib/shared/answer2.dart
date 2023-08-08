@@ -44,7 +44,8 @@ class WeightInputFormatter extends TextInputFormatter {
 }
 
 class Answer2 extends StatefulWidget {
-  const Answer2({super.key});
+  final Map<String, TextEditingController> controllers;
+  const Answer2({required this.controllers, super.key});
 
   @override
   State<Answer2> createState() => _Answer2State();
@@ -134,8 +135,9 @@ class _Answer2State extends State<Answer2> {
         Padding(
           padding: const EdgeInsets.only(top: 50.0),
           child: TextField(
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
+            controller: widget.controllers['bodyWeight'],
+            style: const TextStyle(color: Colors.white),
+            decoration: const InputDecoration(
               labelText: 'Body Weight',
               labelStyle: TextStyle(
                 color: Colors.white,
@@ -147,14 +149,6 @@ class _Answer2State extends State<Answer2> {
               ),
             ),
             // Save the entered value to the bodyWeight variable
-            onChanged: (value) async{
-              setState(() {
-                bodyWeight = double.tryParse(value) ?? 0.0;
-              });
-              // Save the bodyWeight in SharedPreferences
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              await prefs.setDouble('bodyWeight', bodyWeight);
-            },
             // Add input formatters for validation
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,

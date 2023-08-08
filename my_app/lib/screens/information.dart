@@ -45,7 +45,7 @@ List<Question> getQuestions(
     // Body weight (type out box)
     // Experience (Beginner, Intermediate, Advanced)
 
-    answers: Answer2(),
+    answers: Answer2(controllers: controllers),
   ));
 
   list.add(Question(
@@ -109,6 +109,7 @@ class _InformationState extends State<Information> {
     controllers = {
       'name': TextEditingController(text: user.name),
       'age': TextEditingController(text: user.age),
+      'bodyWeight': TextEditingController(text: user.bodyWeight),
       // Add more controllers for other fields as needed
     };
 
@@ -178,7 +179,6 @@ class _InformationState extends State<Information> {
   }
 
   void storeAnswer() {
-    print("test 2 ${user.gender}");
     Question currentQuestion = questionsList[questionIndex];
 
     if (currentQuestion.answers is Answer1) {
@@ -232,7 +232,6 @@ class _InformationState extends State<Information> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        print("test 3 ${user.gender}");
         if (questionIndex == 0) {
           Navigator.pop(context);
           return false;
