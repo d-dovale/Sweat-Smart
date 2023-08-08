@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_app/data/user.dart';
-import 'package:my_app/screens/information.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const bool debugSharedPreferences = false;
+
 class AgeInputFormatter extends TextInputFormatter {
   final BuildContext context;
 
