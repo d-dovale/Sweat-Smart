@@ -169,6 +169,9 @@ class _InformationState extends State<Information> {
       // Save the user information to shared preferences before navigating to NavBar()
       await saveUserInformation();
 
+      // Set the seenInfoScreen flag to true
+      sharedPreferences!.setBool('seenInfoScreen', true);
+
       // Navigates to NavBar() when reaching the end of the questions list
       // ignore: use_build_context_synchronously
       Navigator.push(
@@ -186,9 +189,11 @@ class _InformationState extends State<Information> {
       Answer1 answer1 = currentQuestion.answers as Answer1;
       String name = answer1.controllers['name']!.text;
       String age = answer1.controllers['age']!.text;
+      String bodyWeight = answer1.controllers['bodyWeight']!.text;
       setState(() {
         user.name = name;
         user.age = age;
+        user.bodyWeight = bodyWeight;
         //add as needed
       });
       // Add other conditions for storing other text-based answers if needed
