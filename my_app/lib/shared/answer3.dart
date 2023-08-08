@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:my_app/shared/imageviewer.dart';
 
 class Answer3 extends StatefulWidget {
   const Answer3({Key? key}) : super(key: key);
@@ -19,66 +19,11 @@ class _Answer3State extends State<Answer3> {
         double availableHeight = constraints.maxHeight;
 
         return Center(
-          child: ListWheelScrollView(
-            itemExtent:
-                250, // Set the height of each item in the ListWheelScrollView
-            children: [
-              // Image 1
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selectedImage = 'tom';
-                  });
-                },
-                child: SizedBox(
-                  width: 150,
-                  height: 200,
-                  child: Image.asset(
-                    'assets/images/tom.png', // Replace with your image asset path
-                    fit: BoxFit
-                        .cover, // Use BoxFit.cover to maintain aspect ratio
-                    color: selectedImage == 'tom' ? Colors.red : null,
-                  ),
-                ),
-              ),
-
-              // Image 2
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selectedImage = 'arnold';
-                  });
-                },
-                child: SizedBox(
-                  width: 150,
-                  height: 200,
-                  child: Image.asset(
-                    'assets/images/arnold.png', // Replace with your image asset path
-                    fit: BoxFit
-                        .cover, // Use BoxFit.cover to maintain aspect ratio
-                    color: selectedImage == 'arnold' ? Colors.red : null,
-                  ),
-                ),
-              ),
-
-              // Image 3
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selectedImage = 'michael';
-                  });
-                },
-                child: SizedBox(
-                  width: 150,
-                  height: 200,
-                  child: Image.asset(
-                    'assets/images/michael.png', // Replace with your image asset path
-                    fit: BoxFit
-                        .cover, // Use BoxFit.cover to maintain aspect ratio
-                    color: selectedImage == 'michael' ? Colors.red : null,
-                  ),
-                ),
-              ),
+          child: ImageViewer(
+            imagePaths: [
+              'assets/images/tom.png',
+              'assets/images/arnold.png',
+              'assets/images/michael.png',
             ],
           ),
         );
