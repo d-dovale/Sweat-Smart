@@ -4,13 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:my_app/shared/title.dart';
 import 'package:my_app/screens/getStarted.dart';
 import '../shared/navbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:my_app/data/user.dart';
 
 class Loading extends StatefulWidget {
+  final User user;
+  
+  Loading({required this.user});
   @override
-  State<Loading> createState() => _LoadingState();
+  State<Loading> createState() => _LoadingState(user: user);
 }
 
 class _LoadingState extends State<Loading> {
+  final User user;
+  _LoadingState({required this.user});
   @override
   void initState() {
     super.initState();
@@ -19,10 +26,14 @@ class _LoadingState extends State<Loading> {
 
   _navigatetohome() async {
     await Future.delayed(Duration(seconds: 2), () {});
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool seenInfoScreen = prefs.getBool('seenInfoScreen') ?? false;
+    // ignore: use_build_context_synchronously
+    Widget destinationWidget = seenInfoScreen ? NavBar(user: user) : GetStarted();
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => GetStarted(),
+        builder: (context) => destinationWidget,
       ),
     );
   }
