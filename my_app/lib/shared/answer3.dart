@@ -25,6 +25,7 @@ class _Answer3State extends State<Answer3> {
               'assets/images/arnold.png',
               'assets/images/michael.png',
             ],
+            imageNames: ['Tom', 'Arnold', 'Michael'],
           ),
         );
       },
