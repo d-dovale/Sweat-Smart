@@ -160,6 +160,7 @@ class _InformationState extends State<Information> {
       return;
     }
 
+    // Checks if bodyweight is empty on next screen
     if (bodyWeight.isEmpty && questionIndex == 1) {
       showInputErrorSnackBar(context, 'Please fill in all required fields.');
       return;

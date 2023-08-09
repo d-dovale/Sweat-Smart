@@ -35,7 +35,7 @@ class _ImageViewerState extends State<ImageViewer> {
 
     // Calculate padding based on screen size
     double screenHeight = MediaQuery.of(context).size.height;
-    double paddingValue = screenHeight * 0.1;
+    double paddingValue = screenHeight * 0.07;
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
