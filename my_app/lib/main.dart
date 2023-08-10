@@ -12,7 +12,7 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool seenInfoScreen = prefs.getBool('seenInfoScreen') ?? false;
   User user = await getUserFromSharedPreferences(prefs);
-    if (debugMode) {
+  if (debugMode) {
     prefs.clear();
   }
   runApp(MyApp(seenInfoScreen, user));
@@ -22,16 +22,15 @@ class MyApp extends StatelessWidget {
   final bool seenInfoScreen;
   final User user;
   const MyApp(this.seenInfoScreen, this.user, {super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-        canvasColor: Color.fromARGB(255, 21, 21, 21),
-      ),
-      home: Loading(user:user)
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.red,
+          canvasColor: Color.fromARGB(255, 21, 21, 21),
+        ),
+        home: Loading(user: user));
   }
 }
