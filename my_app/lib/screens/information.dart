@@ -195,28 +195,17 @@ class _InformationState extends State<Information> {
       Answer1 answer1 = currentQuestion.answers as Answer1;
       String name = answer1.controllers['name']!.text;
       String age = answer1.controllers['age']!.text;
-      String bodyWeight = answer1.controllers['bodyWeight']!.text;
       setState(() {
         user.name = name;
         user.age = age;
-        user.bodyWeight = bodyWeight;
         //add as needed
       });
       // Add other conditions for storing other text-based answers if needed
     }
-    if (currentQuestion.answers is Row) {
-      // If the answer widget is a row (e.g., gender), store the selected gender in the User object
-      List<Widget> genderOptions = (currentQuestion.answers as Row).children;
-      for (int i = 0; i < genderOptions.length; i++) {
-        if (genderOptions[i] is ElevatedButton &&
-            (genderOptions[i] as ElevatedButton).style != null) {
-          // The selected gender will have a style that indicates it is pressed
-          setState(() {
-            user.gender = (i == 0) ? 'Male' : 'Female';
-          });
-          break;
-        }
-      }
+    if (currentQuestion.answers is Answer2){
+      Answer2 answer2 = currentQuestion.answers as Answer2;
+      String bodyWeight = answer2.controllers['bodyWeight']!.text;
+      
     }
     // Add other conditions for storing other types of answers if needed
   }
