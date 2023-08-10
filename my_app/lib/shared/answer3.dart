@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:my_app/shared/imageviewer.dart';
 
@@ -18,6 +20,13 @@ class _Answer3State extends State<Answer3> {
         double availableWidth = constraints.maxWidth;
         double availableHeight = constraints.maxHeight;
 
+        // Calculate the desired image width based on the screen width
+        double imageWidth = availableWidth * 0.8; // Adjust as needed
+
+        // Calculate the image height to maintain the aspect ratio
+        double imageAspectRatio = 1; // Set the desired aspect ratio
+        double imageHeight = imageWidth / imageAspectRatio;
+
         return Center(
           child: ImageViewer(
             imagePaths: [
@@ -26,6 +35,9 @@ class _Answer3State extends State<Answer3> {
               'assets/images/michael.png',
             ],
             imageNames: ['Tom', 'Arnold', 'Michael'],
+            arrowButtonSize: 20.0, // Adjust as needed
+            imageHeight: imageHeight,
+            imageWidth: imageWidth,
           ),
         );
       },
