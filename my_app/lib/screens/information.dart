@@ -205,7 +205,13 @@ class _InformationState extends State<Information> {
     if (currentQuestion.answers is Answer2){
       Answer2 answer2 = currentQuestion.answers as Answer2;
       String bodyWeight = answer2.controllers['bodyWeight']!.text;
-      
+      String experience = sharedPreferences!.getString('experience') ?? '';
+      String height = sharedPreferences!.getString('height') ?? '';
+      setState(() {
+        user.bodyWeight = bodyWeight;
+        user.experience = experience;
+        user.height = height;
+      });
     }
     // Add other conditions for storing other types of answers if needed
   }
@@ -232,6 +238,10 @@ class _InformationState extends State<Information> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        print("${user.gender}test");
+        print("${user.name}test 2");
+        print("${user.age}test 3");
+        print("${user.bodyWeight}test 4");
         if (questionIndex == 0) {
           Navigator.pop(context);
           return false;
