@@ -36,17 +36,19 @@ List<Question> getQuestions(
     ),
   ));
 
-  list.add(Question(
-    questionText: 'Start by inputting some basic information',
-    questionSubText: 'Input your height, body weight, and experience',
+  list.add(
+    Question(
+      questionText: 'Start by inputting some basic information',
+      questionSubText: 'Input your height, body weight, and experience',
 
-    // Will include:
-    // Height (type out box)
-    // Body weight (type out box)
-    // Experience (Beginner, Intermediate, Advanced)
+      // Will include:
+      // Height (type out box)
+      // Body weight (type out box)
+      // Experience (Beginner, Intermediate, Advanced)
 
-    answers: Answer2(controllers: controllers),
-  ));
+      answers: Answer2(controllers: controllers),
+    ),
+  );
 
   list.add(Question(
     questionText: 'What is your ideal physique or body goals?',
@@ -154,16 +156,19 @@ class _InformationState extends State<Information> {
     String bodyWeight = controllers['bodyWeight']!.text;
 
     // Check if the name and age fields are empty
-    if ((name.isEmpty || age.isEmpty) && questionIndex == 0) {
+    if ((name.isEmpty || age.isEmpty || user.gender.isEmpty) &&
+        questionIndex == 0) {
       showInputErrorSnackBar(context, 'Please fill in all required fields.');
       return;
     }
 
     // Checks if bodyweight is empty on next screen
-    if (bodyWeight.isEmpty && questionIndex == 1) {
+    if ((bodyWeight.isEmpty) && questionIndex == 1) {
       showInputErrorSnackBar(context, 'Please fill in all required fields.');
       return;
     }
+
+    // Checks if a picture is selected
 
     // Store the current answer in shared preferences
     storeAnswer();
@@ -202,7 +207,7 @@ class _InformationState extends State<Information> {
       });
       // Add other conditions for storing other text-based answers if needed
     }
-    if (currentQuestion.answers is Answer2){
+    if (currentQuestion.answers is Answer2) {
       Answer2 answer2 = currentQuestion.answers as Answer2;
       String bodyWeight = answer2.controllers['bodyWeight']!.text;
       String experience = sharedPreferences!.getString('experience') ?? '';
