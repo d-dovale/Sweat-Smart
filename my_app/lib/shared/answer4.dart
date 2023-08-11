@@ -89,6 +89,13 @@ class _Answer4State extends State<Answer4> {
             ],
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 50.0, 0, 0),
+          child: Image(
+            image: AssetImage("assets/images/daysaweek.png"),
+            alignment: Alignment.center,
+          ),
+        ),
       ],
     );
   }
