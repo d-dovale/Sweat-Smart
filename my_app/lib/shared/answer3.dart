@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/shared/imageviewer.dart';
 import 'package:my_app/data/user.dart';
 import 'package:my_app/shared/answer1.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Answer3 extends StatefulWidget {
   const Answer3({Key? key}) : super(key: key);
@@ -14,6 +15,20 @@ class Answer3 extends StatefulWidget {
 
 class _Answer3State extends State<Answer3> {
   String selectedImage = ''; // Track the selected image
+  String gender = '';
+void initState() {
+    super.initState();
+
+    initializeValues();
+  }
+
+void initializeValues() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      setState(() {
+      gender = prefs.getString('gender') ?? ''; // Default height if not found
+    });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +36,9 @@ class _Answer3State extends State<Answer3> {
       builder: (BuildContext context, BoxConstraints constraints) {
         double availableWidth = constraints.maxWidth;
         double availableHeight = constraints.maxHeight;
+        if(gender == 'Male'){
 
+        }
         return Center(
           child: ImageViewer(
             imagePaths: [
