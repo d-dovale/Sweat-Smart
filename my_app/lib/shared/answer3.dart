@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_app/shared/imageviewer.dart';
+import 'package:my_app/data/user.dart';
+import 'package:my_app/shared/answer1.dart';
 
 class Answer3 extends StatefulWidget {
   const Answer3({Key? key}) : super(key: key);
@@ -20,13 +22,6 @@ class _Answer3State extends State<Answer3> {
         double availableWidth = constraints.maxWidth;
         double availableHeight = constraints.maxHeight;
 
-        // Calculate the desired image width based on the screen width
-        double imageWidth = availableWidth * 0.8; // Adjust as needed
-
-        // Calculate the image height to maintain the aspect ratio
-        double imageAspectRatio = 1; // Set the desired aspect ratio
-        double imageHeight = imageWidth / imageAspectRatio;
-
         return Center(
           child: ImageViewer(
             imagePaths: [
@@ -34,10 +29,12 @@ class _Answer3State extends State<Answer3> {
               'assets/images/arnold.png',
               'assets/images/michael.png',
             ],
-            imageNames: ['Tom', 'Arnold', 'Michael'],
+            imageNames: [
+              'Tom Holland',
+              'Arnold Schwarzenegger',
+              'Michael B. Jordan'
+            ],
             arrowButtonSize: 20.0, // Adjust as needed
-            imageHeight: imageHeight,
-            imageWidth: imageWidth,
           ),
         );
       },
