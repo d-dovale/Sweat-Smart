@@ -154,7 +154,6 @@ class _InformationState extends State<Information> {
     String name = controllers['name']!.text;
     String age = controllers['age']!.text;
     String bodyWeight = controllers['bodyWeight']!.text;
-
     // Check if the name and age fields are empty
     if ((name.isEmpty || age.isEmpty || user.gender.isEmpty) &&
         questionIndex == 0) {
@@ -164,6 +163,11 @@ class _InformationState extends State<Information> {
 
     // Checks if bodyweight is empty on next screen
     if ((bodyWeight.isEmpty) && questionIndex == 1) {
+      showInputErrorSnackBar(context, 'Please fill in all required fields.');
+      return;
+    }
+
+    if ((user.workoutDays.isEmpty) && questionIndex == 3) {
       showInputErrorSnackBar(context, 'Please fill in all required fields.');
       return;
     }

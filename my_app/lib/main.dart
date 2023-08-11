@@ -6,12 +6,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:my_app/data/user.dart';
 
 void main() async {
-  bool debugMode = false;
+  bool debugMode = true;
 
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool seenInfoScreen = prefs.getBool('seenInfoScreen') ?? false;
   User user = await getUserFromSharedPreferences(prefs);
+
   if (debugMode) {
     prefs.clear();
   }
