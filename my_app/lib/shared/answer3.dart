@@ -14,7 +14,7 @@ class Answer3 extends StatefulWidget {
 }
 
 class _Answer3State extends State<Answer3> {
-  String selectedImage = ''; // Track the selected image
+  String selectedImage = '';
   String gender = 'Female';
 
   void initState() {
