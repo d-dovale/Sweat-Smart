@@ -12,144 +12,58 @@ class WorkoutPage extends StatefulWidget {
 }
 
 class _WorkoutPageState extends State<WorkoutPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            UserProfilePage(),
-          ],
-        ),
-      ),
+  ApiService apiService = ApiService();
+  List<String> workoutList = [];
+  bool isLoading = false;
+
+  void _fetchGeneratedWorkouts() async {
+    setState(() {
+      isLoading = true; // Set loading to true when starting to fetch workouts
+    });
+
+    await apiService.sendMessage(
+      modelId: "gpt-3.5-turbo",
+      message: "I am a male who weighs 140 pounds, who's height is 6'1. I am a beginner lifter and my ideal physique is to be Tom Holland who's height is 6'1. I am a beginner lifter and my ideal physique is to be Tom Holland and I want a workout split of 4 days. Generate me 3 completely different workout splits that can be used for my stats. Please start the title of a day with \"Day:\" and end with a new line before describing the workout",
     );
-  }
-}
-
-class UserProfilePage extends StatefulWidget {
-  @override
-  _UserProfilePageState createState() => _UserProfilePageState();
-}
-
-class _UserProfilePageState extends State<UserProfilePage> {
-  late TextEditingController _nameController;
-  DateTime? _selectedDate; // Allow nullable value
-
-  @override
-  void initState() {
-    super.initState();
-    _nameController = TextEditingController();
-    _loadUserData();
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _loadUserData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? name = prefs.getString('name');
-    String? birthday = prefs.getString('birthday');
 
     setState(() {
-      _nameController.text = name ?? '';
-      _selectedDate = birthday != null ? DateTime.parse(birthday) : null;
+      if (apiService.messages.isNotEmpty) {
+        String chatbotResponse = apiService.messages.last['content'] ?? '';
+        workoutList = [chatbotResponse]; // Store the entire message as a list item
+      }
+      isLoading = false;
     });
   }
 
-  Future<void> _saveUserData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('name', _nameController.text);
-    await prefs.setString(
-        'birthday', _selectedDate?.toString() ?? ''); // Handle null case
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: _selectedDate ?? DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
-
-    if (picked != null && picked != _selectedDate) {
-      setState(() {
-        _selectedDate = picked;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Name',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Workouts"),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: _fetchGeneratedWorkouts,
+              child: Text("Generate Workouts"),
             ),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: _nameController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-            ),
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            'Birthday',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 8),
-          InkWell(
-            onTap: () {
-              _selectDate(context);
-            },
-            child: InputDecorator(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                suffixIcon: Icon(Icons.calendar_today),
-              ),
-              child: Text(
-                _selectedDate != null
-                    ? '${_selectedDate!.month}/${_selectedDate!.day}/${_selectedDate!.year}'
-                    : 'Select date',
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 24),
-          ElevatedButton(
-            onPressed: () {
-              _saveUserData();
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('User data saved successfully!')),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
-            ),
-            child: const Text(
-              'Save',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ],
+            isLoading // Show loading indicator while fetching workouts
+                ? CircularProgressIndicator()
+                : ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: workoutList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        title: Text(
+                          workoutList[index],
+                          style: TextStyle(color: Colors.white), // Make text white
+                        ),
+                      );
+                    },
+                  ),
+          ],
+        ),
       ),
     );
   }
