@@ -5,15 +5,11 @@ class ImageViewer extends StatefulWidget {
   final List<String> imageNames;
 
   final double arrowButtonSize;
-  final double imageHeight;
-  final double imageWidth;
 
   const ImageViewer({
     required this.imagePaths,
     required this.imageNames,
     required this.arrowButtonSize,
-    required this.imageHeight,
-    required this.imageWidth,
     Key? key,
   }) : super(key: key);
 
@@ -41,59 +37,69 @@ class _ImageViewerState extends State<ImageViewer> {
     String currentImagePath = widget.imagePaths[currentIndex];
     String currentImageName = widget.imageNames[currentIndex];
 
-    return Padding(
-      padding: const EdgeInsets.all(50.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AnimatedSwitcher(
-            duration: Duration(milliseconds: 700),
-            child: Stack(
-              children: [
+    bool sizeOne(BuildContext context) =>
+        MediaQuery.of(context).size.height <= 750;
+
+    bool sizeTwo(BuildContext context) =>
+        MediaQuery.of(context).size.height > 750;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              if (sizeOne(context))
                 Image.asset(
                   currentImagePath,
                   key: ValueKey<int>(currentIndex),
-                  fit: BoxFit.contain, // Adjust the fit property
-                  width: widget.imageWidth,
-                  height: widget.imageHeight,
+                  fit: BoxFit.contain,
+                  height: 350,
+                  width: 200,
                 ),
-                Positioned(
-                  top: 10.0,
-                  left: 10.0,
-                  child: Text(
-                    currentImageName,
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+              if (sizeTwo(context))
+                Image.asset(
+                  currentImagePath,
+                  key: ValueKey<int>(currentIndex),
+                  fit: BoxFit.contain,
+                  height: 450,
+                  width: 250,
+                ),
+              Positioned(
+                top:
+                    10.0, // Adjust the top value to position the text as desired
+                child: Text(
+                  currentImageName,
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 20.0,
+                    fontFamily: 'Lato',
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: switchToPreviousImage,
-                  icon: Icon(Icons.arrow_back),
-                  color: Colors.white,
-                  iconSize: widget.arrowButtonSize,
-                ),
-                IconButton(
-                  onPressed: switchToNextImage,
-                  icon: Icon(Icons.arrow_forward),
-                  color: Colors.white,
-                  iconSize: widget.arrowButtonSize,
-                ),
-              ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: switchToPreviousImage,
+              icon: Icon(Icons.arrow_back),
+              color: Colors.white,
+              iconSize: widget.arrowButtonSize,
             ),
-          ),
-        ],
-      ),
+            IconButton(
+              onPressed: switchToNextImage,
+              icon: Icon(Icons.arrow_forward),
+              color: Colors.white,
+              iconSize: widget.arrowButtonSize,
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
