@@ -14,8 +14,10 @@ class Answer3 extends StatefulWidget {
 }
 
 class _Answer3State extends State<Answer3> {
-  String selectedImage = '';
-  String gender = 'Female';
+  String selectedImage = ''; // Track the selected image
+  String gender = '';
+  bool isMaleSelected = false;
+  bool isFemaleSelected = false;
 
   void initState() {
     super.initState();
@@ -27,7 +29,8 @@ class _Answer3State extends State<Answer3> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     setState(() {
-      gender = prefs.getString('gender') ?? ''; // Default height if not found
+      isMaleSelected = prefs.getBool('isMaleSelected') ?? false;
+      isFemaleSelected = prefs.getBool('isFemaleSelected') ?? false;
     });
   }
 
@@ -37,7 +40,7 @@ class _Answer3State extends State<Answer3> {
       builder: (BuildContext context, BoxConstraints constraints) {
         double availableWidth = constraints.maxWidth;
         double availableHeight = constraints.maxHeight;
-        if (gender == 'Male') {
+        if (isMaleSelected) {
           return Center(
             child: ImageViewer(
               imagePaths: [
@@ -53,7 +56,7 @@ class _Answer3State extends State<Answer3> {
               arrowButtonSize: 20.0, // Adjust as needed
             ),
           );
-        } else if (gender == 'Female') {
+        } else if (isFemaleSelected) {
           return Center(
             child: ImageViewer(
               imagePaths: [
