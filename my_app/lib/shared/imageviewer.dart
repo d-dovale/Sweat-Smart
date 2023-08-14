@@ -45,6 +45,7 @@ class _ImageViewerState extends State<ImageViewer> {
       currentIndex = (currentIndex - 1) % widget.imagePaths.length;
       selectedImageName = widget.imageNames[currentIndex];
       saveSelectedImageName(); // Save the selected image name
+       saveIdealPhysique(selectedImageName);
     });
   }
 
@@ -53,8 +54,14 @@ class _ImageViewerState extends State<ImageViewer> {
       currentIndex = (currentIndex + 1) % widget.imagePaths.length;
       selectedImageName = widget.imageNames[currentIndex];
       saveSelectedImageName(); // Save the selected image name
+      saveIdealPhysique(selectedImageName);
     });
   }
+
+void saveIdealPhysique(String idealPhysique) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('idealPhysique', idealPhysique);
+}
 
   Future<void> saveSelectedImageName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -222,6 +222,14 @@ class _InformationState extends State<Information> {
         user.height = height;
       });
     }
+
+    if (currentQuestion.answers is Answer3) {
+      Answer3 answer3 = currentQuestion.answers as Answer3;
+      String idealPhysique = sharedPreferences!.getString('idealPhysique') ?? '';
+      setState(() {
+        user.idealPhysique = idealPhysique;
+      });
+    }
     // Add other conditions for storing other types of answers if needed
   }
 
@@ -230,6 +238,7 @@ class _InformationState extends State<Information> {
       sharedPreferences!.setString('name', user.name);
       sharedPreferences!.setString('age', user.age);
       sharedPreferences!.setString('gender', user.gender);
+      sharedPreferences!.setString('idealPhysique', user.idealPhysique);
       // Add more sharedPreferences!.setString() calls for other user information
     }
   }
@@ -251,6 +260,7 @@ class _InformationState extends State<Information> {
         print("${user.name}test 2");
         print("${user.age}test 3");
         print("${user.bodyWeight}test 4");
+        print("${user.idealPhysique}test 5");
         if (questionIndex == 0) {
           Navigator.pop(context);
           return false;
