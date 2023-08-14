@@ -12,7 +12,7 @@ class Answer3 extends StatefulWidget {
 }
 
 class _Answer3State extends State<Answer3> {
-  String selectedImage = ''; // Track the selected image
+  String selectedImageName = ''; // Track the selected image
   String gender = '';
   bool isMaleSelected = false;
   bool isFemaleSelected = false;
@@ -29,6 +29,7 @@ class _Answer3State extends State<Answer3> {
     setState(() {
       isMaleSelected = prefs.getBool('isMaleSelected') ?? false;
       isFemaleSelected = prefs.getBool('isFemaleSelected') ?? false;
+      selectedImageName = prefs.getString('selectedImageName') ?? '';
     });
   }
 
@@ -52,6 +53,7 @@ class _Answer3State extends State<Answer3> {
                 'Michael B. Jordan'
               ],
               arrowButtonSize: 20.0, // Adjust as needed
+              initialSelectedImageName: selectedImageName,
             ),
           );
         } else if (isFemaleSelected) {
@@ -68,10 +70,11 @@ class _Answer3State extends State<Answer3> {
                 'Serena Williams',
               ],
               arrowButtonSize: 20.0, // Adjust as needed
+              initialSelectedImageName: selectedImageName,
             ),
           );
         } else {
-          return Placeholder();
+          return Container(color: Colors.transparent);
         }
       },
     );
