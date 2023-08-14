@@ -67,18 +67,6 @@ class _ImageViewerState extends State<ImageViewer> {
                   height: 450,
                   width: 250,
                 ),
-              // Positioned(
-              //   top:
-              //       10.0,
-              //   child: Text(
-              //     currentImageName,
-              //     style: TextStyle(
-              //       color: Colors.red,
-              //       fontSize: 20.0,
-              //       fontFamily: 'Lato',
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),
