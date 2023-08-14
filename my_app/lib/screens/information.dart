@@ -5,10 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:my_app/shared/nextButton.dart';
 import 'package:my_app/shared/question.dart';
 import 'package:my_app/shared/navbar.dart';
-import 'package:my_app/shared/answer1.dart';
-import 'package:my_app/shared/answer2.dart';
-import 'package:my_app/shared/answer3.dart';
-import 'package:my_app/shared/answer4.dart';
+import 'package:my_app/informationScreens/answer1.dart';
+import 'package:my_app/informationScreens/answer2.dart';
+import 'package:my_app/informationScreens/answer3.dart';
+import 'package:my_app/informationScreens/answer4.dart';
 import 'package:my_app/data/user.dart';
 
 const bool debugSharedPreferences = false;

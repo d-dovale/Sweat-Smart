@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_app/shared/imageviewer.dart';
-import 'package:my_app/data/user.dart';
-import 'package:my_app/shared/answer1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Answer3 extends StatefulWidget {
