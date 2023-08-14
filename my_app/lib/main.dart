@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:my_app/data/user.dart';
 
 void main() async {
-  bool debugMode = true;
+  bool debugMode = false;
 
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
