@@ -112,7 +112,6 @@ class _InformationState extends State<Information> {
       'name': TextEditingController(text: user.name),
       'age': TextEditingController(text: user.age),
       'bodyWeight': TextEditingController(text: user.bodyWeight),
-      // Add more controllers for other fields as needed
     };
 
     questionsList = getQuestions(
@@ -163,11 +162,6 @@ class _InformationState extends State<Information> {
 
     // Checks if bodyweight is empty on next screen
     if ((bodyWeight.isEmpty) && questionIndex == 1) {
-      showInputErrorSnackBar(context, 'Please fill in all required fields.');
-      return;
-    }
-
-    if ((user.workoutDays.isEmpty) && questionIndex == 3) {
       showInputErrorSnackBar(context, 'Please fill in all required fields.');
       return;
     }

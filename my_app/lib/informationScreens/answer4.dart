@@ -61,6 +61,12 @@ class _Answer4State extends State<Answer4> {
     );
   }
 
+  bool sizeOne(BuildContext context) =>
+      MediaQuery.of(context).size.height <= 700;
+
+  bool sizeTwo(BuildContext context) =>
+      MediaQuery.of(context).size.height > 700;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -88,16 +94,32 @@ class _Answer4State extends State<Answer4> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 50.0, 0, 0),
-          child: Flexible(
-            child: Image(
-              image: AssetImage("assets/images/daysaweek.png"),
-              alignment: Alignment.center,
-              fit: BoxFit.contain,
+        if (sizeOne(context))
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 10.0, 0, 0),
+            child: Flexible(
+              child: Image(
+                image: AssetImage("assets/images/daysaweek.png"),
+                alignment: Alignment.center,
+                fit: BoxFit.contain,
+                height: 275,
+                width: 250,
+              ),
             ),
           ),
-        ),
+        if (sizeTwo(context))
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 50.0, 0, 0),
+            child: Flexible(
+              child: Image(
+                image: AssetImage("assets/images/daysaweek.png"),
+                alignment: Alignment.center,
+                fit: BoxFit.contain,
+                height: 350,
+                width: 350,
+              ),
+            ),
+          ),
       ],
     );
   }
