@@ -65,7 +65,6 @@ class _Answer4State extends State<Answer4> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        // Text field for Days a week
         Padding(
           padding: const EdgeInsets.only(top: 50.0),
           child: TextField(
@@ -91,9 +90,12 @@ class _Answer4State extends State<Answer4> {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 50.0, 0, 0),
-          child: Image(
-            image: AssetImage("assets/images/daysaweek.png"),
-            alignment: Alignment.center,
+          child: Flexible(
+            child: Image(
+              image: AssetImage("assets/images/daysaweek.png"),
+              alignment: Alignment.center,
+              fit: BoxFit.contain,
+            ),
           ),
         ),
       ],
