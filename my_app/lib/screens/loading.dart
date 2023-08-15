@@ -9,7 +9,7 @@ import 'package:my_app/data/user.dart';
 
 class Loading extends StatefulWidget {
   final User user;
-  
+
   Loading({required this.user});
   @override
   State<Loading> createState() => _LoadingState(user: user);
@@ -25,11 +25,12 @@ class _LoadingState extends State<Loading> {
   }
 
   _navigatetohome() async {
-    await Future.delayed(Duration(seconds: 2), () {});
+    await Future.delayed(Duration(seconds: 5), () {});
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool seenInfoScreen = prefs.getBool('seenInfoScreen') ?? false;
-    // ignore: use_build_context_synchronously
-    Widget destinationWidget = seenInfoScreen ? NavBar(user: user) : GetStarted();
+
+    Widget destinationWidget =
+        seenInfoScreen ? NavBar(user: user) : GetStarted();
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -55,12 +56,15 @@ class _LoadingState extends State<Loading> {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AppTitle(
-                  logoSize: logoSize,
-                  titleFontSize: titleFontSize,
-                  subtitleFontSize: subtitleFontSize,
-                  textColor: Colors.white,
-                ),
+                // AppTitle(
+                //   logoSize: logoSize,
+                //   titleFontSize: titleFontSize,
+                //   subtitleFontSize: subtitleFontSize,
+                //   textColor: Colors.white,
+                // ),
+                Image(
+                    image: AssetImage(
+                        "assets/images/Sweat Smart Loading Screen Dark.gif")),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, availableHeight * 0.15, 0, 0),
                   child: Image(
