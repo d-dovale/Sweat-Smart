@@ -97,27 +97,37 @@ class _Answer4State extends State<Answer4> {
         if (sizeOne(context))
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 15.0, 0, 0),
-            child: Flexible(
-              child: Image(
-                image: AssetImage("assets/images/daysaweek.png"),
-                alignment: Alignment.center,
-                fit: BoxFit.contain,
-                height: 260,
-                width: 230,
-              ),
+            child: Row( // Wrap Flexible with Row
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Image(
+                    image: AssetImage("assets/images/daysaweek.png"),
+                    alignment: Alignment.center,
+                    fit: BoxFit.contain,
+                    height: 230,
+                    width: 200,
+                  ),
+                ),
+              ],
             ),
           ),
         if (sizeTwo(context))
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 30.0, 0, 0),
-            child: Flexible(
-              child: Image(
-                image: AssetImage("assets/images/daysaweek.png"),
-                alignment: Alignment.center,
-                fit: BoxFit.contain,
-                height: 350,
-                width: 350,
-              ),
+            child: Row( // Wrap Flexible with Row
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Image(
+                    image: AssetImage("assets/images/daysaweek.png"),
+                    alignment: Alignment.center,
+                    fit: BoxFit.contain,
+                    height: 300,
+                    width: 300,
+                  ),
+                ),
+              ],
             ),
           ),
       ],
