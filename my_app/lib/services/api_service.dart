@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class ApiService {
   final List<Map<String, String>> messages = [];
 
-  Future<void> sendMessage({required String message, required String modelId}) async {
+  Future<void> sendMessage({required String message, required String modelId, double temperature = .2}) async {
     try {
       var response = await http.post(
         Uri.parse("$BASE_URL/completions"),
@@ -21,7 +21,8 @@ class ApiService {
               "role": "user",
               "content": message,
             }
-          ]
+          ],
+          "temperature": temperature,
         }),
       );
       print(response.body);
