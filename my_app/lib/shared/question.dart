@@ -36,6 +36,9 @@ class _QuestionBoxState extends State<QuestionBox> {
     List<Question> questionsList = widget.questionsList;
     int questionIndex = widget.questionIndex;
 
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Center(
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
@@ -46,7 +49,7 @@ class _QuestionBoxState extends State<QuestionBox> {
           double subtitleFontSize = availableWidth * 0.03;
 
           return Padding(
-            padding: const EdgeInsets.fromLTRB(0, 70.0, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, screenHeight * 0.1, 0, 0),
             child: FractionallySizedBox(
               // Adjusts the value of the container
               widthFactor: 0.9,

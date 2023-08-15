@@ -39,6 +39,7 @@ class _Answer3State extends State<Answer3> {
       builder: (BuildContext context, BoxConstraints constraints) {
         double availableWidth = constraints.maxWidth;
         double availableHeight = constraints.maxHeight;
+
         if (isMaleSelected) {
           return Center(
             child: ImageViewer(

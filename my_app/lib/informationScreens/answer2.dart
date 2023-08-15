@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 const bool debugSharedPreferences = false;
+
 class WeightInputFormatter extends TextInputFormatter {
   final BuildContext context;
 
@@ -56,15 +56,15 @@ class _Answer2State extends State<Answer2> {
   String experience = '';
   double bodyWeight = 150.0;
 
-
-@override
+  @override
   void initState() {
     super.initState();
 
     // Initialize heightInInches based on the saved value in SharedPreferences
     initializeValues();
   }
-   void initializeValues() async {
+
+  void initializeValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     if (debugSharedPreferences) {
@@ -72,157 +72,178 @@ class _Answer2State extends State<Answer2> {
     }
 
     setState(() {
-      heightInInches = prefs.getDouble('heightInInches') ?? 70.0; // Default height if not found
+      heightInInches = prefs.getDouble('heightInInches') ??
+          70.0; // Default height if not found
       bodyWeight = prefs.getDouble('bodyWeight') ?? 150.0;
       experience = prefs.getString('experience') ?? '';
     });
   }
+
   @override
   Widget build(BuildContext context) {
-    // Converts the height from inches to feet and inches
-
     int feet = (heightInInches ~/ 12);
     int inches = (heightInInches % 12).toInt();
 
-    void showInputErrorSnackBar(BuildContext context, String message) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(message),
-          duration: Duration(seconds: 2),
-        ),
-      );
-    }
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      double availableWidth = constraints.maxWidth;
-      double availableHeight = constraints.maxHeight;
+      builder: (BuildContext context, BoxConstraints constraints) {
+        double availableWidth = constraints.maxWidth;
+        double availableHeight = constraints.maxHeight;
 
-    return Column(
-      children: <Widget>[
-        // Slider for the Height in Feet and Inches
-        Padding(
-          padding: const EdgeInsets.only(top: 50.0),
-          child: Column(
-            children: [
-              Text(
+        double logoSize = availableWidth * 0.05;
+        double titleFontSize = availableWidth * 0.15;
+        double subtitleFontSize = availableWidth * 0.027;
+
+        return Column(
+          children: <Widget>[
+            // Text above the Slider
+            Padding(
+              padding: EdgeInsets.only(top: screenHeight * 0.04),
+              child: Text(
                 'Height: ${feet}\' ${inches}\"',
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: Colors.grey,
                   fontFamily: 'Lato',
+                  fontSize: logoSize,
                 ),
               ),
-              Slider(
-                value: heightInInches,
-                min: 48,
-                max: 90,
-                divisions: 48,
-                label: '${feet}\' ${inches}\"',
-                onChanged: (value) async{
-                  setState(() {
-                    heightInInches = value;
-                  });
-                  // Save the heightInInches in SharedPreferences
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
-                  await prefs.setDouble('heightInInches', heightInInches);
-                },
-              ),
-            ],
-          ),
-        ),
+            ),
 
-        // TextField for Body Weight
-        Padding(
-          padding: const EdgeInsets.only(top: 50.0),
-          child: TextField(
-            controller: widget.controllers['bodyWeight'],
-            style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(
-              labelText: 'Body Weight',
-              labelStyle: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Lato',
-              ),
-              suffix: Text(
-                'lbs',
-                style: TextStyle(color: Colors.white),
+            // Slider for the Height in Feet and Inches
+            Padding(
+              padding: EdgeInsets.only(top: screenHeight * 0.005),
+              child: Column(
+                children: [
+                  Slider(
+                    value: heightInInches,
+                    min: 48,
+                    max: 90,
+                    divisions: 42,
+                    label: '${feet}\' ${inches}\"',
+                    onChanged: (value) async {
+                      setState(() {
+                        heightInInches = value;
+                      });
+                      // Save the heightInInches in SharedPreferences
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      await prefs.setDouble('heightInInches', heightInInches);
+                    },
+                  ),
+                ],
               ),
             ),
-            // Save the entered value to the bodyWeight variable
-            // Add input formatters for validation
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              WeightInputFormatter(context),
-            ],
-          ),
-        ),
 
-          // Radio buttons for Experience selection
-          Padding(
-            padding: EdgeInsets.only(top: 50.0),
-            child: RadioListTile(
-              title: const Text(
-                'Beginner',
+            // TextField for Body Weight
+            Padding(
+              padding: EdgeInsets.only(top: screenHeight * 0.02),
+              child: TextField(
+                controller: widget.controllers['bodyWeight'],
+                style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  labelText: 'Body Weight',
+                  labelStyle: TextStyle(
+                    color: Colors.grey,
+                    fontFamily: 'Lato',
+                    fontSize: logoSize,
+                  ),
+                  suffix: Text(
+                    'lbs',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                // Save the entered value to the bodyWeight variable
+                // Add input formatters for validation
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  WeightInputFormatter(context),
+                ],
+              ),
+            ),
+
+            // Text above the Radio buttons
+            Padding(
+              padding: EdgeInsets.only(top: screenHeight * 0.07),
+              child: Text(
+                'How much experience do you have working out?',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontFamily: 'Lato',
+                  fontSize: logoSize,
+                ),
+              ),
+            ),
+
+            // Radio buttons for Experience selection
+            Padding(
+              padding: EdgeInsets.only(top: screenHeight * 0.01),
+              child: RadioListTile(
+                title: Text(
+                  'Beginner',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Lato',
+                    fontSize: logoSize,
+                  ),
+                ),
+                value: 'Beginner',
+                groupValue: experience,
+                onChanged: (value) async {
+                  setState(() {
+                    experience = value as String;
+                  });
+
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  await prefs.setString('experience', experience);
+                },
+              ),
+            ),
+            RadioListTile(
+              title: Text(
+                'Intermediate',
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'Lato',
+                  fontSize: logoSize,
                 ),
               ),
-              value: 'Beginner',
+              value: 'Intermediate',
               groupValue: experience,
-              onChanged: (value) async{
+              onChanged: (value) async {
                 setState(() {
                   experience = value as String;
                 });
-              // Save the experience in SharedPreferences
-              SharedPreferences prefs =
-                  await SharedPreferences.getInstance();
-              await prefs.setString('experience', experience);
+
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setString('experience', experience);
               },
             ),
-          ),
-          RadioListTile(
-            title: const Text(
-              'Intermediate',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Lato',
+            RadioListTile(
+              title: Text(
+                'Advanced',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Lato',
+                  fontSize: logoSize,
+                ),
               ),
+              value: 'Advanced',
+              groupValue: experience,
+              onChanged: (value) async {
+                setState(() {
+                  experience = value as String;
+                });
+
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setString('experience', experience);
+              },
             ),
-            value: 'Intermediate',
-            groupValue: experience,
-            onChanged: (value) async{
-              setState(() {
-                experience = value as String;
-              });
-              // Save the experience in SharedPreferences
-              SharedPreferences prefs =
-                  await SharedPreferences.getInstance();
-              await prefs.setString('experience', experience);
-            },
-          ),
-          RadioListTile(
-            title: const Text(
-              'Advanced',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Lato',
-              ),
-            ),
-            value: 'Advanced',
-            groupValue: experience,
-            onChanged: (value) async{
-              setState(() {
-                experience = value as String;
-              });
-              // Save the experience in SharedPreferences
-              SharedPreferences prefs =
-                  await SharedPreferences.getInstance();
-              await prefs.setString('experience', experience);
-            },
-          ),
-        ],
-      );
-    });
+          ],
+        );
+      },
+    );
   }
 }

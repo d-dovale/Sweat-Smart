@@ -45,7 +45,7 @@ class _ImageViewerState extends State<ImageViewer> {
       currentIndex = (currentIndex - 1) % widget.imagePaths.length;
       selectedImageName = widget.imageNames[currentIndex];
       saveSelectedImageName(); // Save the selected image name
-       saveIdealPhysique(selectedImageName);
+      saveIdealPhysique(selectedImageName);
     });
   }
 
@@ -58,10 +58,10 @@ class _ImageViewerState extends State<ImageViewer> {
     });
   }
 
-void saveIdealPhysique(String idealPhysique) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setString('idealPhysique', idealPhysique);
-}
+  void saveIdealPhysique(String idealPhysique) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('idealPhysique', idealPhysique);
+  }
 
   Future<void> saveSelectedImageName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -71,7 +71,8 @@ void saveIdealPhysique(String idealPhysique) async {
   @override
   Widget build(BuildContext context) {
     if (!isLoaded) {
-      return Container(color: Colors.transparent); // Or any loading indicator widget
+      return Container(
+          color: Colors.transparent); // Or any loading indicator widget
     }
     String currentImagePath = widget.imagePaths[currentIndex];
     String currentImageName = widget.imageNames[currentIndex];
@@ -88,7 +89,7 @@ void saveIdealPhysique(String idealPhysique) async {
         Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: Stack(
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
             children: [
               if (sizeOne(context))
                 Image.asset(
