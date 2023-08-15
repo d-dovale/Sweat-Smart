@@ -25,8 +25,8 @@ class _WorkoutPageState extends State<WorkoutPage> {
 
   void _fetchGeneratedWorkouts() async {
     await apiService.sendMessage(
-      modelId: "gpt-3.5-turbo",
-      message: "I am a male who weighs 140 pounds, who's height is 6'1. I am a beginner lifter and my ideal physique is to be Tom Holland and I want a workout split of 4 days. Generate me 3 completely different workout splits that can be used for my stats. Please start the title of a day with \"Day:\" and end with a new line before describing the workout", // Update with your message
+      modelId: "gpt-3.5-turbo-16k",
+      message: "I am a male who weighs 140 pounds, who's height is 6'1. I am a beginner lifter and my ideal physique is to be Tom Holland and I want to workout 4 days a week. Generate me 3 different workout routines that can be used for my stats. Please start the title of a day with \"Day:\" and end with a new line before describing the workout", // Update with your message
     );
 
     setState(() {
