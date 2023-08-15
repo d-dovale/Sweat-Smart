@@ -59,8 +59,6 @@ class _Answer2State extends State<Answer2> {
   @override
   void initState() {
     super.initState();
-
-    // Initialize heightInInches based on the saved value in SharedPreferences
     initializeValues();
   }
 
@@ -72,8 +70,7 @@ class _Answer2State extends State<Answer2> {
     }
 
     setState(() {
-      heightInInches = prefs.getDouble('heightInInches') ??
-          70.0; // Default height if not found
+      heightInInches = prefs.getDouble('heightInInches') ?? 70.0;
       bodyWeight = prefs.getDouble('bodyWeight') ?? 150.0;
       experience = prefs.getString('experience') ?? '';
     });
