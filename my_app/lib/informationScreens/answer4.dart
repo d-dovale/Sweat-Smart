@@ -62,10 +62,10 @@ class _Answer4State extends State<Answer4> {
   }
 
   bool sizeOne(BuildContext context) =>
-      MediaQuery.of(context).size.height <= 700;
+      MediaQuery.of(context).size.height < 675;
 
   bool sizeTwo(BuildContext context) =>
-      MediaQuery.of(context).size.height > 700;
+      MediaQuery.of(context).size.height > 675;
 
   @override
   Widget build(BuildContext context) {
@@ -96,20 +96,20 @@ class _Answer4State extends State<Answer4> {
         ),
         if (sizeOne(context))
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10.0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 15.0, 0, 0),
             child: Flexible(
               child: Image(
                 image: AssetImage("assets/images/daysaweek.png"),
                 alignment: Alignment.center,
                 fit: BoxFit.contain,
-                height: 275,
-                width: 250,
+                height: 260,
+                width: 230,
               ),
             ),
           ),
         if (sizeTwo(context))
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 50.0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 30.0, 0, 0),
             child: Flexible(
               child: Image(
                 image: AssetImage("assets/images/daysaweek.png"),
