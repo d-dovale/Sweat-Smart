@@ -86,6 +86,9 @@ class _Answer2State extends State<Answer2> {
     int feet = (heightInInches ~/ 12);
     int inches = (heightInInches % 12).toInt();
 
+    int feetSaved = (savedSliderValue ~/ 12);
+    int inchesSaved = (savedSliderValue % 12).toInt();
+
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
@@ -104,7 +107,7 @@ class _Answer2State extends State<Answer2> {
             Padding(
               padding: EdgeInsets.only(top: screenHeight * 0.04),
               child: Text(
-                'Height: ${feet}\' ${inches}\"',
+                'Height: ${feetSaved}\' ${inchesSaved}\"',
                 style: TextStyle(
                   color: Colors.grey,
                   fontFamily: 'Lato',
@@ -123,13 +126,16 @@ class _Answer2State extends State<Answer2> {
                     min: 48,
                     max: 90,
                     divisions: 42,
-                    label: '${feet}\' ${inches}\"',
+                    label: '${feetSaved}\' ${inchesSaved}\"',
                     onChanged: (value) async {
                       setState(() {
                         heightInInches = value;
+                        savedSliderValue = value;
                       });
-                      savedSliderValue = value; // Update the savedSliderValue
                       // Save the heightInInches in SharedPreferences
+
+                      int feetSaved = (savedSliderValue ~/ 12);
+                      int inchesSaved = (savedSliderValue % 12).toInt();
                       int feet = (heightInInches ~/ 12);
                       int inches = (heightInInches % 12).toInt();
                       String formattedHeight = '$feet\' $inches"';
