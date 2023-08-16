@@ -55,7 +55,7 @@ class _Answer2State extends State<Answer2> {
   double heightInInches = 70.0;
   String experience = '';
   double bodyWeight = 150.0;
-
+  double savedSliderValue = 70.0; // Set a default value
   @override
   void initState() {
     super.initState();
@@ -72,15 +72,17 @@ class _Answer2State extends State<Answer2> {
     }
 
     setState(() {
-      heightInInches = prefs.getDouble('heightInInches') ??
-          70.0; // Default height if not found
-      bodyWeight = prefs.getDouble('bodyWeight') ?? 150.0;
-      experience = prefs.getString('experience') ?? '';
+    String? heightAsString = prefs.getString('heightInInches');
+    heightInInches = double.tryParse(heightAsString ?? '') ?? savedSliderValue;
+    savedSliderValue = prefs.getDouble('savedSliderValue') ?? 70.0;
+    bodyWeight = prefs.getDouble('bodyWeight') ?? 150.0;
+    experience = prefs.getString('experience') ?? '';
     });
   }
 
   @override
   Widget build(BuildContext context) {
+
     int feet = (heightInInches ~/ 12);
     int inches = (heightInInches % 12).toInt();
 
@@ -117,7 +119,7 @@ class _Answer2State extends State<Answer2> {
               child: Column(
                 children: [
                   Slider(
-                    value: heightInInches,
+                    value: savedSliderValue,
                     min: 48,
                     max: 90,
                     divisions: 42,
@@ -126,10 +128,15 @@ class _Answer2State extends State<Answer2> {
                       setState(() {
                         heightInInches = value;
                       });
+                      savedSliderValue = value; // Update the savedSliderValue
                       // Save the heightInInches in SharedPreferences
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      await prefs.setDouble('heightInInches', heightInInches);
+                      int feet = (heightInInches ~/ 12);
+                      int inches = (heightInInches % 12).toInt();
+                      String formattedHeight = '$feet\' $inches"';
+                      
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      await prefs.setDouble('savedSliderValue', savedSliderValue);
+                      await prefs.setString('heightInInches', formattedHeight);
                     },
                   ),
                 ],

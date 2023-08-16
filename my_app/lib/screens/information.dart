@@ -68,7 +68,7 @@ List<Question> getQuestions(
     // Will include:
     // Days a week (text box)
 
-    answers: Answer4(),
+    answers: Answer4(controllers: controllers),
   ));
 
   return list;
@@ -112,6 +112,7 @@ class _InformationState extends State<Information> {
       'name': TextEditingController(text: user.name),
       'age': TextEditingController(text: user.age),
       'bodyWeight': TextEditingController(text: user.bodyWeight),
+      'workoutDays': TextEditingController(text: user.workoutDays),
     };
 
     questionsList = getQuestions(
@@ -209,7 +210,7 @@ class _InformationState extends State<Information> {
       Answer2 answer2 = currentQuestion.answers as Answer2;
       String bodyWeight = answer2.controllers['bodyWeight']!.text;
       String experience = sharedPreferences!.getString('experience') ?? '';
-      String height = sharedPreferences!.getString('height') ?? '';
+      String height = sharedPreferences!.getString('heightInInches') ?? '';
       setState(() {
         user.bodyWeight = bodyWeight;
         user.experience = experience;
@@ -224,6 +225,15 @@ class _InformationState extends State<Information> {
         user.idealPhysique = idealPhysique;
       });
     }
+
+    if(currentQuestion.answers is Answer4){
+      Answer4 answer4 = currentQuestion.answers as Answer4;
+      String workoutDays = sharedPreferences!.getString('workoutDays') ?? '';
+      setState(() {
+        user.workoutDays = workoutDays;
+      });
+    }
+
     // Add other conditions for storing other types of answers if needed
   }
 
@@ -233,6 +243,10 @@ class _InformationState extends State<Information> {
       sharedPreferences!.setString('age', user.age);
       sharedPreferences!.setString('gender', user.gender);
       sharedPreferences!.setString('idealPhysique', user.idealPhysique);
+      sharedPreferences!.setString('bodyWeight', user.bodyWeight);
+      sharedPreferences!.setString('experience', user.experience);
+      sharedPreferences!.setString('heightInInches', user.height);
+      sharedPreferences!.setString('workoutDays', user.workoutDays);
       // Add more sharedPreferences!.setString() calls for other user information
     }
   }
@@ -255,6 +269,10 @@ class _InformationState extends State<Information> {
         print("${user.age}test 3");
         print("${user.bodyWeight}test 4");
         print("${user.idealPhysique}test 5");
+        print("${user.experience}test 6");
+        print("${user.height}test 7");
+        print("${sharedPreferences!.getString("heightInInches")}test 7.5");
+        print("${user.workoutDays}test 8");
         if (questionIndex == 0) {
           Navigator.pop(context);
           return false;
