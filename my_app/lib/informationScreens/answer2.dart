@@ -55,8 +55,7 @@ class _Answer2State extends State<Answer2> {
   double heightInInches = 70.0;
   String experience = '';
   double bodyWeight = 150.0;
-  bool isExperienceSelected = false;
-
+  double savedSliderValue = 70.0; // Set a default value
   @override
   void initState() {
     super.initState();
@@ -71,16 +70,22 @@ class _Answer2State extends State<Answer2> {
     }
 
     setState(() {
-      heightInInches = prefs.getDouble('heightInInches') ?? 70.0;
-      bodyWeight = prefs.getDouble('bodyWeight') ?? 150.0;
-      experience = prefs.getString('experience') ?? '';
+    String? heightAsString = prefs.getString('heightInInches');
+    heightInInches = double.tryParse(heightAsString ?? '') ?? savedSliderValue;
+    savedSliderValue = prefs.getDouble('savedSliderValue') ?? 70.0;
+    bodyWeight = prefs.getDouble('bodyWeight') ?? 150.0;
+    experience = prefs.getString('experience') ?? '';
     });
   }
 
   @override
   Widget build(BuildContext context) {
+
     int feet = (heightInInches ~/ 12);
     int inches = (heightInInches % 12).toInt();
+
+    int feetSaved = (savedSliderValue ~/ 12);
+    int inchesSaved = (savedSliderValue % 12).toInt();
 
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
@@ -99,26 +104,13 @@ class _Answer2State extends State<Answer2> {
             // Text above the Slider
             Padding(
               padding: EdgeInsets.only(top: screenHeight * 0.04),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Height: ',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontFamily: 'Lato',
-                      fontSize: logoSize,
-                    ),
-                  ),
-                  Text(
-                    '${feet}\' ${inches}\"',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Lato',
-                      fontSize: logoSize,
-                    ),
-                  ),
-                ],
+              child: Text(
+                'Height: ${feetSaved}\' ${inchesSaved}\"',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontFamily: 'Lato',
+                  fontSize: logoSize,
+                ),
               ),
             ),
 
@@ -128,19 +120,27 @@ class _Answer2State extends State<Answer2> {
               child: Column(
                 children: [
                   Slider(
-                    value: heightInInches,
+                    value: savedSliderValue,
                     min: 48,
                     max: 90,
                     divisions: 42,
-                    label: '${feet}\' ${inches}\"',
+                    label: '${feetSaved}\' ${inchesSaved}\"',
                     onChanged: (value) async {
                       setState(() {
                         heightInInches = value;
+                        savedSliderValue = value;
                       });
                       // Save the heightInInches in SharedPreferences
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      await prefs.setDouble('heightInInches', heightInInches);
+
+                      int feetSaved = (savedSliderValue ~/ 12);
+                      int inchesSaved = (savedSliderValue % 12).toInt();
+                      int feet = (heightInInches ~/ 12);
+                      int inches = (heightInInches % 12).toInt();
+                      String formattedHeight = '$feet\' $inches"';
+                      
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      await prefs.setDouble('savedSliderValue', savedSliderValue);
+                      await prefs.setString('heightInInches', formattedHeight);
                     },
                   ),
                 ],
