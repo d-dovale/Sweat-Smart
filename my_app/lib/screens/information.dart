@@ -166,7 +166,10 @@ class _InformationState extends State<Information> {
       showInputErrorSnackBar(context, 'Please fill in all required fields.');
       return;
     }
-
+    if((sharedPreferences!.getString('experience') ?? '').isEmpty && questionIndex == 1){
+      showInputErrorSnackBar(context, 'Please fill in all required fields.');
+      return;
+    }
     // Checks if a picture is selected
 
     // Store the current answer in shared preferences
