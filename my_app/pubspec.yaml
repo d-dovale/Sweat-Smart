@@ -58,16 +58,19 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
     - assets/icons/
+    - android/app/src/main/res/mipmap-mdpi/sweatsmart.png
+    - android/app/src/main/res/mipmap-hdpi/sweatsmart.png
+    - android/app/src/main/res/mipmap-xhdpi/sweatsmart.png
+    - android/app/src/main/res/mipmap-xxhdpi/sweatsmart.png
+    - android/app/src/main/res/mipmap-xxxhdpi/sweatsmart.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
