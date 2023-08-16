@@ -70,17 +70,17 @@ class _Answer2State extends State<Answer2> {
     }
 
     setState(() {
-    String? heightAsString = prefs.getString('heightInInches');
-    heightInInches = double.tryParse(heightAsString ?? '') ?? savedSliderValue;
-    savedSliderValue = prefs.getDouble('savedSliderValue') ?? 70.0;
-    bodyWeight = prefs.getDouble('bodyWeight') ?? 150.0;
-    experience = prefs.getString('experience') ?? '';
+      String? heightAsString = prefs.getString('heightInInches');
+      heightInInches =
+          double.tryParse(heightAsString ?? '') ?? savedSliderValue;
+      savedSliderValue = prefs.getDouble('savedSliderValue') ?? 70.0;
+      bodyWeight = prefs.getDouble('bodyWeight') ?? 150.0;
+      experience = prefs.getString('experience') ?? '';
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     int feet = (heightInInches ~/ 12);
     int inches = (heightInInches % 12).toInt();
 
@@ -104,13 +104,26 @@ class _Answer2State extends State<Answer2> {
             // Text above the Slider
             Padding(
               padding: EdgeInsets.only(top: screenHeight * 0.04),
-              child: Text(
-                'Height: ${feetSaved}\' ${inchesSaved}\"',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'Lato',
-                  fontSize: logoSize,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Height: ',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontFamily: 'Lato',
+                      fontSize: logoSize,
+                    ),
+                  ),
+                  Text(
+                    '${feetSaved}\' ${inchesSaved}\"',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Lato',
+                      fontSize: logoSize,
+                    ),
+                  ),
+                ],
               ),
             ),
 
@@ -137,9 +150,11 @@ class _Answer2State extends State<Answer2> {
                       int feet = (heightInInches ~/ 12);
                       int inches = (heightInInches % 12).toInt();
                       String formattedHeight = '$feet\' $inches"';
-                      
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
-                      await prefs.setDouble('savedSliderValue', savedSliderValue);
+
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      await prefs.setDouble(
+                          'savedSliderValue', savedSliderValue);
                       await prefs.setString('heightInInches', formattedHeight);
                     },
                   ),
