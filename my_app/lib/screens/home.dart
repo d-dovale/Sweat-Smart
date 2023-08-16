@@ -53,17 +53,14 @@ class _HomePageState extends State<HomePage> {
                 subtitleFontSize: subtitleFontSize,
                 textColor: Colors.white,
               ),
-              const SizedBox(
-                  height: 100), // Optional spacing between text and button
+              const SizedBox(height: 100),
               ElevatedButton(
                 onPressed: () {
                   // Handle button press
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (BuildContext context) {
-                        return NavBar(
-                            user:
-                                widget.user); // Pass the User object to NavBar
+                        return NavBar(user: widget.user);
                       },
                     ),
                   );

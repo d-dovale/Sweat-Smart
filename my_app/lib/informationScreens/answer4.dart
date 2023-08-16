@@ -123,7 +123,7 @@ class _Answer4State extends State<Answer4> {
         if (sizeOne(context))
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 15.0, 0, 0),
-            child: Row( // Wrap Flexible with Row
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Flexible(
@@ -141,7 +141,7 @@ class _Answer4State extends State<Answer4> {
         if (sizeTwo(context))
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 30.0, 0, 0),
-            child: Row( // Wrap Flexible with Row
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Flexible(
