@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WeekInputFormatter extends TextInputFormatter {
   final BuildContext context;
@@ -43,14 +44,35 @@ class WeekInputFormatter extends TextInputFormatter {
 }
 
 class Answer4 extends StatefulWidget {
-  const Answer4({super.key});
+  final Map<String, TextEditingController> controllers;
+  const Answer4({required this.controllers, super.key});
 
   @override
   State<Answer4> createState() => _Answer4State();
 }
 
 class _Answer4State extends State<Answer4> {
-  double daysAWeek = 0.0;
+  String workoutDays = '';
+  SharedPreferences? sharedPreferences;
+
+    void initState() {
+    super.initState();
+    initSharedPreferences(); // Initialize SharedPreferences instance
+  }
+
+  Future<void> initSharedPreferences() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    String savedDaysAWeek = sharedPreferences!.getString('workoutDays') ?? '';
+    setState(() {
+      workoutDays = savedDaysAWeek;
+    });
+  }
+
+  void saveDaysAWeek() async {
+    if (sharedPreferences != null) {
+      await sharedPreferences!.setString('workoutDays', workoutDays);
+    }
+  }
 
   void showInputErrorSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -74,6 +96,7 @@ class _Answer4State extends State<Answer4> {
         Padding(
           padding: const EdgeInsets.only(top: 50.0),
           child: TextField(
+            controller: widget.controllers['workoutDays'],
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
               labelText: 'Days a week',
@@ -84,8 +107,11 @@ class _Answer4State extends State<Answer4> {
             ),
             onChanged: (value) {
               setState(() {
-                daysAWeek = double.tryParse(value) ?? 0.0;
+                workoutDays = value;
               });
+            },
+            onSubmitted: (value){
+              saveDaysAWeek();
             },
             // Add input formatters for validation
             inputFormatters: [
