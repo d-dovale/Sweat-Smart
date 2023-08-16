@@ -153,6 +153,7 @@ class _InformationState extends State<Information> {
     String name = controllers['name']!.text;
     String age = controllers['age']!.text;
     String bodyWeight = controllers['bodyWeight']!.text;
+
     // Check if the name and age fields are empty
     if ((name.isEmpty || age.isEmpty || user.gender.isEmpty) &&
         questionIndex == 0) {
@@ -161,7 +162,7 @@ class _InformationState extends State<Information> {
     }
 
     // Checks if bodyweight is empty on next screen
-    if ((bodyWeight.isEmpty) && questionIndex == 1) {
+    if ((bodyWeight.isEmpty || user.experience.isEmpty) && questionIndex == 1) {
       showInputErrorSnackBar(context, 'Please fill in all required fields.');
       return;
     }
@@ -219,7 +220,8 @@ class _InformationState extends State<Information> {
 
     if (currentQuestion.answers is Answer3) {
       Answer3 answer3 = currentQuestion.answers as Answer3;
-      String idealPhysique = sharedPreferences!.getString('idealPhysique') ?? '';
+      String idealPhysique =
+          sharedPreferences!.getString('idealPhysique') ?? '';
       setState(() {
         user.idealPhysique = idealPhysique;
       });
@@ -238,12 +240,11 @@ class _InformationState extends State<Information> {
   }
 
   static void showInputErrorSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: Duration(seconds: 2),
-      ),
+    final snackBar = SnackBar(
+      content: Text(message),
+      duration: Duration(seconds: 2),
     );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
@@ -269,13 +270,14 @@ class _InformationState extends State<Information> {
         resizeToAvoidBottomInset: false,
         backgroundColor: const Color.fromARGB(255, 25, 25, 25),
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             'Basic Info',
             style: TextStyle(
               fontFamily: 'BebasNeue',
               letterSpacing: 2.0,
             ),
           ),
+          toolbarHeight: MediaQuery.of(context).size.height * 0.07,
         ),
         body: Column(
           children: <Widget>[
