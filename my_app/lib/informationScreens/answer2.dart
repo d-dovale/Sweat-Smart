@@ -55,6 +55,7 @@ class _Answer2State extends State<Answer2> {
   double heightInInches = 70.0;
   String experience = '';
   double bodyWeight = 150.0;
+  bool isExperienceSelected = false;
 
   @override
   void initState() {
@@ -98,13 +99,26 @@ class _Answer2State extends State<Answer2> {
             // Text above the Slider
             Padding(
               padding: EdgeInsets.only(top: screenHeight * 0.04),
-              child: Text(
-                'Height: ${feet}\' ${inches}\"',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'Lato',
-                  fontSize: logoSize,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Height: ',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontFamily: 'Lato',
+                      fontSize: logoSize,
+                    ),
+                  ),
+                  Text(
+                    '${feet}\' ${inches}\"',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Lato',
+                      fontSize: logoSize,
+                    ),
+                  ),
+                ],
               ),
             ),
 

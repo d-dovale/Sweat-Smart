@@ -25,7 +25,7 @@ class _LoadingState extends State<Loading> {
   }
 
   _navigatetohome() async {
-    await Future.delayed(Duration(seconds: 5), () {});
+    await Future.delayed(Duration(seconds: 2), () {});
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool seenInfoScreen = prefs.getBool('seenInfoScreen') ?? false;
 
@@ -56,15 +56,12 @@ class _LoadingState extends State<Loading> {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // AppTitle(
-                //   logoSize: logoSize,
-                //   titleFontSize: titleFontSize,
-                //   subtitleFontSize: subtitleFontSize,
-                //   textColor: Colors.white,
-                // ),
-                Image(
-                    image: AssetImage(
-                        "assets/images/Sweat Smart Loading Screen Dark.gif")),
+                AppTitle(
+                  logoSize: logoSize,
+                  titleFontSize: titleFontSize,
+                  subtitleFontSize: subtitleFontSize,
+                  textColor: Colors.white,
+                ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, availableHeight * 0.15, 0, 0),
                   child: Image(
