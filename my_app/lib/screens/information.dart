@@ -166,7 +166,8 @@ class _InformationState extends State<Information> {
       showInputErrorSnackBar(context, 'Please fill in all required fields.');
       return;
     }
-    if((sharedPreferences!.getString('experience') ?? '').isEmpty && questionIndex == 1){
+    if ((sharedPreferences!.getString('experience') ?? '').isEmpty &&
+        questionIndex == 1) {
       showInputErrorSnackBar(context, 'Please fill in all required fields.');
       return;
     }
@@ -223,13 +224,14 @@ class _InformationState extends State<Information> {
 
     if (currentQuestion.answers is Answer3) {
       Answer3 answer3 = currentQuestion.answers as Answer3;
-      String idealPhysique = sharedPreferences!.getString('idealPhysique') ?? '';
+      String idealPhysique =
+          sharedPreferences!.getString('idealPhysique') ?? '';
       setState(() {
         user.idealPhysique = idealPhysique;
       });
     }
 
-    if(currentQuestion.answers is Answer4){
+    if (currentQuestion.answers is Answer4) {
       Answer4 answer4 = currentQuestion.answers as Answer4;
       String workoutDays = sharedPreferences!.getString('workoutDays') ?? '';
       setState(() {
@@ -297,6 +299,7 @@ class _InformationState extends State<Information> {
               letterSpacing: 2.0,
             ),
           ),
+          toolbarHeight: MediaQuery.of(context).size.height * 0.08,
         ),
         body: Column(
           children: <Widget>[
