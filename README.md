@@ -60,13 +60,9 @@ allowing for the user's information to be readily available, even after closing 
 
 ### Prerequisites
 
-* Install Flutter
-  
-  https://www.liquidweb.com/kb/how-to-install-and-configure-flutter-sdk-windows-10/
+Install Flutter
 
-* Mac or Windows PC
-
-
+* https://docs.flutter.dev/get-started/install
 
 ### Installation
 
