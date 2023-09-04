@@ -3,7 +3,11 @@
 
 ## Introduction
 
-Hello there! I'm Daniel Dovale, one of the creators behind the mobile workout app, "Sweat Smart." Currently I am a third-year university student at the University of Florida majoring in Computer Science. Together with my friend Jacob Hoppenstedt, we are on a mission to revolutionize the fitness world through AI by bringing you a personalized workout experience like no other. We're thrilled to share it with the public soon on the App Store and Play Store.
+* Hello there! I'm Daniel Dovale, one of the creators behind the mobile workout app, "Sweat Smart." Currently I am a third-year university student at the University of Florida majoring in Computer Science.
+
+* Hey! I'm Jacob Hoppenstedt, co-creator of "Sweat Smart". I'm a second-year studying Computer Science at the University of Florida. 
+
+We are on a mission to revolutionize the fitness world through AI by bringing you a personalized workout experience like no other. We're thrilled to share it with the public soon on the App Store and Play Store.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -30,9 +34,24 @@ Hello there! I'm Daniel Dovale, one of the creators behind the mobile workout ap
 
 ### Our Database
 
+This app utilizes **Shared Preferences**, which serves as a lightweight and efficient way to store key-value pairs. This allows us to persist user preferences and settings seamlessly, eliminating the need to reconfigure settings each time they launch the app. 
 
-
-
+```dart
+   SharedPreferences prefs = await SharedPreferences.getInstance();
+   ```
+After initializing Shared Preferences, it can be used throughout the app to both store data:
+```dart
+   prefs!.setString('myString') ?? '',
+   prefs!.setBool('myBool', true),
+   //Any data type can be stored
+   ```
+and retrieve data:
+```dart
+   prefs!.getString('myString') ?? '',
+   prefs!.getBool('myBool') ?? false,
+   //Any data type can be retrieved
+   ```
+allowing for the user's information to be readily available, even after closing and restarting the app.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
@@ -41,13 +60,9 @@ Hello there! I'm Daniel Dovale, one of the creators behind the mobile workout ap
 
 ### Prerequisites
 
-* Install Flutter
-  
-  https://www.liquidweb.com/kb/how-to-install-and-configure-flutter-sdk-windows-10/
+Install Flutter
 
-* Mac or Windows PC
-
-
+* https://docs.flutter.dev/get-started/install
 
 ### Installation
 
