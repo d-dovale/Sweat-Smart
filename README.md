@@ -36,22 +36,24 @@ We are on a mission to revolutionize the fitness world through AI by bringing yo
 
 This app utilizes **Shared Preferences**, which serves as a lightweight and efficient way to store key-value pairs. This allows us to persist user preferences and settings seamlessly, eliminating the need to reconfigure settings each time they launch the app. 
 
+* We first had to intialize Shared Preferences
 ```dart
    SharedPreferences prefs = await SharedPreferences.getInstance();
    ```
-After initializing Shared Preferences, it can be used throughout the app to both store data:
+* After initializing Shared Preferences, it can be used throughout the app to both store data:
 ```dart
    prefs!.setString('myString') ?? '',
    prefs!.setBool('myBool', true),
-   //Any data type can be stored
+   // Any data type can be stored
    ```
-and retrieve data:
+* and able to retrieve data:
 ```dart
    prefs!.getString('myString') ?? '',
    prefs!.getBool('myBool') ?? false,
-   //Any data type can be retrieved
+   // Any data type can be retrieved
    ```
-allowing for the user's information to be readily available, even after closing and restarting the app.
+_This allows for the user's information to be readily available, even after closing and restarting the app._
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
@@ -89,20 +91,22 @@ _Below is an example of how you can instruct your audience on installing and set
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Pictures
+ 
+<img src="image.png" width="180" height="380" />
+<img src="my_app/screenshots/Sweat Smart Pic 2.png" width="180" height="380" />
+<img src="my_app/screenshots/Sweat Smart Pic 3.png" width="180" height="380" />
 
 
-
-
-
-_For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+
+Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -113,7 +117,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Daniel Dovale - ddovale2004@gmail.com - (786) 603-7263
 
-Jacob Hoppenstedt - jacobhoppenstedt@gmail.com
+Jacob Hoppenstedt - jacobhoppenstedt@gmail.com - (727) 688-7566
 
 Project Link: [https://github.com/d-dovale/Sweat-Smart](https://github.com/d-dovale/Sweat-Smart)
 
