@@ -12,73 +12,75 @@ class WorkoutPage extends StatefulWidget {
 }
 
 class _WorkoutPageState extends State<WorkoutPage> {
-  SharedPreferences? sharedPreferences;
-  
-  ApiService apiService = ApiService();
-  List<String> workoutList = [];
-  bool isLoading = true; // Set to true initially
-
-  @override
-  void initState() {
-    super.initState();
-    // Automatically fetch the generated workouts when the screen is loaded
-    _fetchGeneratedWorkouts();
-  }
-
-  void _fetchGeneratedWorkouts() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    await apiService.sendMessage(
-      modelId: "gpt-3.5-turbo",
-      message: "I am a male who weighs ${sharedPreferences!.getString('name')} pounds, who's height is ${sharedPreferences!.getString('height')}. I am a ${sharedPreferences!.getString('experience')} lifter and my ideal physique is to be ${sharedPreferences!.getString('idealPhysique')} and I want to workout ${sharedPreferences!.getString('workoutDays')} days a week. Generate me 3 different workout routines that can be used for my stats. Please start the title of a day with \"Day:\" and end with a new line before describing the workout",
-      temperature: 0.4,
-    );
-    
-    setState(() {
-      if (apiService.messages.isNotEmpty) {
-        String chatbotResponse = apiService.messages.last['content'] ?? '';
-        workoutList = [chatbotResponse]; // Store the entire message as a list item
-      }
-      isLoading = false; // Set loading to false when the message is fetched
-    });
-  }
+  final Map<String, List<String>> workoutSplits = {
+    'Push Day (Chest, Shoulders, and Triceps)': [
+      'Bench Press: 3 sets of 6-8 reps',
+      'Overhead Press: 3 sets of 6-8 reps',
+      'Incline Dumbbell Press: 3 sets of 8-10 reps',
+      'Tricep Dips: 3 sets of 8-10 reps',
+      'Lateral Raises: 3 sets of 12-15 reps',
+    ],
+    'Pull Day (Back, Biceps, and Forearms)': [
+      'Deadlifts: 3 sets of 6-8 reps',
+      'Pull-Ups or Lat Pulldowns: 3 sets of 6-8 reps',
+      'Barbell Rows: 3 sets of 6-8 reps',
+      'Face Pulls: 3 sets of 12-15 reps',
+      'Hammer Curls: 3 sets of 8-10 reps',
+    ],
+    'Legs Day (Quads, Hamstrings, Calves, and sometimes Glutes)': [
+      'Squats: 3 sets of 6-8 reps',
+      'Leg Press: 3 sets of 8-10 reps',
+      'Romanian Deadlifts: 3 sets of 8-10 reps',
+      'Leg Curls: 3 sets of 10-12 reps',
+      'Calf Raises: 5 sets of 15-20 reps',
+    ],
+  };
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Workouts"),
-        automaticallyImplyLeading: false,
-      ),
-      body: Center(
-        child: isLoading
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(height: 20),
-                  Text(
-                    "Generating workout routines...",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
-              )
-            : SingleChildScrollView(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: workoutList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      title: Text(
-                        workoutList[index],
-                        style: TextStyle(color: Colors.white),
+    return DefaultTabController(
+      length: workoutSplits.length,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(
+            isScrollable: true,
+            tabs: workoutSplits.keys
+                .map((split) => Tab(text: split.split(' ')[0]))
+                .toList(),
+          ),
+          title: Text('Your Workout Split'),
+        ),
+        body: TabBarView(
+          children: workoutSplits.entries.map((entry) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        entry.key,
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                    );
-                  },
+                    ),
+                    ...entry.value.map<Widget>((exercise) {
+                      return Card(
+                        elevation: 4.0,
+                        margin: EdgeInsets.symmetric(vertical: 6.0),
+                        child: ListTile(
+                          title: Text(exercise),
+                        ),
+                      );
+                    }).toList()
+                  ],
                 ),
               ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
