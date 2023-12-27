@@ -12,6 +12,8 @@ class WorkoutPage extends StatefulWidget {
 }
 
 class _WorkoutPageState extends State<WorkoutPage> {
+  SharedPreferences? sharedPreferences;
+  
   ApiService apiService = ApiService();
   List<String> workoutList = [];
   bool isLoading = true; // Set to true initially
@@ -24,12 +26,13 @@ class _WorkoutPageState extends State<WorkoutPage> {
   }
 
   void _fetchGeneratedWorkouts() async {
+    sharedPreferences = await SharedPreferences.getInstance();
     await apiService.sendMessage(
       modelId: "gpt-3.5-turbo",
-      message: "I am a male who weighs 140 pounds, who's height is 6'1. I am a beginner lifter and my ideal physique is to be Tom Holland and I want to workout 4 days a week. Generate me 3 different workout routines that can be used for my stats. Please start the title of a day with \"Day:\" and end with a new line before describing the workout", // Update with your message
+      message: "I am a male who weighs ${sharedPreferences!.getString('name')} pounds, who's height is ${sharedPreferences!.getString('height')}. I am a ${sharedPreferences!.getString('experience')} lifter and my ideal physique is to be ${sharedPreferences!.getString('idealPhysique')} and I want to workout ${sharedPreferences!.getString('workoutDays')} days a week. Generate me 3 different workout routines that can be used for my stats. Please start the title of a day with \"Day:\" and end with a new line before describing the workout",
       temperature: 0.4,
     );
-
+    
     setState(() {
       if (apiService.messages.isNotEmpty) {
         String chatbotResponse = apiService.messages.last['content'] ?? '';
